@@ -8,9 +8,7 @@ body {
 }
 
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: fixed;
     background-color: transparent;
     color: #fff;
     padding: 2rem 8rem;
@@ -57,8 +55,61 @@ nav a:hover{
 }
 
 .header-controls {
-    display: flex;
-    align-items: center;
+    position: fixed;
+    right: 2%;
+    top: 50%;
+    z-index: 2000;
+    
+}
+
+.arrow {
+    position: relative;
+    width: 10px;
+    height: 100px;
+    margin: 50px auto;
+}
+
+.line {
+    position: absolute;
+    top: 0;
+    left: 45%;
+    transform: rotate(90deg);
+    width: 2px;
+    height: 30px;
+    background-color: black;
+
+}
+
+.left-wing, .right-wing {
+    position: absolute;
+    bottom: 0;
+    width: 30px;
+    height: 2px;
+    background-color: black;
+    transform-origin: center;
+}
+
+.left-wing {
+    left: -30px;
+    transform: rotate(-45deg);
+}
+
+.right-wing {
+    right: 5px;
+    top: 1%;
+    transform: rotate(-45deg);
+}
+
+@keyframes moveUp {
+    0% {
+        top: 30px;
+    }
+    50% {
+        top: 0;
+    }
+    100% {
+        top: 30px;
+    }
 }
 
 .btn-entrar{

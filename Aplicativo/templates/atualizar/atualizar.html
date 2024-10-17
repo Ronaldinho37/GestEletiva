@@ -27,5 +27,17 @@
     
     <script src="{% static 'js/acoes_tabela_update.js' %}"></script>
     <script src="{% static 'js/acao_tabela_pesquisar.js' %}"></script>
+    <script>
+        window.onload = () =>{
+            let p = document.querySelector("#p_aviso"); 
+            let modo = document.querySelector("#table-py").dataset.modo;
+            if(modo == "deletar"){
+                p.innerHTML = `Nesta área você poderá deletar as eletivas que atualmente estão ativas, <br> 
+                Selecione a eletiva que deseja deletar e logo após clique no botão <br> vermelho "DELETAR"`
+            }  else {
+                p.innerHTML = `aviso atualizar`
+            }
+        }
+    </script>
 </body>
 </html>

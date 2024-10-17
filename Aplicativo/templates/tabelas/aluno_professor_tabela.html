@@ -3,7 +3,7 @@
 {% include 'codigos reutilizados/links_reutilizados.html' %}
 {% block links %}
 {% endblock %}
-<div id="table-py"  style="font-family:Poppins;">
+<div id="table-py"  style="font-family:Poppins;" data-modo="{{modo}}">
     <div id="form-div " class="d-flex flex-column justify-content-center align-items-center mb-4" >
 
 
@@ -15,7 +15,7 @@
         </style>
 
         <div id="text-del">
-            <h2 class="text-center mb-4 p-3  m-3 rounded text-warning" style="background-color: rgb(8, 83, 196);">DELETAR PROFESSOR/TUTOR</h2>
+            <h2 class="text-center mb-4 p-3  m-3 rounded text-warning" style="background-color: rgb(8, 83, 196);"><span style="text-transform: uppercase;">{{modo}}</span> PROFESSOR/TUTOR</h2>
         </div>
 
         <div style="position: absolute; top:18%;" class="bg-warning p-2 rounded" id="text-area-res">
@@ -25,7 +25,7 @@
         <div id="div-alert-tables" class=" rounded d-flex align-items-center flex-column p-3  shadow-lg" style="background-color: rgb(8, 83, 196); margin:5% 0%;">
             <img src="../../../media/img_fixas/logo-asn.png" alt="" width="180">
             <h1 class="text-white">ATENÇÃO!!!</h1>
-            <p  class="text-white" style="text-align: center;">Nesta área você poderá deletar os usuários nomeados como  "Professores" que<br> atualmente estão ativos, <br> 
+            <p  class="text-white" style="text-align: center;" id="p_aviso"><br> 
             Selecione o usuário que deseja deletar</p>
 
         </div>
