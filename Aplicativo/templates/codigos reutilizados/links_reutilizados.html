@@ -7,17 +7,19 @@
     <header>
         <div class="header-controls">
             <button id="menu-btn"><div class="arrow">
-                <div class="line"></div>
-                <div class="left-wing"></div>
-                <div class="right-wing"></div>
-            </div></div></button>
-            <button id="theme-switcher">🔆</button>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="menu-text">Menu</div>
+            </div></button>
+            
         </div>
     </header>
     <div id="effect"></div>
 
     <nav id="side-nav">
         <button id="close-btn">&times;</button>
+        
         <ul>
             <li><a href="{% url 'eletivas' %}" id="eletivaLink">Eletiva</a></li>
             <li><a href="{% url 'tutoria' %}" id="tutorLink">Tutores</a></li>
@@ -64,6 +66,7 @@
             {% else %}
             <li><a href="{% url 'login' %}" class="btn-entrar"> ENTRAR</a></li>
             {% endif %}
+            <button id="theme-switcher">🔆</button>
             
         </ul>
 

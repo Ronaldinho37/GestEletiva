@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (sobreLink) {
         sobreLink.addEventListener('click', function(event) {
             event.preventDefault();
-            sideNav.style.right = '-300px'; /* Alterado para fechar completamente o menu */
+            sideNav.style.right = '-400px'; /* Alterado para fechar completamente o menu */
             effect.classList.add('visible');
             setTimeout(function() {
                 window.location.href = sobreLink.href;
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (logoLink) {
         logoLink.addEventListener('click', function(event) {
             event.preventDefault();
-            sideNav.style.right = '-300px'; /* Alterado para fechar completamente o menu */
+            sideNav.style.right = '-400px'; /* Alterado para fechar completamente o menu */
             effect.classList.add('visible');
             setTimeout(function() {
                 window.location.href = logoLink.href;
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (eletivasLink) {
         eletivasLink.addEventListener('click', function(event) {
             event.preventDefault();
-            sideNav.style.right = '-300px'; /* Alterado para fechar completamente o menu */
+            sideNav.style.right = '-400px'; /* Alterado para fechar completamente o menu */
             effect.classList.add('visible');
             setTimeout(function() {
                 window.location.href = eletivasLink.href;
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (tutorLink) {
         tutorLink.addEventListener('click', function(event) {
             event.preventDefault();
-            sideNav.style.right = '-300px'; /* Alterado para fechar completamente o menu */
+            sideNav.style.right = '-400px'; /* Alterado para fechar completamente o menu */
             effect.classList.add('visible');
             setTimeout(function() {
                 window.location.href = tutorLink.href;
@@ -73,12 +73,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     closeBtn.addEventListener('click', function() {
-        sideNav.style.right = '-300px'; /* Alterado para fechar completamente o menu */
+        sideNav.style.right = '-400px'; /* Alterado para fechar completamente o menu */
         overlay.classList.remove('show');
     });
 
     overlay.addEventListener('click', function() {
-        sideNav.style.right = '-300px'; /* Alterado para fechar completamente o menu */
+        sideNav.style.right = '-400px'; /* Alterado para fechar completamente o menu */
         overlay.classList.remove('show');
     });
 
