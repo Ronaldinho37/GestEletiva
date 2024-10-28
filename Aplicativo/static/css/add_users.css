@@ -7,10 +7,9 @@ body {
     justify-content: center;
     overflow: hidden; /* Impede a rolagem da página principal */
     padding: 0;
-   
-    
-   
 }
+
+
 
 .container {
     display: flex;
@@ -59,19 +58,57 @@ select:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="p
 }
 
 input[type="submit"] {
-    background-color: #f3e350; /* Botão amarelo */
-    color: #007bff; /* Texto do botão azul */
+    background-color: #007bff; /* Cor de fundo azul */
+    color: white; /* Texto branco */
     border: none;
-    border-radius: 5px;
+    border-radius: 30px; /* Bordas arredondadas */
     padding: 15px;
     cursor: pointer;
     font-size: 16px;
     width: 100%;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
     text-transform: uppercase;
     font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007bff;
+    border-radius: 3px;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
+input[type="checkbox"]:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+input[type="checkbox"]:checked::after {
+    content: '✓';
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    top: 1px;
+    left: 4px;
+    font-size: 16px;
+}
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.checkbox-container label {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #333;
+}
 input[type="submit"]:hover {
     background-color: #e2c100; /* Amarelo mais escuro ao passar o mouse */
 }
