@@ -3,7 +3,7 @@
 {% include 'codigos reutilizados/links_reutilizados.html' %}
 {% block links %}
 {% endblock %}
-<div id="table-py" class="p-3" style=font-family:Poppins sans-serif;>
+<div id="table-py" class="p-3" style=font-family:Poppins sans-serif; data-modo="{{modo}}">
     <style>
         ::-webkit-scrollbar{
             display: none;
@@ -12,7 +12,7 @@
     <div id="form-div" class="d-flex flex-column justify-content-center align-items-center mb-4">
 
         <div id="text-del">
-            <h2 class="text-center mb-4 p-3 rounded text-warning " style="background-color: rgb(8, 83, 196);">DELETAR ELETIVAS</h2>
+            <h2 class="text-center mb-4 p-3 rounded text-warning " style="background-color: rgb(8, 83, 196);"><span style="text-transform: uppercase;">{{modo}}</span> ELETIVAS</h2>
         </div>
 
         <div style="position: absolute; top:18%;" class="bg-warning p-2 rounded" id="text-area-res">
@@ -22,8 +22,7 @@
         <div id="div-alert-tables" class=" rounded d-flex align-items-center flex-column p-3  shadow-lg"style="background-color: rgb(8, 83, 196); margin:5% 0%;">
             <img src="../../../media/img_fixas/logo-asn.png" alt="" width="180">
             <h1 class="text-white">ATENÇÃO!!!</h1>
-            <p  class="text-white" style="text-align: center;">Nesta área você poderá deletar as eletivas que atualmente estão ativas, <br> 
-            Selecione a eletiva que deseja deletar e logo após clique no botão <br> vermelho "DELETAR"</p>
+            <p  class="text-white" style="text-align: center;" id="p_aviso"></p>
 
         </div>
 
@@ -73,6 +72,7 @@
 
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="{% static 'js/R_tables.js' %}"></script>
+
 
 {% endblock %}
 

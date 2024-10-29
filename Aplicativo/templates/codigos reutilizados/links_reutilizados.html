@@ -5,16 +5,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <header>
-        <div class="logo">ASN</div>
         <div class="header-controls">
-            <button id="menu-btn">☰ Menu</button>
-            <button id="theme-switcher">🔆</button>
+            <button id="menu-btn"><div class="arrow">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="menu-text">Menu</div>
+            </div></button>
+            
         </div>
     </header>
     <div id="effect"></div>
 
     <nav id="side-nav" data-user="{{user}}" data-versao="1">
         <button id="close-btn">&times;</button>
+        
         <ul>
             <li><a href="{% url 'eletivas' %}" id="eletivaLink">Eletiva</a></li>
             <li><a href="{% url 'tutoria' %}" id="tutorLink">Tutores</a></li>
@@ -61,6 +66,7 @@
             {% else %}
             <li><a href="{% url 'login' %}" class="btn-entrar" onclick="definir_pagina_antiga()"> ENTRAR</a></li>
             {% endif %}
+            <button id="theme-switcher">🔆</button>
             
         </ul>
 

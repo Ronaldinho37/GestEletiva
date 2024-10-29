@@ -8,9 +8,7 @@ body {
 }
 
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: fixed;
     background-color: transparent;
     color: #fff;
     padding: 2rem 8rem;
@@ -26,8 +24,6 @@ header {
     
 }
 
-
-
 #effect {
     position: fixed;
     top: 0;
@@ -38,7 +34,7 @@ header {
     opacity: 0;
     visibility: hidden;
     transition: opacity 1s ease, visibility 1s ease;
-    z-index: 1000; /* Certifique-se de que o efeito está acima do side nav */
+    z-index: 2001; /* Certifique-se de que o efeito está acima do side nav */
 }
 
 /* Visível */
@@ -57,9 +53,204 @@ nav a:hover{
 }
 
 .header-controls {
-    display: flex;
-    align-items: center;
+    position: fixed;
+    right: 2%;
+    top: 50%;
+    z-index: 2000;
+    
 }
+.arrow {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin: 50px auto;
+    text-align: center;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 50%;
+}
+
+.bar {
+    position: absolute;
+    width: 30px;
+    height: 4px;
+    background-color: black;
+    transition: all 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Fluidez com easing mais orgânico */
+    border-radius: 2px;
+}
+
+.bar:nth-child(1) {
+    top: 20px;
+    left: 5px;
+    transform: rotate(-45deg);
+}
+
+.bar:nth-child(2) {
+    top: 28px;
+    left: 17px;
+}
+
+.bar:nth-child(3) {
+    top: 40px;
+    left: 7px;
+    transform: rotate(45deg);
+}
+
+.menu-text {
+    position: absolute;
+    top: 70px;
+    left: 52%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    color: black;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+}
+
+/* Hover effect: Snake movement and align to form three bars */
+.arrow:hover .menu-text {
+    opacity: 1;
+    transition: opacity 0.5s ease 0.3s;
+}
+
+.arrow:hover .bar:nth-child(1) {
+    animation: snakeMove1 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+.arrow:hover .bar:nth-child(2) {
+    animation: snakeMove2 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s forwards;
+}
+
+.arrow:hover .bar:nth-child(3) {
+    animation: snakeMove3 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.4s forwards;
+}
+
+.arrow:not(:hover) .menu-text {
+    opacity: 0;
+    transition: opacity 0.5s ease 0.3s;
+}
+
+.arrow:not(:hover) .bar:nth-child(1) {
+    animation: snakeMove1Reverse 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+.arrow:not(:hover) .bar:nth-child(2) {
+    animation: snakeMove2Reverse 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s forwards;
+}
+
+.arrow:not(:hover) .bar:nth-child(3) {
+    animation: snakeMove3Reverse 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.4s forwards;
+}
+
+/* Keyframes for snake-like movement to form the menu */
+@keyframes snakeMove1 {
+    0% {
+        transform: rotate(-45deg) translateX(0) translateY(0);
+        top: 20px;
+        left: 5px;
+    }
+    50% {
+        transform: rotate(30deg) translateX(15px) translateY(15px);
+        top: 25px;
+    }
+    100% {
+        transform: rotate(0deg) translateX(0) translateY(0);
+        top: 18px;
+        left: 15px;
+    }
+}
+
+@keyframes snakeMove2 {
+    0% {
+        transform: translateX(0) translateY(0);
+        top: 28px;
+        left: 17px;
+    }
+    50% {
+        transform: translateX(-5px) translateY(-5px);
+        top: 26px;
+        left: 13px;
+    }
+    100% {
+        transform: translateX(0) translateY(0);
+        top: 28px;
+        left: 15px;
+    }
+}
+
+@keyframes snakeMove3 {
+    0% {
+        transform: rotate(45deg) translateX(0) translateY(0);
+        top: 40px;
+        left: 7px;
+    }
+    50% {
+        transform: rotate(-30deg) translateX(-10px) translateY(-10px);
+        top: 42px;
+        left: 12px;
+    }
+    100% {
+        transform: rotate(0deg) translateX(0) translateY(0);
+        top: 38px;
+        left: 15px;
+    }
+}
+
+/* Reverse keyframes for returning to the original arrow */
+@keyframes snakeMove1Reverse {
+    0% {
+        transform: rotate(0deg) translateX(0) translateY(0);
+        top: 18px;
+        left: 15px;
+    }
+    50% {
+        transform: rotate(30deg) translateX(15px) translateY(15px);
+        top: 25px;
+    }
+    100% {
+        transform: rotate(-45deg) translateX(0) translateY(0);
+        top: 20px;
+        left: 5px;
+    }
+}
+
+@keyframes snakeMove2Reverse {
+    0% {
+        transform: translateX(0) translateY(0);
+        top: 28px;
+        left: 15px;
+    }
+    50% {
+        transform: translateX(-5px) translateY(-5px);
+        top: 26px;
+        left: 13px;
+    }
+    100% {
+        transform: translateX(0) translateY(0);
+        top: 28px;
+        left: 17px;
+    }
+}
+
+@keyframes snakeMove3Reverse {
+    0% {
+        transform: rotate(0deg) translateX(0) translateY(0);
+        top: 38px;
+        left: 15px;
+    }
+    50% {
+        transform: rotate(-30deg) translateX(-10px) translateY(-10px);
+        top: 42px;
+        left: 12px;
+    }
+    100% {
+        transform: rotate(45deg) translateX(0) translateY(0);
+        top: 40px;
+        left: 7px;
+    }
+}
+
+
 
 .btn-entrar{
     background-color: #250ff3;
@@ -116,14 +307,14 @@ button#theme-switcher {
 }
 nav {
     height: 100vh;
-    width: 300px;
+    width: 400px;
     position: fixed;
     top: 0;
-    right: -300px; /* Oculta o menu inicialmente */
+    right: -400px; /* Oculta o menu inicialmente */
     background-color: #111;
     color: #fff;
     transition: right 0.3s ease;
-    z-index: 1000;
+    z-index: 2003;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -237,7 +428,7 @@ main {
 nav ul {
     list-style: none;
     padding: 0;
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: 400;
     text-align: left;
 }
