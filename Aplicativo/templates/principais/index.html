@@ -136,14 +136,66 @@
     }
 </style>
 
-
-
-
-
+<br><br>
+    <div class="faq-container">
+        <h1 class="faq-title">Perguntas Frequentes (FAQ)</h1>
+        
+        <div class="faq-item">
+            <div class="faq-question">Quais são os serviços/produtos oferecidos?</div>
+            <div class="faq-answer">
+                Oferecemos ensino de qualidade pra tu aprender a programar e fz o novo facebook.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Como posso entrar em contato com a equipe de suporte?</div>
+            <div class="faq-answer">
+                Você pode entrar em contato conosco por meio de comunicacao@ecomp.com. Estamos disponíveis 24 por dia 7 dias por semana.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Qual é o prazo de matricula na escola?</div>
+            <div class="faq-answer">
+                O prazo em media varia de 30 dias mas varea.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">posso desistir do curos?</div>
+            <div class="faq-answer">
+                Sim, mas é bom ent preocupa n.
+            </div>
+        </div>
+    
+        <div class="faq-item">
+            <div class="faq-question">Como acompanho as notas do meu filho?</div>
+            <div class="faq-answer">
+                rapaz tu vai entrar num site de merda chamado seges.com.
+            </div>
+        </div>
+        
+        <!-- Mais itens de FAQ podem ser adicionados aqui -->
+    </div>
+    
+    <script>
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    if (faq !== item.parentNode) {
+                        faq.classList.remove('active');
+                    }
+                });
+                
+                item.parentNode.classList.toggle('active');
+            });
+        });
+    </script>
+    
+<br><br>
 {% include 'codigos reutilizados/footer.html' %}
     {% block footer %}
     {% endblock %}
-
 
 <script src="{% static 'js/overflow.js' %}"></script>
 <script src="{% static 'js/scroll.js' %}"></script>
