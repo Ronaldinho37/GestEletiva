@@ -1,6 +1,8 @@
 {% block footer %}
+{% load static %}
 <link rel="stylesheet" href="stylescss">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://unpkg.com/scrollreveal"></script>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
   *{
@@ -105,43 +107,43 @@
 <footer>
     <div class="esquerda">
     <div class="logo">
-        <img src="../../../media/img_fixas/logo-asn.png" alt="Logo">
+        <img id="logo-footer" src="../../../media/img_fixas/logo-asn.png" alt="Logo">
     </div>
-        <div class="contact-info">
+        <div id="endereco" class="contact-info">
         <p> Av. Cel. Francisco Heráclito dos Santos, 210</p>
         <p>Prédio de Administração,<br> 5º andar, Curitiba/PR</p>
 
         <br><br>
-        <p> comunicacao@ecomp.com</p>
+        <p id="email"> comunicacao@ecomp.com</p>
     </div>
 </div>
 
     <div class="mei" style=" gap: 200px;">
         <div>
-        <h1>Ajuda</h1>
-        <ul>FAQ</ul>
-        <ul>Termos de Uso</ul>
-        <ul>Contato</ul>
+        <h1 id="help">Ajuda</h1>
+        <ul id="help-links">FAQ</ul>
+        <ul id="help-links">Termos de Uso</ul>
+        <ul id="help-links">Contato</ul>
 </div>
 <div>
-        <h1>Institucional</h1>
-        <ul>Código de Ética</ul>
-        <ul>Canal de Denúncias</ul>
-        <ul>Política de Privacidade</ul>
-        <ul>Trabalhe conosco</ul>
+        <h1 id="institucional">Institucional</h1>
+        <ul id="institucional-links">Código de Ética</ul>
+        <ul id="institucional-links">Canal de Denúncias</ul>
+        <ul id="institucional-links">Política de Privacidade</ul>
+        <ul id="institucional-links">Trabalhe conosco</ul>
     </div>
     </div>
     
     <div class="social-icons">
-        <h2>nos siga nas redes</h2>
+        <h2 id="follow">nos siga nas redes</h2>
         <div>
-        <a href="#">
+        <a href="#" id="social">
             <i class="fa-brands fa-facebook fa-2x" style="color: #00aeff;"></i>
         </a>
-        <a href="#">
+        <a href="#" id="social">
             <i class="fa-brands fa-square-instagram fa-2x" style="color: #00aeff;"></i>
         </a>
-        <a href="#">
+        <a href="#" id="social">
             <i class="fa-brands fa-linkedin fa-2x" style="color: #00aeff;"></i>
         </a></div>
     </div>
@@ -150,4 +152,7 @@
 <div style="width: 100%; height: 30px; background-color: #00aeff; align-items: center; text-align: center; display: grid;">
         © 2024 ASN - Todos os direitos reservados
     </div>
+
+    <script src="{% static 'js/CabReveal.js' %}"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
 {% endblock %}

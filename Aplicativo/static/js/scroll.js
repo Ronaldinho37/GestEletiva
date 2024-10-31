@@ -36,4 +36,14 @@ sr.reveal('#what-new', {
     mobile: true
 });
 
+sr.reveal('.faq-container', {
+    delay: 200,
+    duration: 2000,
+    origin:'top',
+    distance: '100px',
+    reset: true,
+    mobile: true
+});
+
+
 

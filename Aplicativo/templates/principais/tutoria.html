@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/tutoria.css'%}">
     <link rel="stylesheet" href="{% static 'css/links_reutilizados.css'%} ">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://unpkg.com/scrollreveal"></script>
     <title>Document</title>
 </head>
 <body>
@@ -18,53 +17,78 @@
     {% include 'codigos reutilizados/menssage.html' %}
     {% block menssagem %}
     {% endblock %}
-    <div class="casdds">
-        {% for i in tutores %}
-        <div class="card-1">
-            <div class="top-section" style=" background-image: url('../../../media/{{i.imagem}}');">
-                <img src="../../../media/{{i.imagem}}" alt="Wilmeika and Juliano">
-            </div>
-                <div class="align">
-                    <h2>{{i.nome}}</h2>
-                    <p>{{i.descricao}}</p>
-                    <button>Votar</button>
-                </div>
-    
-        </div>
-        {% endfor %}
-</div>
-<section class="part">
-    <a href="#" class="botao-ver-mais">Ver Mais</a>
-</section>
+    <div class="casdds" style="background: linear-gradient(135deg, #301ea8, #3a2c99);">
+      <div class="d-flex flex-column">
+          <div class="d-flex text-center text-white justify-content-center flex-column text-lg mb-4">
+              <h2 style="font-weight: bold; font-size: 2.5rem; margin-bottom: 20px;" id="text-tutor">Tutores</h2>
+              <hr id="hr" style="width: 60px; height: 4px; background-color: #a2d2ff; border: none; margin: 10px auto 30px; border-radius: 2px;">
+          </div>
+          
+          <div class="card-container"> <!-- Removido d-flex para usar grid -->
+              {% for i in tutores %}
+                  <div class="card-1">
+                      <div class="top-section" style="background-image: url('../../../media/{{i.imagem}}');">
+                          <img src="../../../media/{{i.imagem}}" alt="Wilmeika and Juliano">
+                      </div>
+                      <div class="align">
+                          <h2>{{i.nome}}</h2>
+                          <p>{{i.descricao}}</p>
+                          <button>Votar</button>
+                      </div>
+                  </div>
+              {% endfor %}
+          </div> <!-- Fecha a div card-container -->
+      </div>
+  </div>
+  
+
 <br><br>
 
-<section>
+<section class="bg-light p-5">
+  <h2 class="text-center" style="font-weight: bold; font-size: 2.5rem; margin-bottom: 20px;" id="text-why">Por que é Importante a escolha do meu tutor?</h2>
+  <hr id="hr" class="text-center" style="width: 60px; height: 4px; background-color: #ffde59; border: none; margin: 10px auto 30px; border-radius: 2px;">
+  <div class="d-flex justify-content-center pt-4" style="gap: 100px;" >
+    <p style="width: 600px; font-size: 1.5rem;" id="about-why">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. N
+      am ultricies porta nulla ut pharetra. Suspendisse sollicitudin 
+      fringilla nibh sit amet laoreet. Nunc iaculis felis id sapien
+       hendrerit, in mollis lectus hendrerit. Mauris varius diam et augue
+        scelerisque interdum. Class aptent taciti sociosqu ad litora torquent 
+        per conubia nostra, per inceptos himenaeos. Cras a faucibus dui. Nulla
+         sed efficitur nibh. Vestibulum et gravida felis. Aliquam vel placerat 
+         tellus. Pellentesque porttitor vel ligula et ullamcorper. Nam blandit 
+         tortor sed turpis accumsan fermentum. Aliquam aliquet leo pharetra pellentesque 
+         suscipit. Nullam iaculis urna faucibus, maximus enim a, posuere est. 
+         Pellentesque eu augue molestie, scelerisque
+       ipsum sit amet, feugiat lorem. Praesent non ipsum at ex vehicula dignissim.
+    </p>
+    <div class="line"></div>
+    <img src="../.././../media/img_fixas/sandra-element.png" width="800px" alt="" id="sandra">
+  </div>
   
 </section>
 
-<div id="carouselExampleControls" style="height:700px;" class="carousel slide p-5 d-flex" data-ride="carousel">
+<div id="carouselExampleControls" class="carousel slide p-5" data-bs-ride="carousel" data-bs-pause="false" data-bs-interval="3000">
   <div class="d-flex justify-content-between align-items-center w-100">
-      <div class="text-center d-flex align-items-center flex-column" style="flex: 1;">
-          <h1 class="text-warning p-3 d-inline" style="background-color: rgb(8, 83, 196); border-radius:20px;box-shadow: 0px 2px 7px black;">Professores Qualificados</h1>
-          <p style="margin-top: 20px;" class="w-75 px-5">Em nossa Instituição temos profissionais <br> Qualificados para atender seus filhos, todos formados
-              e preparados para desbravar o mundo do conhecimento.</p>
+    <div class="text-center d-flex align-items-center flex-row" style="flex: 1; gap: 80px;">
+      <div class="d-flex flex-column align-items-center">
+        <h1 id="qualify-teachers" class="text-warning p-3 d-inline" style="background-color: rgb(8, 83, 196); border-radius:20px;box-shadow: 0px 2px 7px black;">Os Melhores Tutores !!!</h1>
+        <p id="about-qualify" style="margin-top: 20px;" class="w-75 px-5">Em nossa Instituição temos profissionais <br> Qualificados para atender seus filhos, todos formados
+            e preparados para desbravar o mundo do conhecimento.</p></div>
+  <div class="carousel-inner w-50" style="border-radius: 30px;">
+      <div class="carousel-item active">
+          <img src=".././../../media/img_fixas/Gislene.png" class="d-block w-100 img-fluid" alt="Professora Gislene">
       </div>
-      <div class="carousel-container" style="flex: 1; display: flex; justify-content: flex-end;">
-          <div id="carouselExampleSlidesOnly" class="carousel slide w-100" data-mdb-ride="carousel" data-mdb-carousel-init>
-              <div class="carousel-inner" style="border-radius:20px;box-shadow: 0px 2px 7px black;">
-                  <div class="carousel-item active">
-                      <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="d-block w-100" alt="Wild Landscape"/>
-                  </div>
-                  <div class="carousel-item">
-                      <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp" class="d-block w-100" alt="Camera"/>
-                  </div>
-                  <div class="carousel-item">
-                      <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" class="d-block w-100" alt="Exotic Fruits"/>
-                  </div>
-              </div>
-          </div>
+      <div class="carousel-item">
+          <img src=".././../../media/img_fixas/Jerry.png" class="d-block w-100 img-fluid" alt="Professor Jerry">
+      </div>
+      <div class="carousel-item">
+          <img src=".././../../media/img_fixas/Walas.png" class="d-block w-100 img-fluid" alt="Professor Walas">
       </div>
   </div>
+
+</div>
+</div>
 </div>
 
 
@@ -110,5 +134,10 @@ function showSlides(n) {
   
 <script src="{% static 'js/mouse_funcoes.js' %}"></script>
 <script src="{% static 'js/links_reutilizados.js' %}"></script>
+<script src="{% static 'js/TutoriaReveal.js' %}"></script>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 </html>

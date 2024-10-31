@@ -61,10 +61,57 @@
     cursor: pointer;
     font-size: 14px;
     margin-bottom: 10px;
+    
 }
 
 .card-1 button:hover {
     background-color: #0056b3;
+}
+
+.carousel-item {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.carousel-inner {
+    display: flex;
+    align-items: center; /* Alinha verticalmente no centro */
+    justify-content: flex-start; /* Alinha horizontalmente no centro */
+    height: 500px; /* Ajuste a altura conforme necessário */
+    overflow: hidden; /* Garante que nada ultrapasse os limites do carousel */
+}
+
+.carousel-item img {
+    width: 100%; /* Faz a imagem ocupar 100% da largura do contêiner */
+    object-fit:cover; /* Faz com que a imagem cubra completamente o contêiner */
+    max-height: 100%; /* Limita a altura da imagem ao tamanho do carousel */
+    width: auto; /* Mantém a proporção da imagem */
+}
+
+.carousel-inner {
+    overflow: hidden; /* Garante que nada ultrapasse os limites do carousel */
+}
+
+.carousel-item {
+    transition: opacity 1s ease-in-out; /* Transição suave na opacidade */
+}
+
+.carousel-item-next, .carousel-item-prev, .carousel-item.active {
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out; /* Transição suave na transformação e opacidade */
+}
+
+.carousel-item {
+    opacity: 0; /* Inicialmente oculto */
+}
+
+.carousel-item.active {
+    opacity: 1; /* Ativo é visível */
+}
+
+
+.card-container {
+    display: grid; /* Ativa o grid layout */
+    grid-template-columns: repeat(4, 1fr); /* Cria 4 colunas de igual largura */
+    gap: 20px; /* Espaçamento entre os cards */
 }
 
 .casdds {
@@ -72,7 +119,9 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 48px;
-    margin-top: 15%;
+    padding: 50px;
+    margin: 50px;
+    border-radius: 50px;
     
 }
 
@@ -96,6 +145,12 @@
     background-color: #0056b3;
     color: #fff;
    
+}
+
+.line{
+    width: 5px;
+    background-color: #ffde59;
+    height: 600px;
 }
 
 .align p {
