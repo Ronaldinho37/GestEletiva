@@ -27,3 +27,13 @@ sr.reveal('#logo-div-tec', {
     mobile: true
 });
 
+sr.reveal('#what-new', {
+    delay: 200,
+    duration: 2000,
+    origin:'top',
+    distance: '100px',
+    reset: true,
+    mobile: true
+});
+
+
