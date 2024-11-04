@@ -16,7 +16,9 @@ urlpatterns = [
  #   path('tutoria/',tutoria,name='tutoria'),
     path('definir-paginas/',definir_paginas_utilizaveis,name='definir-paginas'),
     path('editar_aviso/<int:id>',editar_aviso,name='editar_aviso'),
+    path('editar_oferecimento/<int:id>',editar_oferecimento,name='editar_oferecimento'),
     path('deletar/<str:user_a_ser_atualizado_arg>/<str:id>',deletar_com_ids,name='deletar_com_ids'),
+    path('add_oferecimento',add_OqueTemosaOferecer,name='add_oferecimento')
 
     
 ]

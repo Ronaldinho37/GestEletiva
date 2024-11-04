@@ -83,45 +83,20 @@
     <hr style="width: 60px; height: 4px; background-color: #a2d2ff; border: none; margin: 10px auto 30px; border-radius: 2px;">
     
     <div class="d-flex flex-wrap justify-content-center" style="max-width: 1200px; margin: 0 auto;">
-        <!-- Card 1 -->
-        <div class="card d-flex flex-column align-items-center m-3" style="max-width: 280px; max-height: 350px; padding: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); background-color: white; color: #4c3db5;">
-            <img src="../.././../media/img_fixas/literatura.png" alt="" class="img-fluid" style="border-radius: 20px; width: 100%; transition: transform 0.3s ease;">
-            <h5 class="mt-3" style="font-weight: bold;">Projetos Especiais</h5>
-            <p class="text-center">Criados para engajar os estudantes em experiências de escrita significativas</p>
-            <a href="#" style="color: #4c3db5; font-weight: bold; text-decoration: none;">Saiba mais &rarr;</a>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="card d-flex flex-column align-items-center m-3" style="max-width: 280px; max-height: 350px; padding: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); background-color: white; color: #4c3db5;">
-            <img src="../.././../media/img_fixas/literatura.png" alt="" class="img-fluid" style="border-radius: 20px; width: 100%; transition: transform 0.3s ease;">
-            <h5 class="mt-3" style="font-weight: bold;">Cases</h5>
-            <p class="text-center">Assista aos vídeo cases da Letrus e confira na prática o impacto gerado por nosso programa curricular de escrita e leitura</p>
-            <a href="#" style="color: #4c3db5; font-weight: bold; text-decoration: none;">Assista agora &rarr;</a>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="card d-flex flex-column align-items-center m-3" style="max-width: 280px; max-height: 350px; padding: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); background-color: white; color: #4c3db5;">
-            <img src="../.././../media/img_fixas/literatura.png" alt="" class="img-fluid" style="border-radius: 20px; width: 100%; transition: transform 0.3s ease;">
-            <h5 class="mt-3" style="font-weight: bold;">Blog</h5>
-            <p class="text-center">Confira conteúdos exclusivos sobre Gestão Escolar, Ensino Híbrido, Tecnologia Educacional e muito mais.</p>
-            <a href="#" style="color: #4c3db5; font-weight: bold; text-decoration: none;">Saiba mais &rarr;</a>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="card d-flex flex-column align-items-center m-3" style="max-width: 280px; max-height: 350px; padding: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); background-color: white; color: #4c3db5;">
-            <img src="../.././../media/img_fixas/literatura.png" alt="" class="img-fluid" style="border-radius: 20px; width: 100%; transition: transform 0.3s ease;">
-            <h5 class="mt-3" style="font-weight: bold;">Novidade</h5>
-            <p class="text-center">Explore nossos novos projetos e oportunidades para aprendizado e crescimento.</p>
-            <a href="#" style="color: #4c3db5; font-weight: bold; text-decoration: none;">Saiba mais &rarr;</a>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="card d-flex flex-column align-items-center m-3" style="max-width: 280px; max-height: 350px; padding: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); background-color: white; color: #4c3db5;">
-            <img src="../.././../media/img_fixas/literatura.png" alt="" class="img-fluid" style="border-radius: 20px; width: 100%; transition: transform 0.3s ease;">
-            <h5 class="mt-3" style="font-weight: bold;">Extra</h5>
-            <p class="text-center">Descubra conteúdos e atividades complementares para enriquecer sua experiência.</p>
-            <a href="#" style="color: #4c3db5; font-weight: bold; text-decoration: none;">Saiba mais &rarr;</a>
-        </div>
+        {% for i in OqueTemosaOferecer %}
+        {% if user == 'ADMIN' or 'cadastrar' in lista_de_acoes%}
+            <div id="">
+                <a href="{% url 'editar_oferecimento' id=i.id %}">Editar</a>
+                <a href="{% url 'deletar_com_ids' user_a_ser_atualizado_arg='oferecimento' id=i.id %}">deletar</a>
+            </div>
+        {% endif %}
+            <div class="card d-flex flex-column align-items-center m-3" style="max-width: 280px; max-height: 350px; padding: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); background-color: white; color: #4c3db5;">
+                <img src="../.././../media/{{i.imagem}}" alt="" class="img-fluid" style="text-wrap: wrap; text-align: center; border-radius: 20px; width: 100%; height:30%; transition: transform 0.3s ease;">
+                <h5 class="mt-3" style="font-weight: bold;">{{i.titulo}}</h5>
+                <p class="text-center" style="width:280px;">{{i.descricao}}</p>
+                <a href="{{i.link}}" style="color: #4c3db5; font-weight: bold; text-decoration: none;">{{i.titulo_do_link}}&rarr;</a>
+            </div>
+        {% endfor %}
     </div>
 </div>
 

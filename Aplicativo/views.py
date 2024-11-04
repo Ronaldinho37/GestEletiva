@@ -12,6 +12,7 @@ import os
 from PIL import Image
 #pip freeze > requiriments.txt
 menssagem_var = {'mensagem':""}
+
 #esta variável receberá o valor que eu precisarei em todas as funções, ela server para eu não ter que ficar
 #repetindo linhas de código. Em quase todas as funções a variável 'dados' hospedará o valor dela.
 dados_universsais = {}
@@ -55,6 +56,7 @@ def checar_imagem_existente(imagem,pasta,acao):
         #variável que contém todos os itens da pasta requisitada, em forma de lista
         pasta_da_velha_imagem = os.listdir(f'{os.getcwd()}/media/{pasta}')
     except:
+      
         return imagem
     #essa variável serve para eu ter um controle do que esta acontecendo, mais a frente ele dirá se eu tenho ou não de adicionar a imagem
     tam = 0
@@ -169,6 +171,7 @@ def retornar_index(request):
         return render(request,'definir_as_paginas/acesso_bloqueado.html',dados)
     #variável que contém os cards de avisos
     dados['avisos'] = Anuncio.objects.all().order_by("-id")[:2]
+    dados['OqueTemosaOferecer'] = OqueTemosaOferecer.objects.all().values()
     try:
         dados['message'] = menssagem_var['mensagem']
         menssagem_var['mensagem'] = ""
@@ -606,6 +609,18 @@ def deletar_com_ids(request,user_a_ser_atualizado_arg,id):
                         except:
                             return redirect(update_or_delete,u_or_d='deletar',user_a_ser_atualizado_arg=user_a_ser_atualizado_arg)
                 #se o user_a_ser_atualizado_arg for um professor ou tutor
+                elif user_a_ser_atualizado_arg == 'oferecimento':
+                    id_a_ser_deletado = dados['lista_id'][0]
+                    dados['model_user'] = OqueTemosaOferecer.objects.all().values()
+                    dados['diretorio_user'] = "img_OqueTemosaOferecer"
+                    try:
+                        OqueTemosaOferecer.objects.get(id=id_a_ser_deletado).delete()
+                        excluir_imagem('img_OqueTemosaOferecer',OqueTemosaOferecer.objects.all().values())
+                        menssagem_var['mensagem'] = 'O oferecimento foi deletado'
+                        return redirect(retornar_index)
+                    except:
+                        menssagem_var['mensagem'] = 'Id não encontrado'
+                        return redirect(retornar_index)
                 elif user_a_ser_atualizado_arg == "professor" or user_a_ser_atualizado_arg == "tutor":
                     dados['model_user'] = Professores.objects.all().values()
                     dados['diretorio_user'] = "imagem_professores"
@@ -1046,5 +1061,59 @@ def definir_paginas_utilizaveis(request):
                 dados[f'{i}'] = ''
        
         return render(request,'definir_as_paginas/definir_paginas.html',dados)
+
+def add_OqueTemosaOferecer(request):
+    if request.method == 'POST':
+        titulo = request.POST.get('titulo')
+        imagem = checar_imagem_existente(request.FILES.get('imagem'),'img_OqueTemosaOferecer','cadastrar')
+        descricao = request.POST.get('descricao')
+        link = request.POST.get('link')
+        titulo_link = request.POST.get('titulo_link')
+
+        novo_oferecimento = OqueTemosaOferecer(titulo=titulo,imagem=imagem,descricao=descricao,link=link,titulo_do_link=titulo_link)
+        novo_oferecimento.save()
+        menssagem_var['mensagem'] = "Oferecimento adicionado"
+        return redirect(retornar_index)
+    else:
+        return render(request,'OqueTemosaOferecer/add_oferecimentos.html')
+
+def editar_oferecimento(request,id):
+    dados = {}
+    try:
+        oferecimento_a_ser_atualizado = OqueTemosaOferecer.objects.get(id=id)
+    except:
+        menssagem_var['mensagem'] = "Id não encontrado"
+        return redirect(retornar_index)
+    dados['titulo'] = oferecimento_a_ser_atualizado.titulo
+    dados['descricao'] = oferecimento_a_ser_atualizado.descricao
+    dados['imagem'] = oferecimento_a_ser_atualizado.imagem
+    dados['link'] = oferecimento_a_ser_atualizado.link
+    dados['titulo_do_link'] = oferecimento_a_ser_atualizado.titulo_do_link
+    if request.method == 'POST':
+        titulo_novo= request.POST.get('titulo')
+        descricao_nova = request.POST.get('descricao')
+        imagem_nova = request.FILES.get('imagem')
+        link_novo = request.POST.get('link')
+        titulo_link_novo = request.POST.get('titulo_link')
+        
+        
+        if dados['titulo'] != titulo_novo:
+            oferecimento_a_ser_atualizado.titulo = titulo_novo
+        if dados['descricao'] != descricao_nova:
+            oferecimento_a_ser_atualizado.descricao = descricao_nova
+        if dados['link'] != link_novo:
+            oferecimento_a_ser_atualizado.link = link_novo
+        if dados['titulo_do_link'] != titulo_link_novo:
+            oferecimento_a_ser_atualizado.titulo_do_link = titulo_link_novo
+        if imagem_nova != None:
+            oferecimento_a_ser_atualizado.imagem = checar_imagem_existente(imagem_nova,'img_OqueTemosaOferecer','atualizar')
+            excluir_imagem('img_OqueTemosaOferecer',OqueTemosaOferecer.objects.all().values())
+      
+        oferecimento_a_ser_atualizado.save()
+        menssagem_var['mensagem'] = "Oferecimento atualizado"
+        return redirect(retornar_index)
+    else:
+        return render(request, 'OqueTemosaOferecer/editar_oferecimento.html', dados)
+
 
 
