@@ -1,72 +1,63 @@
 {% block footer %}
+{% load static %}
 <link rel="stylesheet" href="stylescss">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://unpkg.com/scrollreveal"></script>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-  *{
-    font-family: inter;
-  }
-
-    footer {
-        background-color: #fafafa; /* Cor de fundo */
-        color: rgb(0, 0, 0);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+    * {
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
     }
 
+    footer {
+        background-color: #fff; /* Cor de fundo */
+        color: rgb(0, 0, 0);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centralizando todos os itens no footer */
+    }
 
-    p:hover{
+    p:hover {
         cursor: pointer;
         color: #eba716;
         transition: .5s;
     }
-    p{
-        transition: .5s
-    }
-
-
+    
     .social-icons {
         display: flex;
         gap: 15px;
         margin-bottom: 10px;
+        justify-content: center;
     }
 
-
     .logo img {
-        max-width: 100px;
+        max-width: 120px; /* Aumentando o tamanho da logo */
         height: auto;
     }
 
-
     .contact-info {
-        text-align: center;
+        text-align: center; /* Centralizando o texto */
     }
-
 
     .contact-info p {
         margin: 5px 0;
     }
 
-
     .contact-info p:first-child {
         font-size: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
-
 
     .contact-info p:last-child {
         font-size: 12px;
     }
 
-
     .contact-info i {
         margin-left: 5px;
     }
-
 
     @media (min-width: 600px) {
         footer {
@@ -75,78 +66,147 @@
             padding: 10px 50px;
         }
 
-
         .contact-info {
             text-align: left;
         }
 
-
         .social-icons {
             margin-bottom: 0;
-            display: grid;
-        }
-        .esquerda{
             flex-direction: column;
+            align-items: center;
 
         }
 
-        .mei{
+        .mei {
             display: flex;
+            gap: 50px;
         }
-        .mei h1{
-            font-size: 30px;
+
+        .mei h1 {
+            font-size: 20px;
         }
-        .mei ul{
-            font-size: 15px  ;
+
+        .mei ul {
+            font-size: 14px;
+            list-style-type: none;
         }
+    }
+
+    @media (max-width: 600px) {
+        .logo {
+            margin: 0 auto; /* Centralizando a logo */
+        }
+
+        .logo{
+            display: flex;
+            justify-content: center;
+        }
+
+        .mei {
+            flex-direction: column;
+            align-items: center;
+            text-align: center; /* Centralizando o texto nas seções de ajuda e institucional */
+        }
+
+        .mei h1 {
+            font-size: 18px; /* Ajustando o tamanho do título */
+        }
+
+        .mei ul {
+            font-size: 14px;
+            list-style-type: none;
+            padding: 0; /* Removendo padding para centralização correta */
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            font-size: 26px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    .footer-bottom {
+        width: 100%;
+        height: 30px;
+        background-color: #00aeff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 12px;
     }
 </style>
 <footer>
     <div class="esquerda">
-    <div class="logo">
-        <img src="../../../media/img_fixas/logo-asn.png" alt="Logo">
+        <div class="logo">
+            <img id="logo-footer" src="../../../media/img_fixas/logo-asn.png" alt="Logo">
+        </div>
+        <div id="endereco" class="contact-info">
+            <p>Av. Cel. Francisco Heráclito dos Santos, 210</p>
+            <p>Prédio de Administração,<br>5º andar, Curitiba/PR</p>
+            <p id="email">comunicacao@ecomp.com</p>
+        </div>
     </div>
-        <div class="contact-info">
-        <p> Av. Cel. Francisco Heráclito dos Santos, 210</p>
-        <p>Prédio de Administração,<br> 5º andar, Curitiba/PR</p>
 
-        <br><br>
-        <p> comunicacao@ecomp.com</p>
-    </div>
-</div>
-
-    <div class="mei" style=" gap: 200px;">
+    <div class="mei">
         <div>
-        <h1>Ajuda</h1>
-        <ul>FAQ</ul>
-        <ul>Termos de Uso</ul>
-        <ul>Contato</ul>
-</div>
-<div>
-        <h1>Institucional</h1>
-        <ul>Código de Ética</ul>
-        <ul>Canal de Denúncias</ul>
-        <ul>Política de Privacidade</ul>
-        <ul>Trabalhe conosco</ul>
-    </div>
+            <h1 id="help">Ajuda</h1>
+            <ul>
+                <li>FAQ</li>
+                <li>Termos de Uso</li>
+                <li>Contato</li>
+            </ul>
+        </div>
+        <div>
+            <h1 id="institucional">Institucional</h1>
+            <ul>
+                <li>Código de Ética</li>
+                <li>Canal de Denúncias</li>
+                <li>Política de Privacidade</li>
+                <li>Trabalhe conosco</li>
+            </ul>
+        </div>
     </div>
     
     <div class="social-icons">
-        <h2>nos siga nas redes</h2>
+        <h2 id="follow">Nossas Redes</h2>
         <div>
-        <a href="#">
-            <i class="fa-brands fa-facebook fa-2x" style="color: #00aeff;"></i>
-        </a>
-        <a href="#">
-            <i class="fa-brands fa-square-instagram fa-2x" style="color: #00aeff;"></i>
-        </a>
-        <a href="#">
-            <i class="fa-brands fa-linkedin fa-2x" style="color: #00aeff;"></i>
-        </a></div>
+            <a href="#" id="social">
+                <i class="fa-brands fa-facebook fa-2x" style="color: #00aeff;"></i>
+            </a>
+            <a href="#" id="social">
+                <i class="fa-brands fa-square-instagram fa-2x" style="color: #00aeff;"></i>
+            </a>
+            <a href="#" id="social">
+                <i class="fa-brands fa-linkedin fa-2x" style="color: #00aeff;"></i>
+            </a>
+        </div>
     </div>
-    
 </footer>
-<div style="width: 100%; height: 30px; background-color: #00aeff; align-items: center; text-align: center; display: grid;">
-        © 2024 ASN - Todos os direitos reservados
-    </div>
+<div class="footer-bottom">
+    © 2024 ASN - Todos os direitos reservados
+</div>
+
+<script src="{% static 'js/CabReveal.js' %}"></script>
+<script src="https://unpkg.com/scrollreveal"></script>
 {% endblock %}

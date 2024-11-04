@@ -59,3 +59,11 @@ class PaginasUtilizaveis(models.Model):
     eletiva = models.BooleanField()
     index = models.BooleanField()
     sobre = models.BooleanField(null=True, blank=False)
+
+class OqueTemosaOferecer(models.Model):
+    titulo = models.CharField(max_length=100)
+    descricao = models.TextField(max_length=76)
+    imagem = models.ImageField(upload_to="img_OqueTemosaOferecer/")
+    #remover linha
+    link = models.URLField(max_length=200)
+    titulo_do_link = models.CharField(max_length=100)

@@ -17,17 +17,17 @@
             
                 <a href="{% url 'index' %}">cancelar</a>
                     <label for="titulo">Título</label>
-                    <input type="text" name="titulo" id="titulo" value="{{titulo}}" maxlength="40">
+                    <input type="text" name="titulo" id="titulo" value="{{titulo}}" maxlength="40" required>
                     <label for="descricao">Descrição</label>
-                    <textarea name="descricao" id="descricao" maxlength="127" rows="10" placeholder="Máximo de caracteres: 127">{{descricao}}</textarea>
+                    <textarea name="descricao" id="descricao" maxlength="127" rows="10" placeholder="Máximo de caracteres: 127" required>{{descricao}}</textarea>
                     <div>
                         <label for="imagemantiga">Imagem Antiga</label>
                         <img id="imagemantiga" src="../../../media/{{imagem}}" alt="" srcset="" style="width: 100%;">
                         <label for="imagem">Nova Imagem</label>
-                        <input type="file" name="imagem" id="imagem">
+                        <input type="file" name="imagem" id="imagem" required>
                     </div>
                     <label for="link">Link</label>
-                    <input type="url" name="link" id="link" value="{{link}}">
+                    <input type="url" name="link" id="link" value="{{link}}" required>
                 
                 
                 </form>

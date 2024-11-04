@@ -22,19 +22,22 @@
     {% block menssagem %}
     {% endblock %}
     <div class=" text-center" id="informations">
+        <video autoplay muted loop class="video-background">
+            <source src="../../../media/img_fixas/asn vem de frente.MP4" type="video/mp4">
+            Seu navegador não suporta a tag de vídeo.
+        </video>
+        <div class="overlay-video"></div> <!-- Overlay adicionado -->
         <img src="./../../../media/img_fixas/logo-asn.png" alt="" width="400" id="logo-div-tec">
         <h1 id="div-tec"><strong>A escola com total <br> Foco em <br> <p id="tecnologia"><strong></strong><span class="cursor">&nbsp;</span></p>
         <a href="#" class="btn btn-outline-info m-3">Notícias</a>
         <a href="#" class="btn btn-outline-info m-3">Explore</a>
-        <div class="plus-sign">+</div>
-        <div class="minus-sign">-</div>
-        <div class="atom">⚛</div>
-        <div class="formula">E=mc²</div>
-        <div class="globe">🌍</div>
-        <div class="amphora">🏺</div>
-    
+      
     </div>
+ 
 <div class="d-flex justify-content-around flex-wrap div-cards " id="div-cards">
+    <div id="what-new" style="position: absolute;top:110%;background-color: rgb(8, 83, 196);box-shadow: 0px 2px 7px black; border-radius:20px;">
+        <h1 class="text-warning p-4">O QUE HÁ DE NOVO?</h1>
+    </div>
     {% for i in avisos %}
     <div class="">
         <div class="card">
@@ -74,16 +77,112 @@
 
     {% endfor %}
 </div>
+
+<div style="background: linear-gradient(135deg, #301ea8, #3a2c99); padding: 50px; color: white; text-align: center; border-radius: 20px; margin: auto;">
+    <h2 style="font-weight: bold; font-size: 2.5rem; margin-bottom: 20px;">O Que Temos a Oferecer </h2>
+    <hr style="width: 60px; height: 4px; background-color: #a2d2ff; border: none; margin: 10px auto 30px; border-radius: 2px;">
+    
+    <div class="d-flex flex-wrap justify-content-center" style="max-width: 1200px; margin: 0 auto;">
+        {% for i in OqueTemosaOferecer %}
+        {% if user == 'ADMIN' or 'cadastrar' in lista_de_acoes%}
+            {% if user == 'ADMIN'%}
+                <div>
+                    <a style="position: absolute;
+                    right: 93px;
+                    margin-top: -77px;" href="{% url 'add_oferecimento' %}">Adicionar Oferecimento</a>
+                </div>
+            {% endif %}
+            <div id="">
+                <a href="{% url 'editar_oferecimento' id=i.id %}">Editar</a>
+                <a href="{% url 'deletar_com_ids' user_a_ser_atualizado_arg='oferecimento' id=i.id %}">deletar</a>
+            </div>
+        {% endif %}
+            <div class="card d-flex flex-column align-items-center m-3" style="max-width: 280px; max-height: 350px; padding: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); background-color: white; color: #4c3db5;">
+                <img src="../.././../media/{{i.imagem}}" alt="" class="img-fluid" style="text-wrap: wrap; text-align: center; border-radius: 20px; width: 100%; height:30%; transition: transform 0.3s ease;">
+                <h5 class="mt-3" style="font-weight: bold;">{{i.titulo}}</h5>
+                <p class="text-center" style="width:280px;">{{i.descricao}}</p>
+                <a href="{{i.link}}" style="color: #4c3db5; font-weight: bold; text-decoration: none;">{{i.titulo_do_link}}&rarr;</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    /* Hover Effect for Cards */
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    .card img:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<br><br>
+    <div class="faq-container">
+        <h1 class="faq-title">Perguntas Frequentes (FAQ)</h1>
+        
+        <div class="faq-item">
+            <div class="faq-question">Quais são os serviços/produtos oferecidos?</div>
+            <div class="faq-answer">
+                Oferecemos ensino de qualidade pra tu aprender a programar e fz o novo facebook.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Como posso entrar em contato com a equipe de suporte?</div>
+            <div class="faq-answer">
+                Você pode entrar em contato conosco por meio de comunicacao@ecomp.com. Estamos disponíveis 24 por dia 7 dias por semana.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Qual é o prazo de matricula na escola?</div>
+            <div class="faq-answer">
+                O prazo em media varia de 30 dias mas varea.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">posso desistir do curos?</div>
+            <div class="faq-answer">
+                Sim, mas é bom ent preocupa n.
+            </div>
+        </div>
+    
+        <div class="faq-item">
+            <div class="faq-question">Como acompanho as notas do meu filho?</div>
+            <div class="faq-answer">
+                rapaz tu vai entrar num site de merda chamado seges.com.
+            </div>
+        </div>
+        
+        <!-- Mais itens de FAQ podem ser adicionados aqui -->
+    </div>
+    
+    <script>
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    if (faq !== item.parentNode) {
+                        faq.classList.remove('active');
+                    }
+                });
+                
+                item.parentNode.classList.toggle('active');
+            });
+        });
+    </script>
+    
+<br><br>
 {% include 'codigos reutilizados/footer.html' %}
     {% block footer %}
     {% endblock %}
-
 
 <script src="{% static 'js/overflow.js' %}"></script>
 <script src="{% static 'js/scroll.js' %}"></script>
 <script src="{% static 'js/script.js' %}"></script>
 <script src="https://unpkg.com/scrollreveal"></script>
-<script src="{% static 'js/scroll.js' %}"></script>
 
 
 

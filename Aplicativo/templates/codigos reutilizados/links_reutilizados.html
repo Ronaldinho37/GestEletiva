@@ -60,7 +60,7 @@
                 </li>
                 {% endif %}
                 {% if user == 'ADMIN' %}
-                    <li><a href="{% url 'definir-paginas' %}">Definir Paginas</a></li>
+                    <li><a href="{% url 'definir-paginas' %}" onclick="definir_pagina_antiga()">Definir Paginas</a></li>
                 {% endif %}
                 <li><button class="btn-sair" onclick="deslogar()"><strong> SAIR</strong></button></li>
             {% else %}
