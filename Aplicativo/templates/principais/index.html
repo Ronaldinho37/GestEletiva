@@ -83,6 +83,11 @@
     <hr style="width: 60px; height: 4px; background-color: #a2d2ff; border: none; margin: 10px auto 30px; border-radius: 2px;">
     
     <div class="d-flex flex-wrap justify-content-center" style="max-width: 1200px; margin: 0 auto;">
+        <div>
+            <a style="position: absolute;
+            right: 93px;
+            margin-top: -77px;" href="{% url 'add_oferecimento' %}">Adicionar Oferecimento</a>
+        </div>
         {% for i in OqueTemosaOferecer %}
         {% if user == 'ADMIN' or 'cadastrar' in lista_de_acoes%}
             <div id="">
