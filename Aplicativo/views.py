@@ -613,9 +613,9 @@ def deletar_com_ids(request,user_a_ser_atualizado_arg,id):
                     id_a_ser_deletado = dados['lista_id'][0]
                     dados['model_user'] = OqueTemosaOferecer.objects.all().values()
                     dados['diretorio_user'] = "img_OqueTemosaOferecer"
-                    dados['user'] = 'oferecimento(s)'
                     try:
                         OqueTemosaOferecer.objects.get(id=id_a_ser_deletado).delete()
+                        excluir_imagem('img_OqueTemosaOferecer',OqueTemosaOferecer.objects.all().values())
                         menssagem_var['mensagem'] = 'O oferecimento foi deletado'
                         return redirect(retornar_index)
                     except:
@@ -1089,7 +1089,7 @@ def editar_oferecimento(request,id):
     dados['imagem'] = oferecimento_a_ser_atualizado.imagem
     dados['link'] = oferecimento_a_ser_atualizado.link
     dados['titulo_do_link'] = oferecimento_a_ser_atualizado.titulo_do_link
-    if request.methot == 'POST':
+    if request.method == 'POST':
         titulo_novo= request.POST.get('titulo')
         descricao_nova = request.POST.get('descricao')
         imagem_nova = request.FILES.get('imagem')
@@ -1107,12 +1107,13 @@ def editar_oferecimento(request,id):
             oferecimento_a_ser_atualizado.titulo_do_link = titulo_link_novo
         if imagem_nova != None:
             oferecimento_a_ser_atualizado.imagem = checar_imagem_existente(imagem_nova,'img_OqueTemosaOferecer','atualizar')
+            excluir_imagem('img_OqueTemosaOferecer',OqueTemosaOferecer.objects.all().values())
       
         oferecimento_a_ser_atualizado.save()
         menssagem_var['mensagem'] = "Oferecimento atualizado"
         return redirect(retornar_index)
     else:
-        return render(request, ' OqueTemosaOferecer/editar_oferecimento.html', dados)
+        return render(request, 'OqueTemosaOferecer/editar_oferecimento.html', dados)
 
 
 
