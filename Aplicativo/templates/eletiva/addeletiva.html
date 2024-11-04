@@ -14,6 +14,8 @@
     {% endblock %}
     <div class="container">
         <div class="login-container">
+            <p>Etapa 1 de 2</p>
+            <p><span style="color: red;">*</span> Nesta etapa você poderá criar uma nova eletiva </p>
             <h1>Adicionar Eletiva</h1>
             <form action="{% url 'add-eletiva' %}" method="post"  enctype="multipart/form-data">
                 {% csrf_token %}

@@ -110,6 +110,48 @@
       </div>
       </div>
       </div>
+
+
+<!-- Modal -->
+<div id="professorModal" class="modal-overlay" onclick="closeModal(event)" style="display: none;">
+    <div class="modal-conteudo">
+        <!-- Imagem do Professor -->
+        <div class="modal-image-container">
+            <img id="modalProfessorImage" src="" alt="Imagem do Professor" class="professor-photo-modal">
+        </div>
+
+        <div>
+            <img src="../.././../media/img_fixas/logo-asn.png" alt="" width="50px">
+        </div>
+
+        <!-- Card Flip ao Lado da Imagem -->
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <!-- Frente do Card -->
+                <div class="flip-card-front">
+                    <h2 id="professorName">Nome do Professor</h2>
+                    <i class="fa-solid fa-graduation-cap"  style="font-size: 60px;"></i>
+
+                </div>
+
+                <!-- Verso do Card -->
+                <div class="flip-card-back">
+                    <ul>
+                        <li><strong>Idade:</strong> 35 anos</li>
+                        <li><strong>Graduações:</strong> Mestre em Matemática</li>
+                        <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
+                        <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
+                        <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
+                        <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
+                        <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     
 
     {% include 'codigos reutilizados/footer.html' %}
@@ -117,13 +159,39 @@
     {% endblock %}
     
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     
     <script>
         function vai(x){
             window.location.href = `${x.dataset.link}`
         }
+    </script>
+
+    <script>
+function openProfessorModal(imageSrc, professorName) {
+    // Define a imagem e o nome do professor no modal
+    document.getElementById("modalProfessorImage").src = imageSrc;
+    document.getElementById("professorName").textContent = professorName;
+
+    // Exibe o modal
+    document.getElementById("professorModal").style.display = "flex";
+}
+
+function closeModal(event) {
+    // Fecha o modal ao clicar fora do conteúdo
+    if (event.target.classList.contains("modal-overlay")) {
+        document.getElementById("professorModal").style.display = "none";
+    }
+}
+
+// Adiciona um evento de clique nas imagens do carousel para abrir o modal
+document.querySelectorAll(".carousel-item img").forEach(img => {
+    img.addEventListener("click", () => {
+        openProfessorModal(img.src, img.alt);
+    });
+});
+
+
+
     </script>
 
     <script src="{% static 'js/mouse_funcoes.js' %}"></script>
