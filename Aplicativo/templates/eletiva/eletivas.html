@@ -132,11 +132,14 @@
                 {% for i in carrossel %}
                     <div class="flip-card-back" data-id="{{i.id}}">
                         <ul>
-                            <li><strong>Graduações:</strong>{{i.eletiva}}</li>
+                            <li><strong>Idade:</strong>{{i.idade}}</li>
+                            <li><strong>Graduações:</strong>{{i.graduacao}}</li>
                             <li><strong>Descrição:</strong>{{i.descricao}}</li>
-        
+                            <li><a href="{% url 'atualizar_carrossel' id=i.id%}">Atualizar</a></li>
+                            <li><a href="{% url 'deletar_carrossel' id=i.id%}">Deletar</a></li>
                         </ul>
                     </div>
+                   
                 {% endfor %}
                 
             </div>

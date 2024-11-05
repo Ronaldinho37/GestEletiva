@@ -15,7 +15,7 @@
         </style>
 
         <div id="text-del">
-            <h2 class="text-center mb-4 p-3  m-3 rounded text-warning" style="background-color: rgb(8, 83, 196);"><span style="text-transform: uppercase;">{{modo}}</span> PROFESSOR/TUTOR</h2>
+            <h2 class="text-center mb-4 p-3  m-3 rounded text-warning" style="background-color: rgb(8, 83, 196);"><span style="text-transform: uppercase;">{{modo}}</span> {{tabela_user_passado_como_parametro}}</h2>
         </div>
 
         <div style="position: absolute; top:18%;" class="bg-warning p-2 rounded" id="text-area-res">
@@ -50,7 +50,7 @@
         {% endif %}
 
         <div id="text-professores" class="bg-primary p-2 my-3 text-warning rounded">
-            <h3>PROFESSORES/TUTOR</h3>
+            <h3>{{tabela_user_passado_como_parametro}}</h3>
         </div>
     </div>
     <table id="tabela" class="table table-hover" data-user="{{tabela_user_passado_como_parametro}}" data-id_do_user_logado="None">

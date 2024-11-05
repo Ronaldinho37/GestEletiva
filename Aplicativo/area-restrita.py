@@ -19,7 +19,9 @@ urlpatterns = [
     path('editar_oferecimento/<int:id>',editar_oferecimento,name='editar_oferecimento'),
     path('deletar/<str:user_a_ser_atualizado_arg>/<str:id>',deletar_com_ids,name='deletar_com_ids'),
     path('add_oferecimento',add_OqueTemosaOferecer,name='add_oferecimento'),
-    path('add_professor_carrossel',add_professor_carrossel,name='add_professor_carrossel'),
+    path('carrossel/adicionar',add_professor_carrossel,name='add_professor_carrossel'),
+    path('carrossel/atualizar/<int:id>',update_carrossel,name='atualizar_carrossel'),
+    path('carrossel/deletar/<int:id>',deletar_carrossel,name='deletar_carrossel'),
 
     
 ]

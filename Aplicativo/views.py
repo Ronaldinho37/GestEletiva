@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from .models import *
 import os
 from PIL import Image
-#acabar de fazer os 'link_antigo' templates adicionar
+#adicionar um link do carrossel
 #pip freeze > requiriments.txt
 menssagem_var = {'mensagem':""}
 
@@ -295,13 +295,7 @@ def eletivas(request):
         menssagem_var['mensagem'] = ""
     except:
         dados['message'] = ""
-    ids = CarrosselProfessores.objects.get(id=1).ids.split(',')
-    dicionario = [Professores.objects.filter(id=int(ids[0])).values(),Professores.objects.filter(id=int(ids[1])).values(),Professores.objects.filter(id=int(ids[2])).values()]
-    dados['carrossel'] = []
-    for i in dicionario:
-        for e in i:
-            dados['carrossel'].append(e)
-    #####################################
+    dados['carrossel'] = CarrosselProfessores.objects.all().values()
     return render(request,'eletiva/eletivas.html',dados)
 
 #função que desloga o usuário
@@ -772,6 +766,8 @@ def update_or_delete(request,u_or_d,user_a_ser_atualizado_arg):
     #caso seja professor/tutor
     elif user_a_ser_atualizado_arg.lower() == 'professor-tutor':
         dados['usuarios'] = Professores.objects.filter(professor=True,tutor=True)
+    elif user_a_ser_atualizado_arg.lower() == 'carrossel':
+        dados['usuarios'] = CarrosselProfessores.objects.all().values()
     #caso seja nenhum dos acima
     else:
         menssagem_var['mensagem'] = "Usuário não identificado"
@@ -1108,20 +1104,66 @@ def editar_oferecimento(request,id):
         return redirect(retornar_index)
     else:
         return render(request, 'OqueTemosaOferecer/editar_oferecimento.html', dados)
-
+def deletar_carrossel(request,id):
+    if request.mothod == 'POST':
+        sim = request.POST.get('sim')
+        if sim == 'on':
+            try:
+                CarrosselProfessores.objects.get(id=int(id)).delete()
+            except:
+                menssagem_var['mensagem'] = 'Id não identificado'
+        return redirect(eletivas)
+    else:
+        dados = dados_universsais.copy()
+        dados['tam_lista_id'] = 1
+        return render(request, 'deletar_com_ids.html',dados)
 def add_professor_carrossel(request):
     if request.method == 'POST':
-        ids = request.POST.get('ids')
-        campo = CarrosselProfessores.objects.get(id=1)
-        campo.ids = ids
+        nome = request.POST.get('nome')
+        idade = request.POST.get('idade')
+        graduacao = request.POST.get('graduacao')
+        descricao = request.POST.get('descricao')
+        imagem = checar_imagem_existente(request.FILES.get('imagem'),'carrosselProfessores','cadastrar') 
+        campo = CarrosselProfessores(nome=nome,idade=idade,graduacao=graduacao,descricao=descricao,imagem=imagem)
         campo.save()
-        return redirect(eletivas)
+        return redirect(add_professor_carrossel)
     else:
         dados = dados_universsais.copy()
         dados['usuarios'] = Professores.objects.filter(tutor=True,professor=True).values()
         dados['modo'] = 'adicionarcarrossel'
-        return render(request,'definir_carrossel/tabela_com_os_tutores.html',dados)
+        return render(request,'carrossel/carrossel.html',dados)
 
+def update_carrossel(request,id):
+    usuario = CarrosselProfessores.objects.get(id=int(id))
+    dados = dados_universsais.copy()
+    dados['nome'] = usuario.nome
+    dados['idade'] = usuario.idade
+    dados['graduacao'] = usuario.graduacao
+    dados['imagem'] = usuario.imagem
+    dados['descricao'] = usuario.nome
+    if request.method == 'POST':
+        novo_nome = request.POST.get('nome')
+        nova_idade = request.POST.get('idade')
+        nova_graduacao = request.POST.get('graduacao')
+        nova_descricao = request.POST.get('descricao')
+        novo_imagem = request.FILES.get('imagem')
+        deixar_sem_imagem = request.POST.get('deixar_sem_imagem')
+        if novo_nome != dados['nome']:
+            usuario.nome = novo_nome
+        if nova_graduacao != dados['graduacao']:
+            usuario.graduacao = nova_graduacao
+        if nova_idade != dados['idade']:
+            usuario.idade = nova_idade
+        if nova_descricao != dados['descricao']:
+            usuario.descricao = nova_descricao
+        if deixar_sem_imagem == 'on' and novo_imagem != None or deixar_sem_imagem == 'on' and novo_imagem == None:
+            usuario.imagem = checar_imagem_existente(None,'carrosselProfessor',None)
+        elif deixar_sem_imagem != 'on' and novo_imagem != None:
+            usuario.imagem = checar_imagem_existente(novo_imagem,'carrosselProfessor',None)
+            
+        usuario.save()
+        return redirect(eletivas)
 
-
-
+    else:
+        dados['modo'] = 'atualizar'
+        return render(request,'carrossel/carrossel.html',dados)

@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Definir carrossel</title>
+</head>
+<body>
+   <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <input type="text" id="nome" name="nome" value="{{nome}}">
+        <input type="number" id="idade" name="idade" value="{{idade}}">
+        <input type="text" id="graduacao" name="graduacao" value="{{graduacao}}">
+        <textarea name="descricao" id="descricao" maxlength="200">{{descricao}}</textarea>
+        {% if modo == 'atualizar' %}
+            <img src="../../../media/{{imagem}}" alt="">
+            <input type="checkbox" name="deixar_sem_imagem">
+        {% endif %}
+        <input type="file" id="imagem" name="imagem">
+        <input type="submit" value="Enviar">
+   </form>
+    <script src="{% static 'js/acoes_tabela.js' %}"></script>
+    <script src="{% static 'js/acao_tabela_pesquisar.js' %}"></script>
+    <script>
+        function validarFormCarrossel(){
+            let ids = String(document.querySelector('input[name="ids"]').value).split(',')
+            if(ids.length == 3){
+                return true
+            }
+            document.querySelector('h3[id="selecione"]').style.color = "red"
+            return false
+            
+        }
+    </script>
+</body>
+</html>
