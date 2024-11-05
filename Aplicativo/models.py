@@ -69,4 +69,10 @@ class OqueTemosaOferecer(models.Model):
     titulo_do_link = models.CharField(max_length=100)
 
 class CarrosselProfessores(models.Model):
-    ids = models.CharField(max_length=30)
+    nome = models.CharField(max_length=100)
+    idade = models.IntegerField()
+    graduacao = models.CharField(max_length=100)
+    imagem = models.FileField(upload_to="carrosselProfessores/")
+    descricao = models.TextField(max_length=200)
+    
+    

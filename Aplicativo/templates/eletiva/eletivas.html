@@ -94,8 +94,8 @@
                   e preparados para desbravar o mundo do conhecimento.</p></div>
         <div class="carousel-inner w-50" style="border-radius: 30px;">
             {% for i in carrossel %}
-                <div class="carousel-item active">
-                    <img src=".././../../media/{{i.imagem}}" class="d-block w-100 img-fluid" alt="{{i.nome}}">
+                <div class="carousel-item active" >
+                    <img src=".././../../media/{{i.imagem}}" data-id="{{i.id}}" class="d-block w-100 img-fluid" alt="{{i.nome}}">
                 </div>
             {% endfor %}
             
@@ -130,15 +130,11 @@
 
                 <!-- Verso do Card -->
                 {% for i in carrossel %}
-                    <div class="flip-card-back">
+                    <div class="flip-card-back" data-id="{{i.id}}">
                         <ul>
-                            <li><strong>Idade:</strong> 35 anos</li>
-                            <li><strong>Graduações:</strong> Mestre em Matemática</li>
-                            <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
-                            <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
-                            <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
-                            <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
-                            <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
+                            <li><strong>Graduações:</strong>{{i.eletiva}}</li>
+                            <li><strong>Descrição:</strong>{{i.descricao}}</li>
+        
                         </ul>
                     </div>
                 {% endfor %}
@@ -164,13 +160,22 @@
     </script>
 
     <script>
-function openProfessorModal(imageSrc, professorName) {
+function openProfessorModal(imageSrc, professorName,idDaDescricao) {
     // Define a imagem e o nome do professor no modal
     document.getElementById("modalProfessorImage").src = imageSrc;
     document.getElementById("professorName").textContent = professorName;
 
     // Exibe o modal
     document.getElementById("professorModal").style.display = "flex";
+    let cards = document.querySelectorAll('.flip-card-back');
+    cards.forEach((x)=>{
+        if(x.dataset.id != idDaDescricao){
+            x.style.display = 'none'
+        } else {
+            x.style.display = ''
+        }
+    })
+    
 }
 
 function closeModal(event) {
@@ -183,7 +188,7 @@ function closeModal(event) {
 // Adiciona um evento de clique nas imagens do carousel para abrir o modal
 document.querySelectorAll(".carousel-item img").forEach(img => {
     img.addEventListener("click", () => {
-        openProfessorModal(img.src, img.alt);
+        openProfessorModal(img.src, img.alt,img.dataset.id);
     });
 });
 
