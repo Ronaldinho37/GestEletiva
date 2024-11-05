@@ -52,7 +52,7 @@
 
     <section>
         <div class="ini bg-light p-5">
-            <h1 id="see-more" class="title-ele p-2  text-warning" style="">Veja Mais</h1>
+            <h1 id="see-more" class="title-ele p-2  text-warning" >Veja Mais</h1>
             <h2 id="about-eletives" class="p-2 bg-warning  font-family: Poppins, sans-serif; " style="margin-top: -19px;
     position: relative;
     border-radius: 25px;
@@ -94,9 +94,9 @@
                   e preparados para desbravar o mundo do conhecimento.</p></div>
         <div class="carousel-inner w-50" style="border-radius: 30px;">
             {% for i in carrossel %}
-            <div class="carousel-item active">
-                <img src=".././../../media/img_fixas/Gislene.png" class="d-block w-100 img-fluid" alt="Professora Gislene">
-            </div>
+                <div class="carousel-item active">
+                    <img src=".././../../media/{{i.imagem}}" class="d-block w-100 img-fluid" alt="{{i.nome}}">
+                </div>
             {% endfor %}
             
         </div>
@@ -129,17 +129,20 @@
                 </div>
 
                 <!-- Verso do Card -->
-                <div class="flip-card-back">
-                    <ul>
-                        <li><strong>Idade:</strong> 35 anos</li>
-                        <li><strong>Graduações:</strong> Mestre em Matemática</li>
-                        <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
-                        <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
-                        <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
-                        <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
-                        <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
-                    </ul>
-                </div>
+                {% for i in carrossel %}
+                    <div class="flip-card-back">
+                        <ul>
+                            <li><strong>Idade:</strong> 35 anos</li>
+                            <li><strong>Graduações:</strong> Mestre em Matemática</li>
+                            <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
+                            <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
+                            <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
+                            <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
+                            <li><strong>Descrição:</strong> Professora com ampla experiência em ensino e pesquisa.</li>
+                        </ul>
+                    </div>
+                {% endfor %}
+                
             </div>
         </div>
     </div>

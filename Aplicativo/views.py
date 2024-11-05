@@ -296,8 +296,11 @@ def eletivas(request):
     except:
         dados['message'] = ""
     ids = CarrosselProfessores.objects.get(id=1).ids.split(',')
-    dados['carrossel'] = [Professores.objects.filter(id=int(ids[0])).values(),Professores.objects.filter(id=int(ids[1])).values(),Professores.objects.filter(id=int(ids[2])).values()]
-    for i in dad
+    dicionario = [Professores.objects.filter(id=int(ids[0])).values(),Professores.objects.filter(id=int(ids[1])).values(),Professores.objects.filter(id=int(ids[2])).values()]
+    dados['carrossel'] = []
+    for i in dicionario:
+        for e in i:
+            dados['carrossel'].append(e)
     #####################################
     return render(request,'eletiva/eletivas.html',dados)
 
@@ -321,7 +324,6 @@ def logout_viwes(request):
         request.session['user'] = None
         menssagem_var['mensagem'] = "Deslogado com sucesso!"
         link = request.POST.get('link_antigo')
-        print(link)
         return para_onde_vou(request,link)
 
 #função que adiciona as eletivas
@@ -1116,7 +1118,7 @@ def add_professor_carrossel(request):
         return redirect(eletivas)
     else:
         dados = dados_universsais.copy()
-        dados['usuarios'] = Professores.objects.filter(tutor=True).values()
+        dados['usuarios'] = Professores.objects.filter(tutor=True,professor=True).values()
         dados['modo'] = 'adicionarcarrossel'
         return render(request,'definir_carrossel/tabela_com_os_tutores.html',dados)
 
