@@ -2,6 +2,7 @@ let users_a_serem_excluidos = []
 let span = document.querySelector('span[id="numero_selecionados"]')
 let tabela = document.querySelector('table[id="tabela"]').dataset.user
 let id_do_user_logado = Number(document.querySelector('table[id="tabela"]').dataset.id_do_user_logado)
+let modo = document.querySelector('div[id="table-py"]').dataset.modo
 
 
 function adicionar_linha(x){
@@ -19,6 +20,9 @@ function adicionar_linha(x){
         let u = users_a_serem_excluidos.filter(item => item !== x.id)
         users_a_serem_excluidos = u
         span.innerText = users_a_serem_excluidos.length
+    }
+    if(modo == 'adicionarcarrossel'){
+        document.querySelector('input[name="ids"]').value = users_a_serem_excluidos
     }
    
 }

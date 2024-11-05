@@ -96,15 +96,12 @@
               <p id="about-qualify" style="margin-top: 20px;" class="w-75 px-5">Em nossa Instituição temos profissionais <br> Qualificados para atender seus filhos, todos formados
                   e preparados para desbravar o mundo do conhecimento.</p></div>
         <div class="carousel-inner w-50" style="border-radius: 30px;">
+            {% for i in carrossel %}
             <div class="carousel-item active">
                 <img src=".././../../media/img_fixas/Gislene.png" class="d-block w-100 img-fluid" alt="Professora Gislene">
             </div>
-            <div class="carousel-item">
-                <img src=".././../../media/img_fixas/Jerry.png" class="d-block w-100 img-fluid" alt="Professor Jerry">
-            </div>
-            <div class="carousel-item">
-                <img src=".././../../media/img_fixas/Walas.png" class="d-block w-100 img-fluid" alt="Professor Walas">
-            </div>
+            {% endfor %}
+            
         </div>
       
       </div>

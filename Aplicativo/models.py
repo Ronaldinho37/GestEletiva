@@ -67,3 +67,6 @@ class OqueTemosaOferecer(models.Model):
     #remover linha
     link = models.URLField(max_length=200)
     titulo_do_link = models.CharField(max_length=100)
+
+class CarrosselProfessores(models.Model):
+    ids = models.CharField(max_length=30)

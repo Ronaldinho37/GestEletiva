@@ -295,6 +295,10 @@ def eletivas(request):
         menssagem_var['mensagem'] = ""
     except:
         dados['message'] = ""
+    ids = CarrosselProfessores.objects.get(id=1).ids.split(',')
+    dados['carrossel'] = [Professores.objects.filter(id=int(ids[0])).values(),Professores.objects.filter(id=int(ids[1])).values(),Professores.objects.filter(id=int(ids[2])).values()]
+    for i in dad
+    #####################################
     return render(request,'eletiva/eletivas.html',dados)
 
 #função que desloga o usuário
@@ -1102,6 +1106,20 @@ def editar_oferecimento(request,id):
         return redirect(retornar_index)
     else:
         return render(request, 'OqueTemosaOferecer/editar_oferecimento.html', dados)
+
+def add_professor_carrossel(request):
+    if request.method == 'POST':
+        ids = request.POST.get('ids')
+        campo = CarrosselProfessores.objects.get(id=1)
+        campo.ids = ids
+        campo.save()
+        return redirect(eletivas)
+    else:
+        dados = dados_universsais.copy()
+        dados['usuarios'] = Professores.objects.filter(tutor=True).values()
+        dados['modo'] = 'adicionarcarrossel'
+        return render(request,'definir_carrossel/tabela_com_os_tutores.html',dados)
+
 
 
 
