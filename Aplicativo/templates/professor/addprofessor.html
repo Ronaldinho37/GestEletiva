@@ -13,9 +13,10 @@
     {% endblock %}
     <div class="container">
         <div class="login-container">
-            <p>Etapa 1 de 2</p>
+            <p>Etapa 2 de 2</p>
             <p><span style="color: red;">*</span> Bom, agora nesta etapa você ira informar o
-                 professor regente desta eletiva que acabou de criar, caso contrário, ficará sem professor </p>
+                 professor regente desta eletiva que acabou de criar, ou inserir outro professor em uma eletiva 
+                 com limitação de 2 professores por eletiva, caso contrário, ficará sem professor !!! </p>
             <h1>Adicionar {{tipo_de_user}}</h1>
             <form action="" method="post" enctype="multipart/form-data"> {% csrf_token %}           
                 {% if tipo_de_user == 'professor' or tipo_de_user == 'professor-tutor' %}

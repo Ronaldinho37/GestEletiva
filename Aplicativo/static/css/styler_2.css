@@ -1,11 +1,8 @@
-/*body {
-    display: flex;
-    justify-content: center;
+body {
     height: 100vh;
     background-color: #f0f0f0;
     margin: 0;
-    font-family: Arial, sans-serif;
-}*/
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
@@ -97,6 +94,7 @@
 .modal-image-container, .flip-card {
     width: 700px;
     height: 600px;
+    transition: .8s ease;
 }
 
 .professor-photo-modal {
@@ -104,6 +102,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 8px;
+    transition: .8s ease;
 }
 
 /* Estilos do Card Flip */
@@ -478,6 +477,15 @@ body {
   animation-duration: 1.5s;
 }
 
+#see-more{
+    background-color: rgb(8, 83, 196);
+    font-family: Poppins; 
+    border-radius: 20px; 
+    Z-INDEX: 1; 
+    box-shadow: 0px 2px 7px black; width: 464px; 
+    height: 119px;
+}
+
 ::-webkit-scrollbar{
     display: none;
 }
@@ -526,14 +534,125 @@ html {
 
 }
 
-@media (min-width: 1023px) and (max-width: 1440px){
-    .casdds {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 48px;
-        margin-top: 15%;
-        
+  /* Responsividade para telas menores */
+  @media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards por linha */
     }
 
+    .casdds {
+        padding: 15px;
+    }
+
+    .d-flex.text-center h2 {
+        font-size: 2rem; /* Tamanho de fonte menor para cabeçalho */
+    }
+
+    .card-1 h2 {
+        font-size: 1.125rem; /* Tamanho de fonte menor para título de card */
+    }
+
+    .card-1 p {
+        font-size: 0.9rem; /* Tamanho de fonte menor para descrição */
+    }
+
+    .top-section {
+        height: 180px; /* Menor altura para o banner da imagem */
+    }
+
+    .top-section img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .card-1 button {
+        width: 100%; /* Botão ocupa toda a largura do card */
+    }
+}
+
+@media (max-width: 480px) {
+    .card-container {
+        grid-template-columns: 1fr; /* 1 card por linha */
+    }
+
+    .d-flex.text-center h2 {
+        font-size: 1.75rem;
+    }
+
+    .card-1 h2 {
+        font-size: 1rem;
+    }
+
+    .card-1 p {
+        font-size: 0.85rem;
+    }
+
+    .top-section {
+        height: 150px;
+    }
+
+    .top-section img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .card-1 button {
+        width: 100%;
+    }
+}
+
+ /* Responsividade: Ajuste para telas menores */
+ @media (max-width: 1024px) {
+    /* Em tablets ou telas médias (exemplo: 1024px ou menos), exibe 2 cards por linha */
+    .eleti {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Em telas menores (exemplo: 768px ou menos), exibe 1 card por linha */
+    .eleti {
+        grid-template-columns: 1fr;
+    }
+
+    /* Ajusta o tamanho dos títulos */
+    #see-more {
+        font-size: 1.5rem;
+    }
+
+    .title-ele{
+        width: 250px;
+    }
+
+    #about-eletives {
+        font-size: 1.2rem;
+    }
+
+    .text h1 {
+        font-size: 1rem;
+    }
+
+    .text p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 425px) {
+    /* Para smartphones em modo retrato ou telas menores */
+    .ini {
+        padding: 15px;
+    }
+
+
+    /* Ajuste adicional para o texto no título */
+    #see-more {
+        font-size: 1.4rem;
+
+        width: 200px;
+        height: 70px;
+    }
+
+    #about-eletives {
+        font-size: 1rem;
+    }
 }
