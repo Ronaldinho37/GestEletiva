@@ -249,7 +249,7 @@ input:checked + .slider:before {
 
 #informations {
     padding-bottom: 10%;
-    position: relative;
+
     overflow: hidden;
     z-index: 2;
 }
