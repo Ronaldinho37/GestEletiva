@@ -164,6 +164,7 @@ def definir_user(request):
     dados_universsais.update(dados)
     return dados
 def para_onde_vou(request,link_antigo):
+    link_lista = link_antigo.split("/")
     if "eletivas" in link_antigo:
         return redirect(eletivas)
     elif "sobre" in link_antigo:
@@ -174,7 +175,6 @@ def para_onde_vou(request,link_antigo):
         return redirect(definir_paginas_utilizaveis)
     elif  link_antigo == "/":
         return redirect(retornar_index)
-    link_lista = link_antigo.split("/")
     if link_lista[2] == 'update_or_delete':
         return redirect(update_or_delete,u_or_d=link_lista[3],user_a_ser_atualizado_arg=link_lista[4])
     elif link_lista[2] == 'deletar' or link_lista[2] == 'atualizar':
@@ -548,6 +548,11 @@ def sobre(request):
     if ver_se_a_pagina_pode_funcionar('sobre',dados) == True:
         return render(request,'definir_as_paginas/acesso_bloqueado.html',dados)
     dados['pagina'] = 'sobre'#excluir essa linha
+    try:
+        dados['message'] = menssagem_var['mensagem']
+        menssagem_var['mensagem'] = ""
+    except:
+        dados['message'] = ""
     return render(request,'principais/about.html',dados)
         
 def deletar_com_ids(request,user_a_ser_atualizado_arg,id):
@@ -713,7 +718,9 @@ def add_admin(request):
         nome = request.POST.get('nome').lower()
         email = request.POST.get('email')
         senha = request.POST.get('senha')
+        link_antigoA = request.POST.get('link_antigoA')
         imagem = checar_imagem_existente(request.FILES.get('imagem'),'imagem_admins', None)
+        print(link_antigoA)
         
 
         #checkboxes= inputs do html
@@ -729,8 +736,8 @@ def add_admin(request):
         novo_adm = Admins(nome=nome,senha=senha,email=email,acoes=acoes_permitidas,imagem=imagem)
         novo_adm.save()
         #retornado a respectiva menssagem
-        menssagem_var['menssagem'] = "Admin adicionado com sucesso!"
-        return redirect(retornar_index)
+        menssagem_var['mensagem'] = "Admin adicionado com sucesso!"
+        return para_onde_vou(request,link_antigo=link_antigoA)
     else:
         return render(request,'acoes_principais/template_add.html')
 #função que direciona o usuário para a página de Deletar ou Atualizar, com respectivas variáveis necessárias
@@ -1105,19 +1112,32 @@ def editar_oferecimento(request,id):
     else:
         return render(request, 'OqueTemosaOferecer/editar_oferecimento.html', dados)
 def deletar_carrossel(request,id):
-    if request.mothod == 'POST':
+    dados = dados_universsais.copy()
+    if dados['user'] != 'ADMIN':
+        menssagem_var['mensagem'] = "Só o diretor pode deletar o carrossel"
+        return redirect(eletivas)
+    if request.method == 'POST':
         sim = request.POST.get('sim')
         if sim == 'on':
             try:
                 CarrosselProfessores.objects.get(id=int(id)).delete()
+                menssagem_var['mensagem'] = 'Carrossel deletado'
             except:
                 menssagem_var['mensagem'] = 'Id não identificado'
         return redirect(eletivas)
     else:
-        dados = dados_universsais.copy()
         dados['tam_lista_id'] = 1
-        return render(request, 'deletar_com_ids.html',dados)
+        try:
+            dados['message'] = menssagem_var['mensagem']
+            menssagem_var['mensagem'] = ""
+        except:
+            dados['message'] = ""
+        return render(request, 'deletar/deletar_com_ids.html',dados)
 def add_professor_carrossel(request):
+    dados = dados_universsais.copy()
+    if dados['user'] != 'ADMIN':
+        menssagem_var['mensagem'] = "Só o diretor pode adicionar professores ao carrossel"
+        return redirect(eletivas)
     if request.method == 'POST':
         nome = request.POST.get('nome')
         idade = request.POST.get('idade')
@@ -1126,21 +1146,29 @@ def add_professor_carrossel(request):
         imagem = checar_imagem_existente(request.FILES.get('imagem'),'carrosselProfessores','cadastrar') 
         campo = CarrosselProfessores(nome=nome,idade=idade,graduacao=graduacao,descricao=descricao,imagem=imagem)
         campo.save()
+        menssagem_var['mensagem'] = "Professor adicionado ao carrossel"
         return redirect(add_professor_carrossel)
     else:
-        dados = dados_universsais.copy()
         dados['usuarios'] = Professores.objects.filter(tutor=True,professor=True).values()
         dados['modo'] = 'adicionarcarrossel'
+        try:
+            dados['message'] = menssagem_var['mensagem']
+            menssagem_var['mensagem'] = ""
+        except:
+            dados['message'] = ""
         return render(request,'carrossel/carrossel.html',dados)
 
 def update_carrossel(request,id):
-    usuario = CarrosselProfessores.objects.get(id=int(id))
     dados = dados_universsais.copy()
+    if dados['user'] != 'ADMIN':
+        menssagem_var['mensagem'] = "Só o diretor pode editar o carrossel"
+        return redirect(eletivas)
+    usuario = CarrosselProfessores.objects.get(id=int(id))
     dados['nome'] = usuario.nome
     dados['idade'] = usuario.idade
     dados['graduacao'] = usuario.graduacao
     dados['imagem'] = usuario.imagem
-    dados['descricao'] = usuario.nome
+    dados['descricao'] = usuario.descricao
     if request.method == 'POST':
         novo_nome = request.POST.get('nome')
         nova_idade = request.POST.get('idade')
@@ -1162,8 +1190,14 @@ def update_carrossel(request,id):
             usuario.imagem = checar_imagem_existente(novo_imagem,'carrosselProfessor',None)
             
         usuario.save()
+        menssagem_var['mensagem'] = "Carrossel atualizado com sucesso"
         return redirect(eletivas)
 
     else:
         dados['modo'] = 'atualizar'
+        try:
+            dados['message'] = menssagem_var['mensagem']
+            menssagem_var['mensagem'] = ""
+        except:
+            dados['message'] = ""
         return render(request,'carrossel/carrossel.html',dados)

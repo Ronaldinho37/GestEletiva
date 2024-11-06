@@ -9,6 +9,7 @@ function ValidarForm(){
     }
     for(i of checboxes){
         if(i.checked == true){
+            document.querySelector('input[name="link_antigoA"]').value = sessionStorage.getItem('link');
             return true
         }
     }

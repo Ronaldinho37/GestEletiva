@@ -38,7 +38,7 @@
                 {% endif %}
                 {% if user == 'ADMIN'  or  'cadastrar' in lista_de_acoes%}
                     <li class="menu-item">
-                        <a href="" class="dropdown-btn-add dropdown-btn" data-target="services-dropdown">Adicionar</a>
+                        <a href="" class="dropdown-btn-add dropdown-btn" data-target="services-dropdown" onclick="definir_pagina_antiga()">Adicionar</a>
                         <ul class="dropdown-content" id="services-dropdown">
                             <li><a href="{% url 'add' tipo_de_user='professor'%}">Adicionar Professor</a></li>
                             <li><a href="{% url 'add' tipo_de_user='tutor'%}">Adicionar Tutor</a></li>

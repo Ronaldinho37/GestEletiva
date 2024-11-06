@@ -7,16 +7,22 @@
     <title>Definir carrossel</title>
 </head>
 <body>
+    {% include 'codigos reutilizados/menssage.html' %}
+    {% block menssagem %}
+    {% endblock %}
    <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-        <input type="text" id="nome" name="nome" value="{{nome}}">
-        <input type="number" id="idade" name="idade" value="{{idade}}">
-        <input type="text" id="graduacao" name="graduacao" value="{{graduacao}}">
-        <textarea name="descricao" id="descricao" maxlength="200">{{descricao}}</textarea>
+        <input type="text" id="nome" name="nome" value="{{nome}}" required>
+        <input type="number" id="idade" name="idade" value="{{idade}}" required>
+        <input type="text" id="graduacao" name="graduacao" value="{{graduacao}}" required>
+        <textarea name="descricao" id="descricao" maxlength="200" required>{{descricao}}</textarea>
         {% if modo == 'atualizar' %}
             <img src="../../../media/{{imagem}}" alt="">
             <input type="checkbox" name="deixar_sem_imagem">
+            <input type="file" id="imagem" name="imagem">
+        {% else %}
+            <input type="file" id="imagem" name="imagem" required>
         {% endif %}
-        <input type="file" id="imagem" name="imagem">
+        
         <input type="submit" value="Enviar">
    </form>
     <script src="{% static 'js/acoes_tabela.js' %}"></script>

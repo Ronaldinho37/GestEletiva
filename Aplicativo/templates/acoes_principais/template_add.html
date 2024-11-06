@@ -12,6 +12,7 @@
         <div class="login-container">
             <h1>Adicionar Admin</h1>
             <form action="{% url 'add-admin' %}" method="post" enctype="multipart/form-data" onsubmit="return ValidarForm()">{% csrf_token %}
+                <input type="text" name="link_antigoA" id="link_antigoA" style="visibility: hidden;position: absolute;">
                 <input type="text" name="nome" id="nome" placeholder="nome">
                 <label for="imagem">Imagem de Perfil:</label><br>
                 <input type="file" name="imagem" id="imagem">
