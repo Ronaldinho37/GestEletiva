@@ -1,5 +1,9 @@
 from django.urls import path,include
-from Aplicativo.views import sobre,tutoria,retornar_index,eletivas,logout_viwes
+from Aplicativo.views import retornar_index
+from .funcoes.eletivas import eletivas
+from .funcoes.sobre import sobre
+from .funcoes.tutoria import tutoria
+from .funcoes.logout import logout_viwes
 
 urlpatterns = [
     path('', retornar_index,name='index'),
