@@ -211,7 +211,7 @@ input:checked + .slider:before {
 
 .video-background {
     position: absolute;
-    top: 50%;
+    top: 47%;
     left: 50%;
     min-width: 100%;
     min-height: 100%;
@@ -226,10 +226,13 @@ input:checked + .slider:before {
     top: 0;
     left: 0;
     width: 100%;
-    height: 107%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Ajuste a cor e a opacidade conforme necessário */
     z-index: 0; /* Certifique-se de que o overlay fique acima do vídeo */
 }
+
+/* Aumenta o z-index do modal para estar acima de todos */
+
 
 
 .footer {

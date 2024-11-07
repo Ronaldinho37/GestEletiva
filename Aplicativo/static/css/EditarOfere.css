@@ -1,0 +1,65 @@
+
+   /* Estilos gerais */
+    body {
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        
+    }
+    form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+    }
+    /* Estilo dos campos */
+    input[type="text"],
+    input[type="url"],
+    input[type="file"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+    input[type="text"]:focus,
+    input[type="url"]:focus,
+    input[type="file"]:focus,
+    textarea:focus {
+        border-color: #6a95ff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(106, 149, 255, 0.5);
+    }
+    /* Estilo da imagem */
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 10px 0;
+        border-radius: 4px;
+    }
+    /* Botão de envio */
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #6a95ff;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover {
+        background-color: #587be3;
+    }

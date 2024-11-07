@@ -1,21 +1,79 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <title>Confirmar Delete</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        /* Estilo do formulário */
+        form {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h4 {
+            font-size: 1.2rem;
+            color: #dc3545;
+            margin-bottom: 20px;
+        }
+        /* Estilo das opções de confirmação */
+        label {
+            font-weight: bold;
+            color: #495057;
+            margin-right: 10px;
+        }
+        input[type="checkbox"] {
+            margin: 0 15px 0 5px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        /* Botão de envio */
+        input[type="submit"] {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background-color: #dc3545;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #c82333;
+        }
+    </style>
 </head>
 <body>
     {% include 'codigos reutilizados/menssage.html' %}
     {% block menssagem %}
     {% endblock %}
-    <form action="{{deletar_com_ids}}" method="post">{% csrf_token %}
+    <form action="{{deletar_com_ids}}" id="Deleção" method="post">{% csrf_token %}
         <h4>Tem certeza que queres deletar o(s) <span id="ids_a_serem_deletados">{{tam_lista_id}}</span> usuáro(s)?</h4>
         <label for="sim">Sim</label>
         <input type="checkbox" name="sim" id="sim" onclick="vai(this)">
         <label for="nao">Não</label>
         <input type="checkbox" name="nao" id="nao" onclick="vai(this)">
-        <input type="submit" value="Submit">
+        <input type="submit" value="Confirmar">
     </form>
     <script>
         function vai(x){
@@ -26,5 +84,7 @@
             }
         }
     </script>
+
+    <script src="{% static 'js/Deletar_id.js' %}"></script>
 </body>
 </html>

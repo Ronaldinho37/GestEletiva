@@ -87,14 +87,15 @@
                 <div>
                     <a style="position: absolute;
                     right: 93px;
-                    margin-top: -77px;" href="{% url 'add_oferecimento' %}">Adicionar Oferecimento</a>
+                    margin-top: -77px;" href="{% url 'add_oferecimento' %}" class="btn btn-info">Adicionar Oferecimento</a>
                 </div>
         {% endif %}
         {% for i in OqueTemosaOferecer %}
         {% if user == 'ADMIN' or 'cadastrar' in lista_de_acoes%}
+        <div class="d-flex flex-column-reverse">
             <div id="">
-                <a href="{% url 'editar_oferecimento' id=i.id %}">Editar</a>
-                <a href="{% url 'deletar_com_ids' user_a_ser_atualizado_arg='oferecimento' id=i.id %}">deletar</a>
+                <a class="btn btn-outline-info" href="{% url 'editar_oferecimento' id=i.id %}">Editar</a>
+                <a class="btn btn-outline-danger" href="{% url 'deletar_com_ids' user_a_ser_atualizado_arg='oferecimento' id=i.id %}">deletar</a>
             </div>
         {% endif %}
             <div class="card d-flex flex-column align-items-center m-3" style="max-width: 280px; max-height: 350px; padding: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); background-color: white; color: #4c3db5;">
@@ -103,6 +104,7 @@
                 <p class="text-center" style="width:200px;">{{i.descricao}}</p>
                 <a href="{{i.link}}" style="color: #4c3db5; font-weight: bold; text-decoration: none;">{{i.titulo_do_link}}&rarr;</a>
             </div>
+        </div>
         {% endfor %}
     </div>
 </div>
