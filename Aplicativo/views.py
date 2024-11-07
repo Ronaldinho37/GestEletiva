@@ -166,11 +166,11 @@ def definir_user(request):
 def para_onde_vou(request,link_antigo):
     link_lista = link_antigo.split("/")
     if "eletivas" in link_antigo:
-        return redirect(eletivas)
+        return redirect("/eletivas")
     elif "sobre" in link_antigo:
-        return redirect(sobre)
+        return redirect("/sobre")
     elif "tutoria" in link_antigo:
-        return redirect(tutoria)
+        return redirect("/tutoria")
     elif "definir-paginas" in link_antigo:
         return redirect(definir_paginas_utilizaveis)
     elif  link_antigo == "/":
@@ -199,157 +199,6 @@ def retornar_index(request):
     except:
         dados['message'] = ""
     return render(request,'principais/index.html',dados)
-
-#nesta função é feito o login dos usuários 
-def login_viwes(request):
-    try:
-        request.session['user']
-    except:
-        request.session['user'] = None
-    #esse if verifica se já tem um usuário logado, se tiver é necessário que deslogue para logar de novo
-    if request.session['user'] == 'ADMIN'or request.session['user'] != None:
-        return redirect(retornar_index)
-    
-    if request.method == 'POST':
-        #variável que guarda o valor do nome inserido no input do login
-        nome = request.POST.get('nome').lower()
-        #variável que guarda a senha inserida no input do login
-        password = request.POST.get('password')
-        link_antigo = request.POST.get('link_antigo')
-        #guardará o valor inserido pelo usuário referente a cada checkbox
-        checkboxes = {}
-        #lista de nomes de cada checkbox do html
-        lista_checkboxes = ['ADMIN','Admin']
-        #for que armazena na variável 'checkboxes' os valores referentes a cada input do html
-        for i in lista_checkboxes:
-            checkboxes[f'{i}'] = request.POST.get(f'{i}')
-        #caso o usuário a ser logado seja o ADMIN
-        if checkboxes['ADMIN'] == 'on':
-            #verifique se ele existe no Django
-            usuario = authenticate(username=nome,password=password)
-            #se existir
-            if usuario is not None:
-                #logue-o no Django
-                login(request,usuario)
-                request.session['user'] = 'ADMIN'
-                request.session['nome_user_logado'] = nome
-                request.session['senha_user_logado'] = password
-                menssagem_var['mensagem'] = "Usuário logado com sucesso!"
-                return para_onde_vou(request,link_antigo)
-        #caso o usuário a ser logado seja o Admin
-        elif checkboxes['Admin'] == 'on':
-            #pegue todos os admin do meu site
-            admins = Admins.objects.all().values()
-            #percorra-os
-            for i in admins:
-                #se o nome e senha pegados do html forem iguais à nome e senha de algum admin então logue-o
-                if i['nome'].lower() == nome and i['senha'] == password:
-                    request.session['user'] = 'admin'
-                    #a lista de ações permitidas ao usuário estão no models com string, o split() transforma a string em uma lista
-                    acoes_lista = i['acoes'].split()
-                    request.session['lista_de_acoes'] = acoes_lista
-                    request.session['nome_user_logado'] = nome
-                    request.session['senha_user_logado'] = password
-                    menssagem_var['mensagem'] = "Usuário logado com sucesso!"
-                    return para_onde_vou(request,link_antigo) 
-        #se chegou até aqui é porque nenhum dos ifs anteriores foram iguais a True, logo a senha ou nome ou usuário escolhidos não coincidem
-        dados = {}
-        dados['message'] = "Usuário ou senha inválidos!, por favor, preencha noamente suas credenciais!!"
-        dados['form'] = LoginForm()
-        dados['nome'] = nome
-        dados['password'] = password
-        return render(request,'principais/login.html',dados)
-        
-        
-    else:
-        dados = dados_universsais.copy()
-        dados['message'] = ''
-        return render(request,'principais/login.html',dados)
-    
-#função que retorna para a página das eletivas com as eletivas presentes no site
-def eletivas(request):
-    try:
-        if request.session['user'] != dados_universsais['user']:
-            dados = definir_user(request)
-        else:
-            dados=dados_universsais.copy()
-    except:
-        dados = definir_user(request)
-    if ver_se_a_pagina_pode_funcionar('eletiva',dados) == True:
-        return render(request,'definir_as_paginas/acesso_bloqueado.html',dados)
-    dados['pagina'] = "eletivas"
-    dados['eletivas'] = Eletivas.objects.all().values()
-    #essa variável recebe as duplas de professores por eletivas
-    todos_professores = {}
-    #for que percorre as eletivas existente
-    #ao fim, é adicionado na variável 'dados['todos_professores']' um dict com cada par de professores por eletiva
-    #no template é chamada uma tag que filtra o dict e retorna o nome dos professores que estão na eletiva
-    for i in dados['eletivas']:
-        #filtra os professores que dão aula na eletiva
-        #e adiciona-os na variável "todos_professores" com uma key referente ao nome da eletiva 
-        todos_professores[f"professor_de_{i['titulo']}"] = Professores.objects.filter(eletiva=f"{i['titulo']}").values()
-    #adiciono a variável 'todos_professores' a variável dados
-    dados['todos_professores'] = todos_professores
-    try:
-        dados['message'] = menssagem_var['mensagem']
-        menssagem_var['mensagem'] = ""
-    except:
-        dados['message'] = ""
-    dados['carrossel'] = CarrosselProfessores.objects.all().values()
-    return render(request,'eletiva/eletivas.html',dados)
-
-#função que desloga o usuário
-def logout_viwes(request):
-    if request.method == "POST":
-        user = request.session['user'] 
-        #o admin supremo(ADMIN) é o único que foi criado como um user no django e por isso ele recebe um 
-        #tratamento diferente dos demais, a função logout() é própria do Django ela server para deslogar o user que esta logado
-        if user == 'ADMIN':
-            logout(request)
-        #se o usuário for um admin e quer deslogar-se então primeiro eu apago as sessions que comtém os valores 
-        #das ações que ele pode realizar 
-        elif user == 'admin':
-            del request.session['lista_de_acoes']
-
-        #por conseguinte eu limpo os valores da variável dos dados universais, pois ela guarda valores referentes
-        # ao usuário e já que ele não está mais logado eu não preciso mais delas 
-        dados_universsais.clear()
-        #definindo o session 'user' como None, desta maneira o código saberá se o usuário está logado ou não
-        request.session['user'] = None
-        menssagem_var['mensagem'] = "Deslogado com sucesso!"
-        link = request.POST.get('link_antigo')
-        return para_onde_vou(request,link)
-
-#função que adiciona as eletivas
-def add_eletivas(request):
-    #chama a função que verifica se o usuário está apto ou não à adicionar eletivas ou não
-    if verificar_se_o_usuario_pode_realizar_a_acao_equisitada(request,'cadastrar') == True:
-        return redirect(retornar_index)
-    
-    if request.method == 'POST':
-        #chamando o form 
-        form = AddEletivaForm(request.POST, request.FILES)
-        if form.is_valid():
-            #variável que armazena o nome da eletiva
-            eletiva = form.cleaned_data.get('titulo')
-            #variável que armazena a imagem de fundo da eletiva
-            imagem = checar_imagem_existente(form.cleaned_data.get("imagem"),"img_eletivas",None)
-            #variável que armazena a imagem dos professores da eletiva. Ele recebe o "request.FILES.get" porque  este campo não esta presente no form do django
-            imagem_p = checar_imagem_existente(request.FILES.get("imagem_p"),"img_eletivas/img_professores_eletiva",None)
-            #criando a nova eletiva
-            new = Eletivas(titulo=eletiva,descricao=form.cleaned_data.get('descricao'),imagem=imagem,img_professores_eletiva=imagem_p,link=form.cleaned_data.get("link"))
-            #salvando-a
-            new.save()
-            #redirecionando para a função que adiciona o professor responsável pela eletiva
-            excluir_imagem("img_eletivas",Eletivas.objects.all().values())
-            menssagem_var['mensagem'] = "Eletiva Adicionada!"
-            return redirect(add_professor,tipo_de_user='professor')
-    else:
-        dados = {}
-        #variável que retorna o form para o html
-        dados['form'] = AddEletivaForm()
-        dados['message'] = ''
-        return render(request,'eletiva/addeletiva.html',dados)
 
 #função que adiciona os professores e/ou tutores
 #tipo_de_user: tipo do user a ser adicionado(professor/tutor)
@@ -437,28 +286,7 @@ def add_professor(request, tipo_de_user):
         #como eu tinha que executar o 'exclude' eu não podia obter os 'values' do models 'Eletivas', porém, agora posso
         dados['eletivas'] = dados['eletivas'].values()
         return render(request,'professor/addprofessor.html',dados)
-#função que retorna para a página dos tutores
-def tutoria(request):
-    try:
-        if request.session['user'] != dados_universsais['user']:
-            dados = definir_user(request)
-        else:
-            dados=dados_universsais.copy()
-    except:
-        dados = definir_user(request)
-    #verificando se a página pode funcionar
-    if ver_se_a_pagina_pode_funcionar('tutoria',dados) == True:
-        return render(request,'definir_as_paginas/acesso_bloqueado.html',dados)
-    dados['pagina'] = 'tutoria' #excluir essa linha
-    #pegue do models dos Professores somente onde tutor for igual a True
-    dados['tutores'] = Professores.objects.filter(tutor=True)
-    try:
-        dados['message'] = menssagem_var['mensagem'] 
-        menssagem_var['mensagem'] = ""
-    except:
-        dados['message'] = ""
-    #retornando para a página de tutoria
-    return render(request,'principais/tutoria.html',dados)
+
 #função que edita e se ele não existir cria o aviso
 def editar_aviso(request,id):
     #verificando se a página pode funcionar
@@ -534,26 +362,6 @@ def editar_aviso(request,id):
 #função que atualiza a eletiva
 #excluir esta função
 
-        
-#função que retorna para a página sobre(about)
-def sobre(request):
-    try:
-        if request.session['user'] != dados_universsais['user']:
-            dados = definir_user(request)
-        else:
-            dados=dados_universsais.copy()
-    except:
-        dados = definir_user(request)
-     #verificando se a página pode funcionar
-    if ver_se_a_pagina_pode_funcionar('sobre',dados) == True:
-        return render(request,'definir_as_paginas/acesso_bloqueado.html',dados)
-    dados['pagina'] = 'sobre'#excluir essa linha
-    try:
-        dados['message'] = menssagem_var['mensagem']
-        menssagem_var['mensagem'] = ""
-    except:
-        dados['message'] = ""
-    return render(request,'principais/about.html',dados)
         
 def deletar_com_ids(request,user_a_ser_atualizado_arg,id):
         #verificando se o usuário pode deletar

@@ -1,11 +1,12 @@
 from django.urls import path
 from Aplicativo.views import *
+from .funcoes.loguin import login_viwes
+from .funcoes.ADD.addEletiva import add_eletivas
 
 urlpatterns = [
     path('update_or_delete/<str:u_or_d>/<str:user_a_ser_atualizado_arg>',update_or_delete,name="update_or_delete"),
     path('',login_viwes ,name='login'),
  #   path('sobre/',sobre,name='sobre'),
-    path('logout/',logout_viwes ,name='logout'),
    # path('eletivas/', eletivas,name='eletivas'),
     path('add-eletiva/', add_eletivas,name='add-eletiva'),
     path('add/<str:tipo_de_user>', add_professor,name='add'),
