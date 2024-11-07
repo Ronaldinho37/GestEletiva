@@ -1121,6 +1121,7 @@ def deletar_carrossel(request,id):
         if sim == 'on':
             try:
                 CarrosselProfessores.objects.get(id=int(id)).delete()
+                excluir_imagem('carrosselProfessores',CarrosselProfessores.objects.all().values())
                 menssagem_var['mensagem'] = 'Carrossel deletado'
             except:
                 menssagem_var['mensagem'] = 'Id não identificado'
@@ -1190,6 +1191,8 @@ def update_carrossel(request,id):
             usuario.imagem = checar_imagem_existente(novo_imagem,'carrosselProfessor',None)
             
         usuario.save()
+        excluir_imagem('carrosselProfessores',CarrosselProfessores.objects.all().values())
+
         menssagem_var['mensagem'] = "Carrossel atualizado com sucesso"
         return redirect(eletivas)
 
