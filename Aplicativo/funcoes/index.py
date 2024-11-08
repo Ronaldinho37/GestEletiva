@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from ..views import dados_universsais,menssagem_var
+from ..views import menssagem_var, dados_universsais
 from .funcoes_sem_url.definir_user import definir_user
 from .funcoes_sem_url.pagina_pode_funcionar import ver_se_a_pagina_pode_funcionar
-#função que retorna para a página sobre(about)
-def sobre(request):
+from ..models import OqueTemosaOferecer,Anuncio
+from django.shortcuts import render
+def retornar_index(request):
     try:
         if request.session['user'] != dados_universsais['user']:
             dados = definir_user(request)
@@ -11,13 +11,14 @@ def sobre(request):
             dados=dados_universsais.copy()
     except:
         dados = definir_user(request)
-     #verificando se a página pode funcionar
-    if ver_se_a_pagina_pode_funcionar('sobre',dados) == True:
+    if ver_se_a_pagina_pode_funcionar('index',dados) == True:
         return render(request,'definir_as_paginas/acesso_bloqueado.html',dados)
-    dados['pagina'] = 'sobre'#excluir essa linha
+    #variável que contém os cards de avisos
+    dados['avisos'] = Anuncio.objects.all().order_by("-id")[:2]
+    dados['OqueTemosaOferecer'] = OqueTemosaOferecer.objects.all().values()
     try:
         dados['message'] = menssagem_var['mensagem']
         menssagem_var['mensagem'] = ""
     except:
         dados['message'] = ""
-    return render(request,'principais/about.html',dados)
+    return render(request,'principais/index.html',dados)

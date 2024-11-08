@@ -1,5 +1,7 @@
-from ..views import dados_universsais,menssagem_var,para_onde_vou
+from ..views import dados_universsais,menssagem_var
 from django.contrib.auth import logout
+from .funcoes_sem_url.para_onde_vou import para_onde_vou
+
 #função que desloga o usuário
 def logout_viwes(request):
     if request.method == "POST":

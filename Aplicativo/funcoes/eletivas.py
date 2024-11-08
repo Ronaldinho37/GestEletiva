@@ -1,6 +1,8 @@
 from ..models import Eletivas,Professores,CarrosselProfessores
-from ..views import ver_se_a_pagina_pode_funcionar,definir_user,dados_universsais,menssagem_var
+from ..views import dados_universsais,menssagem_var
+from .funcoes_sem_url.definir_user import definir_user
 from django.shortcuts import render
+from .funcoes_sem_url.pagina_pode_funcionar import ver_se_a_pagina_pode_funcionar
 
 #função que retorna para a página das eletivas com as eletivas presentes no site
 def eletivas(request):

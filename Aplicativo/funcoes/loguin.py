@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from ..forms import LoginForm
 from ..models import Admins
 from django.contrib.auth import login, authenticate
-from ..views import para_onde_vou,dados_universsais,menssagem_var
-from django.shortcuts import redirect
+from ..views import dados_universsais,menssagem_var
+from .funcoes_sem_url.para_onde_vou import para_onde_vou
 #nesta função é feito o login dos usuários 
 def login_viwes(request):
     try:
