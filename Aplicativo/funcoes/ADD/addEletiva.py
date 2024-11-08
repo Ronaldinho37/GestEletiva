@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from ...forms import AddEletivaForm
 from ...models import Eletivas
-from ...views import excluir_imagem,menssagem_var,verificar_se_o_usuario_pode_realizar_a_acao_equisitada,checar_imagem_existente
+from ..funcoes_sem_url.excluir_imagem import excluir_imagem
+from ..funcoes_sem_url.checar_imagem import checar_imagem_existente
+from ..funcoes_sem_url.acao_requisitada import verificar_se_o_usuario_pode_realizar_a_acao_equisitada
+from ...views import menssagem_var
 from django.shortcuts import redirect
 #função que adiciona as eletivas
 def add_eletivas(request):

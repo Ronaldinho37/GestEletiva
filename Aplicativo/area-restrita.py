@@ -2,6 +2,18 @@ from django.urls import path
 from Aplicativo.views import *
 from .funcoes.loguin import login_viwes
 from .funcoes.ADD.addEletiva import add_eletivas
+from .funcoes.ADD.professsor_tutor import add_professor
+from .funcoes.ADD.addAdmin import add_admin
+from .funcoes.ADD.oquetemosaoferecer import add_OqueTemosaOferecer
+from .funcoes.ADD.carrossel import add_professor_carrossel
+from .funcoes.definirPaginas import definir_paginas_utilizaveis
+from .funcoes.editar.oferecimento import editar_oferecimento
+from .funcoes.editar.aviso import editar_aviso
+from .funcoes.editar.carrossel import update_carrossel
+from .funcoes.deletar.carrossel import deletar_carrossel
+from .funcoes.update_or_delete.update_or_delete import update_or_delete
+from .funcoes.update_or_delete.update_com_id import update_com_id 
+from .funcoes.update_or_delete.deletar_com_id import deletar_com_ids
 
 urlpatterns = [
     path('update_or_delete/<str:u_or_d>/<str:user_a_ser_atualizado_arg>',update_or_delete,name="update_or_delete"),

@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from ..views import dados_universsais,menssagem_var,definir_user,ver_se_a_pagina_pode_funcionar
+from ..views import dados_universsais,menssagem_var
 from ..models import Professores
+from .funcoes_sem_url.definir_user import definir_user
+from .funcoes_sem_url.pagina_pode_funcionar import ver_se_a_pagina_pode_funcionar
 #função que retorna para a página dos tutores
 def tutoria(request):
     try:
