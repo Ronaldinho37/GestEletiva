@@ -4,38 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Definir carrossel</title>
+    <title>Definir Carrossel</title>
+    <link rel="stylesheet" href="{% static 'css/Caro_Add.css' %}">
 </head>
 <body>
-    {% include 'codigos reutilizados/menssage.html' %}
-    {% block menssagem %}
-    {% endblock %}
-   <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-        <input type="text" id="nome" name="nome" value="{{nome}}" required>
-        <input type="number" id="idade" name="idade" value="{{idade}}" min="18" max="99" required>
-        <input type="text" id="graduacao" name="graduacao" value="{{graduacao}}" required>
-        <textarea name="descricao" id="descricao" maxlength="200" required>{{descricao}}</textarea>
+    <h1>ADICIONAR NOVO OFERECIMENTO</h1>
+
+    <div class="align">
+
+    <form action="" method="post" enctype="multipart/form-data" onsubmit="return validarFormCarrossel()">
+        {% csrf_token %}
+        <input type="text" id="nome" name="nome" value="{{nome}}" required placeholder="Título">
+        <input type="number" id="idade" name="idade" value="{{idade}}" min="18" max="99" required placeholder="Idade">
+        <input type="text" id="graduacao" name="graduacao" value="{{graduacao}}" required placeholder="Graduação">
+        <textarea name="descricao" id="descricao" maxlength="200" required placeholder="Descrição"></textarea>
+        
         {% if modo == 'atualizar' %}
-            <img src="../../../media/{{imagem}}" alt="">
-            <input type="checkbox" name="deixar_sem_imagem">
+            <img src="../../../media/{{imagem}}" alt="Imagem atual">
+            <input type="checkbox" name="deixar_sem_imagem"> Deixar sem imagem
             <input type="file" id="imagem" name="imagem">
         {% else %}
             <input type="file" id="imagem" name="imagem" required>
         {% endif %}
-        
+
         <input type="submit" value="Enviar">
-   </form>
+    </form>
+
+    <div class="explanation">
+        <img src="../.././../media/img_fixas/logo-asn.png" alt="Logo">
+        <p>Nesta área você poderá adicionar novos oferecimentos na página inicial do site, podendo definir: Uma imagem a ser apresentada, um título pequeno, uma mini descrição sobre seu oferecimento e disponibilizar o link para levar o usuário ao site desejado.</p>
+    </div>
+</div>
+
     <script src="{% static 'js/acoes_tabela.js' %}"></script>
     <script src="{% static 'js/acao_tabela_pesquisar.js' %}"></script>
     <script>
-        function validarFormCarrossel(){
+        function validarFormCarrossel() {
             let ids = String(document.querySelector('input[name="ids"]').value).split(',')
-            if(ids.length == 3){
-                return true
+            if(ids.length === 3) {
+                return true;
             }
-            document.querySelector('h3[id="selecione"]').style.color = "red"
-            return false
-            
+            document.querySelector('h3[id="selecione"]').style.color = "red";
+            return false;
         }
     </script>
 </body>
