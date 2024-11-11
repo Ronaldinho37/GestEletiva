@@ -10,7 +10,8 @@
 }
 
 #s1{
-    text-align: center;
+    display: flex;
+    justify-content:center ;
 }
 
 .text {
@@ -270,13 +271,12 @@ h1 {
 }
 
 .card {
-    background-color: white;
     border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
     transition: transform 0.3s ease;
 }
 
@@ -393,3 +393,66 @@ h1 {
 .professores{
     color: #000;
 }
+
+/* Estilo do container do card */
+.card-container {
+    perspective: 1000px; /* Cria um efeito de profundidade para o flip */
+    width: 300px; /* Largura do cartão */
+    height: 400px; /* Altura do cartão */
+  }
+  
+  /* Estilo do card */
+  .card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d; /* Habilita o efeito 3D */
+    transition: transform 0.6s; /* Transição suave para o efeito de flip */
+  }
+  
+  /* Efeito do flip quando o mouse passa sobre o card */
+  .card:hover {
+    transform: rotateY(180deg);
+  }
+  
+  /* Estilo da frente do card */
+  .card-front, .card-back {
+    position: absolute;
+    width: 150%;
+    height: 100%;
+    backface-visibility: hidden; /* Esconde o verso do card quando ele gira */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilo do verso do card (quando virado) */
+  .card-back {
+    transform: rotateY(180deg); /* Faz o verso do card começar virado */
+    background-color: #f4f4f4;
+  }
+
+  .nossa-h{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Estilos adicionais para o conteúdo */
+  .nossa-h h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .nossa-h p {
+    font-size: 16px;
+    color: #333;
+  }
+  
