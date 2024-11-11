@@ -12,7 +12,7 @@
     {% endblock %}
    <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
         <input type="text" id="nome" name="nome" value="{{nome}}" required>
-        <input type="number" id="idade" name="idade" value="{{idade}}" required>
+        <input type="number" id="idade" name="idade" value="{{idade}}" min="18" max="99" required>
         <input type="text" id="graduacao" name="graduacao" value="{{graduacao}}" required>
         <textarea name="descricao" id="descricao" maxlength="200" required>{{descricao}}</textarea>
         {% if modo == 'atualizar' %}

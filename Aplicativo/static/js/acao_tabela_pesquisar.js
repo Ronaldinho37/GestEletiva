@@ -1,3 +1,4 @@
+//função que faz a pesquisa de caractere dentre os valores da tabela 
 function pesquisar(x){
     let coluna = document.querySelector('select[id="coluna"]').value
     let todos_valore = ""
