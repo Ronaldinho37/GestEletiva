@@ -50,7 +50,7 @@
             </div>
 
             <div class="meio">
-                <div class="texto-materia" style="padding-left:10px">{{i.descricao}}</div>
+                <div class="texto-materia" style="padding-left:10px;"><p style="width: 280px; font-size:16px;">{{i.descricao}}</p></div>
                 <div class="text-menor">{{i.titulo}}</div>
                 <div><img src="../../../media/{{i.imagem}}" alt="Imagem"></div>
             </div>
@@ -79,35 +79,46 @@
 </div>
 
 <div style="background: linear-gradient(135deg, #301ea8, #3a2c99); padding: 50px; color: white; text-align: center; border-radius: 20px; margin: auto;">
-    <h2 style="font-weight: bold; font-size: 2.5rem; margin-bottom: 20px;">O Que Temos a Oferecer </h2>
+    <h2 style="font-weight: bold; font-size: 2.5rem; margin-bottom: 20px;">O Que Temos a Oferecer</h2>
     <hr style="width: 60px; height: 4px; background-color: #a2d2ff; border: none; margin: 10px auto 30px; border-radius: 2px;">
     
+    <!-- Container Flex para os itens -->
     <div class="d-flex flex-wrap justify-content-center" style="max-width: 1200px; margin: 0 auto;">
-        {% if user == 'ADMIN'%}
-                <div>
-                    <a style="position: absolute;
-                    right: 93px;
-                    margin-top: -77px;" href="{% url 'add_oferecimento' %}" class="btn btn-info">Adicionar Oferecimento</a>
-                </div>
+        
+        <!-- Condicional para ADMIN (botão de adicionar) -->
+        {% if user == 'ADMIN' %}
+            <div style="position: relative; margin-bottom: 20px;">
+                <a href="{% url 'add_oferecimento' %}" class="btn btn-info" style="position: absolute; right: 20px; top: -60px;">Adicionar Oferecimento</a>
+            </div>
         {% endif %}
+        
+        <!-- Loop para os itens -->
         {% for i in OqueTemosaOferecer %}
-        {% if user == 'ADMIN' or 'cadastrar' in lista_de_acoes%}
-        <div class="d-flex flex-column-reverse">
-            <div id="">
-                <a class="btn btn-outline-info" href="{% url 'editar_oferecimento' id=i.id %}">Editar</a>
-                <a class="btn btn-outline-danger" href="{% url 'deletar_com_ids' user_a_ser_atualizado_arg='oferecimento' id=i.id %}">deletar</a>
+        
+            <div class="d-flex flex-column align-items-center">
+            
+                <!-- Card de oferta -->
+                <div class="card d-flex flex-column align-items-center m-3" style="max-width: 280px; max-height: 350px; padding: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); background-color: white; color: #4c3db5;">
+                    <img src="../.././../media/{{ i.imagem }}" alt="" class="img-fluid" style="text-align: center; border-radius: 20px; width: 100%; height:30%; transition: transform 0.3s ease;">
+                    <h5 class="mt-3" style="font-weight: bold;">{{ i.titulo }}</h5>
+                    <p class="text-center" style="width:200px;">{{ i.descricao }}</p>
+                    <a href="{{ i.link }}" style="color: #4c3db5; font-weight: bold; text-decoration: none;">{{ i.titulo_do_link }}&rarr;</a>
+                </div>
+                
+                <!-- Condicional para exibir os botões "Editar" e "Deletar" para ADMIN ou usuários com permissão -->
+                {% if user == 'ADMIN' or 'cadastrar' in lista_de_acoes %}
+                    <div class="mt-3 d-flex flex-row" style="gap: 24px;">
+                        <a class="btn btn-outline-info" href="{% url 'editar_oferecimento' id=i.id %}">Editar</a>
+                        <a class="btn btn-outline-danger" href="{% url 'deletar_com_ids' user_a_ser_atualizado_arg='oferecimento' id=i.id %}">Deletar</a>
+                    </div>
+                {% endif %}
+                
             </div>
-        {% endif %}
-            <div class="card d-flex flex-column align-items-center m-3" style="max-width: 280px; max-height: 350px; padding: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); background-color: white; color: #4c3db5;">
-                <img src="../.././../media/{{i.imagem}}" alt="" class="img-fluid" style="text-wrap: wrap; text-align: center; border-radius: 20px; width: 100%; height:30%; transition: transform 0.3s ease;">
-                <h5 class="mt-3" style="font-weight: bold;">{{i.titulo}}</h5>
-                <p class="text-center" style="width:200px;">{{i.descricao}}</p>
-                <a href="{{i.link}}" style="color: #4c3db5; font-weight: bold; text-decoration: none;">{{i.titulo_do_link}}&rarr;</a>
-            </div>
-        </div>
+        
         {% endfor %}
     </div>
 </div>
+
 
 <style>
     /* Hover Effect for Cards */
@@ -125,38 +136,40 @@
         <h1 class="faq-title">Perguntas Frequentes (FAQ)</h1>
         
         <div class="faq-item">
-            <div class="faq-question">Quais são os serviços/produtos oferecidos?</div>
+            <div class="faq-question">Como faço para acompanhar o desempenho do meu filho?</div>
             <div class="faq-answer">
-                Oferecemos ensino de qualidade pra tu aprender a programar e fz o novo facebook.
+                Você pode acompanhar o desempenho acadêmico de seu filho por meio de boletins escolares bimestrais, reuniões de pais e mestres e, caso necessário, contato direto com os professores ou a coordenação pedagógica.            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Quais são os documentos necessários para matrícula?</div>
+            <div class="faq-answer">
+                Os documentos comuns para matrícula incluem:
+                Certidão de nascimento ou RG do aluno;
+                Comprovante de residência recente;
+                RG e CPF dos pais ou responsáveis;
+                Histórico escolar ou transferência (se for o caso);
+                Foto 3x4 do aluno.            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">O que é a Educação de Jovens e Adultos (EJA)?</div>
+            <div class="faq-answer">
+                A EJA é uma modalidade de ensino destinada a jovens e adultos que, por diversos motivos, não concluíram seus estudos na idade regular. Ela oferece a possibilidade de retomar a educação e concluir o ensino fundamental (1º ao 9º ano) ou o ensino médio (1ª à 3ª série), com uma grade curricular adaptada às necessidades dessa faixa etária.
             </div>
         </div>
         
         <div class="faq-item">
-            <div class="faq-question">Como posso entrar em contato com a equipe de suporte?</div>
+            <div class="faq-question">Como posso me inscrever no curso técnico em Informática da Escola Santos Neves?</div>
             <div class="faq-answer">
-                Você pode entrar em contato conosco por meio de comunicacao@ecomp.com. Estamos disponíveis 24 por dia 7 dias por semana.
-            </div>
-        </div>
-        
-        <div class="faq-item">
-            <div class="faq-question">Qual é o prazo de matricula na escola?</div>
-            <div class="faq-answer">
-                O prazo em media varia de 30 dias mas varea.
-            </div>
-        </div>
-        
-        <div class="faq-item">
-            <div class="faq-question">posso desistir do curos?</div>
-            <div class="faq-answer">
-                Sim, mas é bom ent preocupa n.
+                As inscrições para o Curso Técnico em Informática são feitas durante o período de matrícula, geralmente por meio de um processo seletivo ou sorteio. Para se inscrever, é necessário estar cursando o 1º ano do ensino médio ou estar terminando o 9º ano do ensino fundamental. Fique atento aos prazos de inscrição e consulte o site da Secretaria da Educação do Estado do Espírito Santo (SEDU) ou a escola para mais informações.
             </div>
         </div>
     
         <div class="faq-item">
-            <div class="faq-question">Como acompanho as notas do meu filho?</div>
+            <div class="faq-question">Como os alunos podem participar do programa Jovem Protagonista?</div>
             <div class="faq-answer">
-                rapaz tu vai entrar num site de merda chamado seges.com.
-            </div>
+                participação no programa Jovem Protagonista é feita a partir de uma seleção interna realizada pela escola. Geralmente, os alunos que têm maior desempenho acadêmico, voz ativa nas atividades escolares e facilidade de comunicação no ambiente escolar são convidados a participar. A escola busca jovens que se destacam pelo engajamento, interesse em liderança e disposição para atuar como agentes de mudança, promovendo ações que contribuam para o ambiente escolar e para a comunidade.            </div>
         </div>
         
         <!-- Mais itens de FAQ podem ser adicionados aqui -->

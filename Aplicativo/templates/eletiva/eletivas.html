@@ -88,7 +88,7 @@
     <div id="carouselExampleControls" class="carousel slide p-5" data-bs-ride="carousel" data-bs-pause="false" data-bs-interval="3000">
         {% if user == 'ADMIN' %}
             <div>
-                <a href="{% url 'add_professor_carrossel' %}">Adicionar Professor ao Carrossel</a>
+                <a href="{% url 'add_professor_carrossel' %}" class="btn btn-info text-white">Adicionar Professor ao Carrossel</a>
             </div>
         {% endif %}
         
@@ -96,8 +96,8 @@
           <div class="text-center d-flex align-items-center flex-row" style="flex: 1; gap: 80px;">
             <div class="d-flex flex-column align-items-center">
               <h1 id="qualify-teachers" class="text-warning p-3 d-inline" style="background-color: rgb(8, 83, 196); border-radius:20px;box-shadow: 0px 2px 7px black;">Professores Qualificados</h1>
-              <p id="about-qualify" style="margin-top: 20px;" class="w-75 px-5">Em nossa Instituição temos profissionais <br> Qualificados para atender seus filhos, todos formados
-                  e preparados para desbravar o mundo do conhecimento.</p></div>
+              <p id="about-qualify" style="margin-top: 20px;" class="w-75 px-5"><p>Na nossa instituição, contamos com um time de professores <br> altamente qualificados, preparados para proporcionar uma educação <br> de excelência aos seus filhos. Cada um de nossos profissionais é <br> formado nas mais diversas áreas do conhecimento e constantemente <br> se atualiza, garantindo que os alunos recebam a melhor formação <br> acadêmica. Nosso compromisso é despertar o potencial de cada <br> estudante e guiá-lo por uma jornada de aprendizado enriquecedora <br> e transformadora.</p>
+            </div>
         <div class="carousel-inner w-50" style="border-radius: 30px;">
             {% for i in carrossel %}
                 <div class="carousel-item active" >

@@ -48,7 +48,7 @@ class Eletivas(models.Model):
 
 class Anuncio(models.Model):
     titulo = models.CharField(max_length=40)
-    descricao = models.TextField(max_length=127)
+    descricao = models.TextField(max_length=73)
     imagem = models.ImageField(upload_to="img_anuncio/")
     #remover linha
     link = models.URLField(max_length=100, null=True, blank=False)

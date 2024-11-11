@@ -1,5 +1,6 @@
 from ...models import Anuncio
 from ...forms import AnuncioForm
+from ...views import menssagem_var
 from ..funcoes_sem_url.checar_imagem import checar_imagem_existente
 from ..funcoes_sem_url.excluir_imagem import excluir_imagem
 from ..funcoes_sem_url.acao_requisitada import verificar_se_o_usuario_pode_realizar_a_acao_equisitada
@@ -63,6 +64,7 @@ def editar_aviso(request,id):
             anuncio_a_ser_atualizado.save()
             #chamando a função que exclui a imagem se ela não esta mais sendo usada
             excluir_imagem('img_anuncio',Anuncio.objects.all().values())
+            menssagem_var['mensagem'] = "Aviso alterado com sucesso"
             return redirect("/")
         else:
             dados = {}

@@ -36,5 +36,5 @@ def excluir_imagem(dir,model):
     for i in imagens_da_pasta_solicitada:
         #se a imagem da pasta não esta em 'imagens_usuarios', então ela esta inutilizada portanto apague-a
         if i not in imagens_usuarios:
-            os.remove(f'{os.getcwd()}/media/{dir}/{i}')
+            os.remove(f'{os.getcwd()}/media/{dir}/{i}')     
     return

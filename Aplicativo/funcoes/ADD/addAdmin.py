@@ -16,8 +16,6 @@ def add_admin(request):
         senha = request.POST.get('senha')
         link_antigoA = request.POST.get('link_antigoA')
         imagem = checar_imagem_existente(request.FILES.get('imagem'),'imagem_admins', None)
-        print(link_antigoA)
-        
 
         #checkboxes= inputs do html
         checkboxes = ['deletar','atualizar','cadastrar']
