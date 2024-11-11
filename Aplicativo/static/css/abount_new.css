@@ -47,26 +47,23 @@
 .pri{
     display: flex;
     flex-direction: column;
-    background-color: #66666659;
     padding: 10px;
     border-radius: 10px;
-    width: 50%;
+    width: 45%;
 }
 .sec{
     display: flex;
     flex-direction: column;
-    background-color: #66666659;
     padding: 10px;
     border-radius: 10px;
-    width: 50%;
+    width: 45%;
 }
 .ter{
     display: flex;
     flex-direction: column;
-    background-color: #66666659;
     padding: 10px;
     border-radius: 10px;
-    width: 50%;
+    width: 45%;
 }
 
 .resto{
@@ -392,4 +389,15 @@ h1 {
 
 .professores{
     color: #000;
+}
+
+.text-prin{
+    background-color: white;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+.pra-alin{
+    padding-left: 10%;
+    padding-right: 10%;
 }

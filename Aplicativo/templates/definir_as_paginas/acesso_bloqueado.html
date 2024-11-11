@@ -4,19 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+
+        html, body {
+            height: 100%;
+            margin: 0; 
+        }
+
+
+        body {
+            display: flex;
+            flex-direction: column; 
+        }
+
+
+        .principal {
+            flex: 1;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .alinhamento {
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
+
     {% include 'codigos reutilizados/links_reutilizados.html' %}
     {% block links %}
     {% endblock %}
     {% include 'codigos reutilizados/menssage.html' %}
     {% block menssagem %}
     {% endblock %}
+
     <div class="principal">
         <h1>Página suspensa pelo admin</h1>
     </div>
-    {% include 'codigos reutilizados/footer.html' %}
-    {% block footer %}
-    {% endblock %}
+
+    <div class="alinhamento">
+        {% include 'codigos reutilizados/footer.html' %}
+        {% block footer %}
+        {% endblock %}
+    </div>
+
 </body>
 </html>
