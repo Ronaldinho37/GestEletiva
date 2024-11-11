@@ -51,10 +51,9 @@ def deletar_com_ids(request,user_a_ser_atualizado_arg,id):
                             OqueTemosaOferecer.objects.get(id=id_a_ser_deletado).delete()
                             excluir_imagem('img_OqueTemosaOferecer',OqueTemosaOferecer.objects.all().values())
                             menssagem_var['mensagem'] = 'O oferecimento foi deletado'
-                            return redirect("/")
                         except:
                             menssagem_var['mensagem'] = 'Id não encontrado'
-                            return redirect("/")
+                        return redirect("/")
                 elif user_a_ser_atualizado_arg == "professor" or user_a_ser_atualizado_arg == "tutor":
                     dados['model_user'] = Professores.objects.all().values()
                     dados['diretorio_user'] = "imagem_professores"

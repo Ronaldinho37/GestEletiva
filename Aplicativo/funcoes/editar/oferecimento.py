@@ -36,9 +36,9 @@ def editar_oferecimento(request,id):
             oferecimento_a_ser_atualizado.titulo_do_link = titulo_link_novo
         if imagem_nova != None:
             oferecimento_a_ser_atualizado.imagem = checar_imagem_existente(imagem_nova,'img_OqueTemosaOferecer','atualizar')
-            excluir_imagem('img_OqueTemosaOferecer',OqueTemosaOferecer.objects.all().values())
-      
+    
         oferecimento_a_ser_atualizado.save()
+        excluir_imagem('img_OqueTemosaOferecer',OqueTemosaOferecer.objects.all().values())
         menssagem_var['mensagem'] = "Oferecimento atualizado"
         return redirect("/")
     else:
