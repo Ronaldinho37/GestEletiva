@@ -14,16 +14,16 @@ def add_professor(request, tipo_de_user):
     if request.method == 'POST':
         dados_do_ser_a_ser_adicionado = {}
         #esta variável armazena os campos que não possuem valores booleanos
-        campos_universais = ['nome','email','password','descricao','eletiva']
+        campos_universais = ['nome','email','idade','descricao','eletiva','graduacao']
         #armazena a nova imagem do professor/tutor 
         dados_do_ser_a_ser_adicionado['imagem'] = checar_imagem_existente(request.FILES.get('imagem'),'imagem_professores','cadastrar')
         #percorre os campos para adiciona-los a variável 'dados_do_ser_a_ser_adicionado'
         for i in campos_universais:
-            #se o user a ser adicionado for um professor então eu não preciso de descrição
-            if tipo_de_user == 'professor' and i == 'descricao':
-                dados_do_ser_a_ser_adicionado[f'{i}'] = ''
-            #se o user a ser adicionado for um tutor então eu não preciso de eletiva
-            elif tipo_de_user == 'tutor'and i == 'eletiva':
+            # #se o user a ser adicionado for um professor então eu não preciso de descrição
+            # if tipo_de_user == 'professor' and i == 'descricao':
+            #     dados_do_ser_a_ser_adicionado[f'{i}'] = ''
+            # #se o user a ser adicionado for um tutor então eu não preciso de eletiva
+            if tipo_de_user == 'tutor'and i == 'eletiva' or tipo_de_user == 'tutor'and i == 'graduacao':
                 dados_do_ser_a_ser_adicionado[f'{i}'] = ''
             #do contrário adicione os valores
             else:
@@ -41,7 +41,7 @@ def add_professor(request, tipo_de_user):
             dados_do_ser_a_ser_adicionado['tutor'] = True
             dados_do_ser_a_ser_adicionado['professor'] = True
         #criando um novo professor ou tutor
-        professor = Professores(eletiva=dados_do_ser_a_ser_adicionado['eletiva'],nome=dados_do_ser_a_ser_adicionado['nome'],email=dados_do_ser_a_ser_adicionado['email'],senha=dados_do_ser_a_ser_adicionado['password'],imagem=dados_do_ser_a_ser_adicionado['imagem'],professor=dados_do_ser_a_ser_adicionado['professor'],tutor=dados_do_ser_a_ser_adicionado['tutor'],descricao=dados_do_ser_a_ser_adicionado['descricao'])
+        professor = Professores(eletiva=dados_do_ser_a_ser_adicionado['eletiva'],nome=dados_do_ser_a_ser_adicionado['nome'],email=dados_do_ser_a_ser_adicionado['email'],idade=dados_do_ser_a_ser_adicionado['idade'],graduacao=dados_do_ser_a_ser_adicionado['graduacao'],imagem=dados_do_ser_a_ser_adicionado['imagem'],professor=dados_do_ser_a_ser_adicionado['professor'],tutor=dados_do_ser_a_ser_adicionado['tutor'],descricao=dados_do_ser_a_ser_adicionado['descricao'])
         #salvando-o
         professor.save()
         if tipo_de_user == 'tutor':

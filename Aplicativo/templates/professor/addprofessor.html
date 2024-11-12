@@ -19,7 +19,7 @@
                  com limitação de 2 professores por eletiva, caso contrário, ficará sem professor !!! </p>
             <h1>Adicionar {{tipo_de_user}}</h1>
             <form action="" method="post" enctype="multipart/form-data"> {% csrf_token %}           
-                {% if tipo_de_user == 'professor' or tipo_de_user == 'professor-tutor' %}
+                {% if tipo_de_user != 'tutor'%}
                 <label for="eletiva">Eletiva</label>
                     <select name="eletiva" id="eletiva" required>
                         <option value=""></option>
@@ -32,15 +32,17 @@
                 <input type="text" name="nome" id="nome" placeholder="Insira o seu nome" required>
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" placeholder="email" required>
-                <label for="password">Senha</label>
-                <input type="password" name="password" id="password" placeholder="password" required>
+                <label for="idade">Idade</label>
+                <input type="number" name="idade" id="idade" placeholder="idade" min="18" max="99" required>
+                {% if tipo_de_user != "tutor" %}
+                    <label for="graduacao">Graduacao</label>
+                    <input type="text" name="graduacao" id="graduacao" placeholder="graduacao" required>
+                {% endif %}
                 <label for="imagem">Imagem Perfil</label>
                 <input type="file" name="imagem" id="imagem" placeholder="imagem" accept="image/*" onchange="previewImage()">
                 <div class="image-preview" id="imagePreview"></div>
-                {% if tipo_de_user == 'tutor' or tipo_de_user == 'professor-tutor' %}
-                    <label for="descricao">Descrição</label>
-                    <textarea name="descricao" id="descricao" required placeholder="Máximo de caracteres: 100" maxlength="100"></textarea>
-                {% endif %}
+                <label for="descricao">Descrição</label>
+                <textarea name="descricao" id="descricao" required placeholder="Máximo de caracteres: 1000" maxlength="1000"></textarea>
                 <div class="error-message" id="errorMessage">Por favor, preencha todos os campos corretamente.</div>
                 <input type="submit" value="Enviar">
             </form>
