@@ -93,7 +93,9 @@
         {% endif %}
         
         <div class="d-flex justify-content-between align-items-center w-100">
-          <div class="text-center d-flex align-items-center flex-row" style="flex: 1; gap: 80px;">
+          <div class="text-center d-flex align-items-center flex-row" style="flex: 1; 
+          gap: 330px;
+          padding-left: 100px;">
             <div class="d-flex flex-column align-items-center">
               <h1 id="qualify-teachers" class="text-warning p-3 d-inline" style="background-color: rgb(8, 83, 196); border-radius:20px;box-shadow: 0px 2px 7px black;">Professores Qualificados</h1>
               <p id="about-qualify" style="margin-top: 20px;" class="w-75 px-5"><p>Na nossa instituição, contamos com um time de professores <br> altamente qualificados, preparados para proporcionar uma educação <br> de excelência aos seus filhos. Cada um de nossos profissionais é <br> formado nas mais diversas áreas do conhecimento e constantemente <br> se atualiza, garantindo que os alunos recebam a melhor formação <br> acadêmica. Nosso compromisso é despertar o potencial de cada <br> estudante e guiá-lo por uma jornada de aprendizado enriquecedora <br> e transformadora.</p>
@@ -124,32 +126,28 @@
             <img src="../.././../media/img_fixas/logo-asn.png" alt="" width="50px">
         </div>
 
-        <!-- Card Flip ao Lado da Imagem -->
         <div class="flip-card">
             <div class="flip-card-inner">
                 <!-- Frente do Card -->
                 <div class="flip-card-front">
                     <h2 id="professorName">Nome do Professor</h2>
-                    <i class="fa-solid fa-graduation-cap"  style="font-size: 60px;"></i>
-
+                    <i class="fa-solid fa-graduation-cap" style="font-size: 60px;"></i>
                 </div>
-
+        
                 <!-- Verso do Card -->
                 {% for i in carrossel %}
-                    <div class="flip-card-back" data-id="{{i.id}}">
-                        <ul>
-                            <li><strong>Idade:</strong>{{i.idade}}</li>
-                            <li><strong>Graduações:</strong>{{i.graduacao}}</li>
-                            <li><strong>Descrição:</strong>{{i.descricao}}</li>
-                            {% if user == 'ADMIN' %}
-                                <li><a href="{% url 'atualizar_carrossel' id=i.id%}">Atualizar</a></li>
-                                <li><a href="{% url 'deletar_carrossel' id=i.id%}">Deletar</a></li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                   
+                <div class="flip-card-back" data-id="{{i.id}}">
+                    <ul>
+                        <li><strong>Idade:</strong> {{i.idade}}</li>
+                        <li><strong>Graduações:</strong> {{i.graduacao}}</li>
+                        <li><strong>Descrição:</strong> {{i.descricao}}</li>
+                        {% if user == 'ADMIN' %}
+                        <li><a href="{% url 'atualizar_carrossel' id=i.id %}">Atualizar</a></li>
+                        <li><a href="{% url 'deletar_carrossel' id=i.id %}">Deletar</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
                 {% endfor %}
-                
             </div>
         </div>
     </div>

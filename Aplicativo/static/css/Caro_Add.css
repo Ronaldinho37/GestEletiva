@@ -4,15 +4,30 @@ body {
     background-color: #f4f4f4;
 }
 
-.align{
+.container {
+    width: 900px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.title {
+    color: #ffcc00;
+    background-color: #0057e7;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.align {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
 }
 
 form {
-    width: 400px;
+    width: 60%;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
@@ -47,31 +62,22 @@ form input[type="submit"]:hover {
     background-color: #444;
 }
 
-h1 {
-    color: #ffcc00;
-    background-color: #0057e7;
-    text-align: center;
-    padding: 20px;
-    border-radius: 8px 8px 0 0;
-}
-
-div.explanation {
+.explanation {
+    width: 35%;
     background-color: #0057e7;
     color: white;
     padding: 20px;
-    border-radius: 0 0 8px 8px;
-    margin-top: 15px;
     text-align: center;
-    width: 400px;
-    height: 370px;
+    border-radius: 10px;
+    box-sizing: border-box;
 }
 
-div.explanation p {
+.explanation p {
     font-size: 14px;
     line-height: 1.5;
 }
 
-div.explanation img {
+.explanation img {
     display: block;
     margin: 0 auto 10px;
     max-width: 80px;

@@ -8,31 +8,33 @@
     <link rel="stylesheet" href="{% static 'css/Caro_Add.css' %}">
 </head>
 <body>
-    <h1>ADICIONAR NOVO OFERECIMENTO</h1>
+
+<div class="container">
+    <h1 class="title">ADICIONAR NOVO CARROSSEL</h1>
 
     <div class="align">
+        <form action="" method="post" enctype="multipart/form-data" onsubmit="return validarFormCarrossel()">
+            {% csrf_token %}
+            <input type="text" id="nome" name="nome" value="{{nome}}" required placeholder="Título">
+            <input type="number" id="idade" name="idade" value="{{idade}}" min="18" max="99" required placeholder="Idade">
+            <input type="text" id="graduacao" name="graduacao" value="{{graduacao}}" required placeholder="Graduação">
+            <textarea name="descricao" id="descricao" maxlength="200" required placeholder="Descrição"></textarea>
+            
+            {% if modo == 'atualizar' %}
+                <img src="../../../media/{{imagem}}" alt="Imagem atual">
+                <input type="checkbox" name="deixar_sem_imagem"> Deixar sem imagem
+                <input type="file" id="imagem" name="imagem">
+            {% else %}
+                <input type="file" id="imagem" name="imagem" required>
+            {% endif %}
 
-    <form action="" method="post" enctype="multipart/form-data" onsubmit="return validarFormCarrossel()">
-        {% csrf_token %}
-        <input type="text" id="nome" name="nome" value="{{nome}}" required placeholder="Título">
-        <input type="number" id="idade" name="idade" value="{{idade}}" min="18" max="99" required placeholder="Idade">
-        <input type="text" id="graduacao" name="graduacao" value="{{graduacao}}" required placeholder="Graduação">
-        <textarea name="descricao" id="descricao" maxlength="200" required placeholder="Descrição"></textarea>
-        
-        {% if modo == 'atualizar' %}
-            <img src="../../../media/{{imagem}}" alt="Imagem atual">
-            <input type="checkbox" name="deixar_sem_imagem"> Deixar sem imagem
-            <input type="file" id="imagem" name="imagem">
-        {% else %}
-            <input type="file" id="imagem" name="imagem" required>
-        {% endif %}
+            <input type="submit" value="Enviar">
+        </form>
 
-        <input type="submit" value="Enviar">
-    </form>
-
-    <div class="explanation">
-        <img src="../.././../media/img_fixas/logo-asn.png" alt="Logo">
-        <p>Nesta área você poderá adicionar novos oferecimentos na página inicial do site, podendo definir: Uma imagem a ser apresentada, um título pequeno, uma mini descrição sobre seu oferecimento e disponibilizar o link para levar o usuário ao site desejado.</p>
+        <div class="explanation">
+            <img src="../.././../media/img_fixas/logo-asn.png" alt="Logo">
+            <p>Nesta área você poderá adicionar novos oferecimentos na página inicial do site, podendo definir: Uma imagem a ser apresentada, um título pequeno, uma mini descrição sobre seu oferecimento e disponibilizar o link para levar o usuário ao site desejado.</p>
+        </div>
     </div>
 </div>
 
