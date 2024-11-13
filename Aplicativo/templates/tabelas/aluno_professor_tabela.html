@@ -47,6 +47,10 @@
         {%if modo == "deletar" %}
             <h3>Selecionados: <span id="numero_selecionados">0</span></h3>
             <button onclick="ir_para_o_site()" class="bg-danger rounded" style="margin: 0;">DELETAR</button>
+        {% elif modo == "carrossel"%}
+            <h3>Selecionados: <span id="numero_selecionados">0</span></h3>
+            <button onclick="adicionar_carrossel()" class="bg-danger rounded" style="margin: 0;">Adicionar</button>
+
         {% endif %}
 
         <div id="text-professores" class="bg-primary p-2 my-3 text-warning rounded">
@@ -86,6 +90,11 @@
         </tbody>
       </table>
 </div>
+<script>
+    function adicionar_carrossel(){
+
+    }
+</script>
 
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="{% static 'js/R_tables.js' %}"></script>

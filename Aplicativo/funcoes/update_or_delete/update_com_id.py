@@ -31,11 +31,11 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
         #entã, adicione à variável "model" o models do usuário e a pasta
         model.append(Professores.objects.all().values())
         model.append("imagem_professores")
-        #como tutores, professores e professores-tutores têm campos diferentes, estes ifs adicionam somente os campos necessários 
-        if user_a_ser_atualizado_arg == 'tutor':
-            campos_atigos_do_user = [user_a_ser_atualizado[0].nome,user_a_ser_atualizado[0].email,user_a_ser_atualizado[0].idade,user_a_ser_atualizado[0].imagem,user_a_ser_atualizado[0].descricao]
-        else:
-            campos_atigos_do_user = [user_a_ser_atualizado[0].nome,user_a_ser_atualizado[0].email,user_a_ser_atualizado[0].idade,user_a_ser_atualizado[0].imagem,user_a_ser_atualizado[0].descricao,user_a_ser_atualizado[0].eletiva,user_a_ser_atualizado[0].graduacao]
+        # #como tutores, professores e professores-tutores têm campos diferentes, estes ifs adicionam somente os campos necessários 
+        # if user_a_ser_atualizado_arg == 'tutor':
+        #     campos_atigos_do_user = {'nome': user_a_ser_atualizado[0].nome,'email': user_a_ser_atualizado[0].email,'idade':user_a_ser_atualizado[0].idade,'imagem':user_a_ser_atualizado[0].imagem,'descricao':user_a_ser_atualizado[0].descricao}
+        # else:
+        #     campos_atigos_do_user = {'nome': user_a_ser_atualizado[0].nome,'email': user_a_ser_atualizado[0].email,'idade':user_a_ser_atualizado[0].idade,'imagem':user_a_ser_atualizado[0].imagem,'descricao':user_a_ser_atualizado[0].descricao,'eletiva':user_a_ser_atualizado[0].eletiva,'graduacao':user_a_ser_atualizado[0].graduacao}
     elif user_a_ser_atualizado_arg == 'eletiva':
          #tente adicionar o user
         try:
@@ -49,7 +49,7 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
         model.append(Eletivas.objects.all().values())
         model.append("img_eletivas")
         #adicionandos os campos antigos do usuário
-        campos_atigos_do_user = [user_a_ser_atualizado[0].titulo,user_a_ser_atualizado[0].descricao,user_a_ser_atualizado[0].imagem,user_a_ser_atualizado[0].img_professores_eletiva,user_a_ser_atualizado[0].link]
+        campos_atigos_do_user = {'titulo':user_a_ser_atualizado[0].titulo,'descricao':user_a_ser_atualizado[0].descricao,'imagem':user_a_ser_atualizado[0].imagem,'img_professores':user_a_ser_atualizado[0].img_professores_eletiva,'link':user_a_ser_atualizado[0].link}
     elif user_a_ser_atualizado_arg == 'admin':
          #tente pegar o user
         try:
@@ -68,58 +68,48 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
         model.append("imagem_admins")
         #adicionando à variável "user_a_ser_atualizado" o user a ser atualizado
         user_a_ser_atualizado.append(admin_a_ser_atualizado)
-        campos_atigos_do_user = [user_a_ser_atualizado[0].nome,user_a_ser_atualizado[0].email,user_a_ser_atualizado[0].senha,user_a_ser_atualizado[0].imagem,user_a_ser_atualizado[0].acoes]
+        campos_atigos_do_user = {'nome':user_a_ser_atualizado[0].nome,'email':user_a_ser_atualizado[0].email,'senha':user_a_ser_atualizado[0].senha,'imagem':user_a_ser_atualizado[0].imagem,'acoes':user_a_ser_atualizado[0].acoes}
  
     if request.method == 'POST':
-        #pegando os novos valores, estes aqui são padrão(têm na maioria dos users)
-        nome = request.POST.get('nome')
-        email = request.POST.get('email')
-        senha = request.POST.get('senha')
-        imagem = request.FILES.get('imagem')
-        idade = request.POST.get('idade')
-        graduacao = request.POST.get('graduacao')
-        #pegue a nova eletiva
-        eletiva = request.POST.get('eletiva')
-        #pegue a nova descrição
-        descricao = request.POST.get('descricao')
-        #caso seja eletivas eu preciso saber se o usuário quer deixar sem imagens ou não
-        pergunta_imagem = request.POST.get('pergunta_imagem')
-        pergunta_imagem_professores = request.POST.get('pergunta_imagem_professores')
+        dados_request = {}
+        def definir_requests(request,campos_antigos_do_user_arg):
+            for i in campos_antigos_do_user_arg:
+                if i == 'imagem' or i == 'img_professores':
+                    dados_request[f'{i}'] = request.FILES.get(f'{i}')
+                else:
+                    dados_request[f'{i}'] = request.POST.get(f'{i}')
+        dados_request['pergunta_imagem'] = request.POST.get('pergunta_imagem')
         #vaiável que recebe os novos campos do user
         campos_atualizados_do_user = []
         #ifs que pegão valores atuais dos usuarios
         if user_a_ser_atualizado_arg == 'professor' or user_a_ser_atualizado_arg == 'professor-tutor' or user_a_ser_atualizado_arg == 'tutor': 
             professor = request.POST.get('professor')
             tutor = request.POST.get('tutor')
-            if professor == 'on' and tutor != 'on':
+            if professor == 'on' and tutor != 'on' and user_a_ser_atualizado_arg != 'professor':
                 user_a_ser_atualizado[0].professor = True
                 user_a_ser_atualizado[0].tutor = False
                 user_a_ser_atualizado_arg = "professor"
-            elif professor != 'on' and tutor == 'on':
+            elif professor != 'on' and tutor == 'on' and user_a_ser_atualizado_arg != 'tutor':
                 user_a_ser_atualizado[0].tutor = True
                 user_a_ser_atualizado[0].professor = False
                 user_a_ser_atualizado_arg = "tutor"
-                #ta dando erro porque o user_a_ser_atualizado_arg precisa mudar
-            else:
+            elif professor != 'on' and tutor != 'on' and user_a_ser_atualizado_arg != 'professor-tutor':
                 user_a_ser_atualizado[0].professor = True
                 user_a_ser_atualizado[0].tutor = True
                 user_a_ser_atualizado_arg = "professor-tutor"
                 
-            if user_a_ser_atualizado_arg == 'tutor':
-                #campo caso seja tutor
-                campos_atualizados_do_user = [nome,email,idade,imagem,descricao]
+            campos_atigos_do_user.clear()
+            campos_atigos_do_user = {'nome': user_a_ser_atualizado[0].nome,'email': user_a_ser_atualizado[0].email,'idade':user_a_ser_atualizado[0].idade,'imagem':user_a_ser_atualizado[0].imagem,'descricao':user_a_ser_atualizado[0].descricao,'eletiva':user_a_ser_atualizado[0].eletiva,'graduacao':user_a_ser_atualizado[0].graduacao}
+            definir_requests(request,campos_atigos_do_user)
+            if user_a_ser_atualizado[0].tutor == True and user_a_ser_atualizado[0].professor == False:
+                campos_atualizados_do_user = [dados_request['nome'],dados_request['email'],dados_request['idade'],dados_request['imagem'],dados_request['descricao'],"",""]
             else:
-                #atualizando a variável "campos_atualizados_do_user"
-                if user_a_ser_atualizado[0].tutor == True and user_a_ser_atualizado[0].professor == False:
-                    eletiva = ""
-                campos_atualizados_do_user = [nome,email,idade,imagem,eletiva,descricao,graduacao]
+                campos_atualizados_do_user = [dados_request['nome'],dados_request['email'],dados_request['idade'],dados_request['imagem'],dados_request['descricao'],dados_request['eletiva'],dados_request['graduacao']]
+
         elif user_a_ser_atualizado_arg == 'eletiva':
-            #a eletiva é o único "user" com campos diferentes, por isso a variável "campos_atualizados_do_user" é diferente das demais
-            titulo = request.POST.get('titulo')
-            link = request.POST.get('link')
-            descricao = request.POST.get('descricao')
-            img_professores = request.FILES.get('img_professores')
-            campos_atualizados_do_user = [titulo,descricao,imagem,img_professores,link]
+                    #caso seja eletivas eu preciso saber se o usuário quer deixar sem imagens ou não
+            dados_request['pergunta_imagem_professores'] = request.POST.get('pergunta_imagem_professores')
+            campos_atualizados_do_user = [dados_request['titulo'],dados_request['descricao'],dados_request['imagem'],dados_request['img_professores'],dados_request['link']]
         elif user_a_ser_atualizado_arg == 'admin':
             #checkboxes do admin
             checkboxes = ['deletar','atualizar','cadastrar']
@@ -130,70 +120,66 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
                 if checkbox == 'on':
                     acoes_permitidas += f' {i}'
             #atualizando a variável "campos_atualizados_do_user"
-            campos_atualizados_do_user = [nome,email,senha,imagem,acoes_permitidas]
+            campos_atualizados_do_user = [dados_request['nome'],dados_request['email'],dados_request['senha'],dados_request['imagem'],acoes_permitidas]
+        
         #esta variável é quem diz qual campo esta sendo atualizado no momento, por exemplo:
         #0: nome, 1: email ...
         tam = 0
-        #for que percorre os novos valores inseridos pelo usuário 
+        print(user_a_ser_atualizado_arg)
+        print(user_a_ser_atualizado[0].professor)
+        print(user_a_ser_atualizado[0].tutor)
         for i in campos_atualizados_do_user:
-            #se o campo da vez for diferente do campo antigo, então...
-            if i != campos_atigos_do_user[tam]:
-                #se tam == 0 ou seja "nome"
-                if tam == 0:
-                    #se for eletiva
-                    if user_a_ser_atualizado_arg == 'eletiva':
-                        #muda também o nome no campo "eletiva" no models dos Professores
-                        professores = Professores.objects.filter(eletiva=str(user_a_ser_atualizado[0].titulo))
-                        # alunos = Alunos.objects.filter(eletiva=str(user_a_ser_atualizado[0].titulo))
-                        #se o tamanho desta variável for diferente de 0 é porque há professores nesta eletiva e por isso devem ser alterados
-                        if len(professores) != 0:
-                            for p in professores:
-                                p.eletiva = i
-                                p.save()
-                        #atualizando o título da eletiva
-                        user_a_ser_atualizado[0].titulo = i
-                    else:
-                        #atualizando o nome do user
-                        user_a_ser_atualizado[0].nome = i
-                #tam == 1  and user != 'eletiva': email
-                elif tam == 1 and user_a_ser_atualizado_arg != 'eletiva':
-                    user_a_ser_atualizado[0].email = i
-                #tam == 2  and user != 'eletiva': senha
-                elif tam == 2 and user_a_ser_atualizado_arg != 'eletiva' and user_a_ser_atualizado_arg != 'professor' and user_a_ser_atualizado_arg != 'tutor' and user_a_ser_atualizado_arg != 'professor-tutor':
-                    user_a_ser_atualizado[0].senha = i
-                elif tam == 2 and user_a_ser_atualizado_arg != 'professor' or tam == 2 and user_a_ser_atualizado_arg != 'professor-tutor' or tam == 2 and user_a_ser_atualizado_arg != 'tutor':
-                    user_a_ser_atualizado[0].idade = i
-                #tam == 2  and user == 'eletiva': foto de fundo da eletiva
-                #tam == 3  and user != 'eletiva': foto de perfil do usuário
-                elif tam == 3 and user_a_ser_atualizado_arg != 'eletiva' or tam == 2 and user_a_ser_atualizado_arg == 'eletiva' :
-                    #se não for passada imagem nova ou se for e o input que diz se o usuário quer ou não deixar sem imagem
-                    #estiver marcado então chamará a função "checar_imagem_existente" como None
-                    if imagem != None and pergunta_imagem == 'on' or imagem == None and pergunta_imagem == 'on':
-                        user_a_ser_atualizado[0].imagem = checar_imagem_existente(None,model[1],'atualizar')
-                    #do contrário chamará a função "checar_imagem_existente" com a nova imagem 
-                    elif imagem != None and pergunta_imagem == None:
-                        user_a_ser_atualizado[0].imagem = checar_imagem_existente(imagem,model[1],'atualizar')
-                #tam == 3  and user == 'eletiva': foto dos professores
-                elif tam == 3 and user_a_ser_atualizado_arg == 'eletiva':
-                    #se for inserida uma imagem ou não e o input que diz que o usuário quer deixar sem imagem estiver marcado então chamará a função "checar_imagem_existente" como None
-                    if img_professores != None and pergunta_imagem_professores == 'on' or img_professores == None and pergunta_imagem_professores == 'on':
-                        user_a_ser_atualizado[0].img_professores_eletiva = checar_imagem_existente(None,f'img_eletivas/img_professores_eletiva','atualizar')
-                    #caso contrário chamará "checar_imagem_existente" com a nova imagem 
-                    elif img_professores != None and pergunta_imagem_professores == None:
-                        user_a_ser_atualizado[0].img_professores_eletiva = checar_imagem_existente(img_professores,f'img_eletivas/img_professores_eletiva','atualizar')
-                #na posição 4 da variável "campos_atualizados_do_user" do admin, tutor e professor-tutor esta localizado o campo diferente de "eletiva"
-                elif tam == 4 and user_a_ser_atualizado_arg != 'admin' and user_a_ser_atualizado_arg != 'tutor' and user_a_ser_atualizado_arg == 'professor-tutor':
-                    user_a_ser_atualizado[0].eletiva = i
-                #a posição 4 da variável "campos_atualizados_do_user" do admin é equivalente ao campo "acoes"
-                elif tam == 4 and user_a_ser_atualizado_arg == 'admin':
-                    user_a_ser_atualizado[0].acoes = i
-                #a posição 4 da variável "campos_atualizados_do_user" do tutor e professor-tutor é equivalente ao campo "descricao"
-                #a posição 1 da variável "campos_atualizados_do_user" da eletiva também é equivalente ao campo "descricao"
-                elif tam == 4 and user_a_ser_atualizado_arg == 'tutor' or  tam == 5 and user_a_ser_atualizado_arg == 'professor-tutor' or user_a_ser_atualizado_arg == 'eletiva' and tam == 1 or user_a_ser_atualizado_arg == 'professor' and tam == 5 :
-                    user_a_ser_atualizado[0].descricao = i
-                elif tam == 6 and user_a_ser_atualizado_arg == 'professor' or tam == 6 and user_a_ser_atualizado_arg == 'professor-tutor':
-                    user_a_ser_atualizado[0].graduacao = i
-            #aumentando o valor da variável "tam" para que seja mantido o fluxo
+            #se tam == 0 ou seja "nome"
+            if tam == 0:
+                #se for eletiva
+                if user_a_ser_atualizado_arg == 'eletiva':
+                    #muda também o nome no campo "eletiva" no models dos Professores
+                    professores = Professores.objects.filter(eletiva=str(user_a_ser_atualizado[0].titulo))
+                    # alunos = Alunos.objects.filter(eletiva=str(user_a_ser_atualizado[0].titulo))
+                    #se o tamanho desta variável for diferente de 0 é porque há professores nesta eletiva e por isso devem ser alterados
+                    if len(professores) != 0:
+                        for p in professores:
+                            p.eletiva = i
+                            p.save()
+                    #atualizando o título da eletiva
+                    user_a_ser_atualizado[0].titulo = i
+                else:
+                    #atualizando o nome do user
+                    user_a_ser_atualizado[0].nome = i
+            #pois na posicao 1 de eletivas está 'descrição'
+            elif tam == 1 and user_a_ser_atualizado_arg != 'eletiva':
+                user_a_ser_atualizado[0].email = i      
+            elif tam == 2 and user_a_ser_atualizado_arg != 'admin' and user_a_ser_atualizado_arg != 'eletiva':
+                user_a_ser_atualizado[0].idade = i 
+            elif tam == 2 and user_a_ser_atualizado_arg == 'admin':
+                user_a_ser_atualizado[0].senha = i
+            elif tam == 3 and user_a_ser_atualizado_arg == 'eletiva':
+                if dados_request['pergunta_imagem_professores'] != 'on':
+                    if i != None:
+                        user_a_ser_atualizado[0].img_professores_eletiva = checar_imagem_existente(i,'eletivas/img_professores_eletiva',None)
+                else:
+                    user_a_ser_atualizado[0].img_professores_eletiva = checar_imagem_existente(None,'eletivas/img_professores_eletiva',None)
+            elif tam == 3 and user_a_ser_atualizado_arg != 'eletiva' or tam == 2 and user_a_ser_atualizado_arg == 'eletiva':
+                if dados_request['pergunta_imagem'] != 'on':
+                    if i != None:
+                        user_a_ser_atualizado[0].imagem = checar_imagem_existente(i,model[1],None)
+                else:
+                    user_a_ser_atualizado[0].imagem = checar_imagem_existente(None,model[1],None)
+            elif tam == 4 and user_a_ser_atualizado_arg == 'admin':
+                user_a_ser_atualizado[0].acoes = i
+            elif tam == 4 and user_a_ser_atualizado_arg == 'eletiva':
+                user_a_ser_atualizado[0].link = i
+            elif tam == 4 and user_a_ser_atualizado_arg != 'eletiva' and user_a_ser_atualizado_arg != 'admin' or tam == 1 and user_a_ser_atualizado_arg == 'eletiva':
+                user_a_ser_atualizado[0].descricao = i  
+            elif tam == 5 and user_a_ser_atualizado_arg == 'tutor':
+                user_a_ser_atualizado[0].eletiva = ""
+            elif tam == 5 and user_a_ser_atualizado_arg == 'professor' or tam == 5 and user_a_ser_atualizado_arg == 'professor-tutor':
+                user_a_ser_atualizado[0].eletiva = i 
+            elif tam == 6 and user_a_ser_atualizado_arg == 'tutor':
+                user_a_ser_atualizado[0].graduacao = ""
+            elif tam == 6 and user_a_ser_atualizado_arg == 'professor' or tam == 6 and user_a_ser_atualizado_arg == 'professor-tutor':
+                user_a_ser_atualizado[0].graduacao = i
+            
             tam += 1
         #salvando as alterações efetuadas
         user_a_ser_atualizado[0].save()
@@ -211,16 +197,7 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
         #recebe o user que será atualizado
         dados['tabela'] = user_a_ser_atualizado[0]
         dados['eletivas'] = Eletivas.objects
-        dados['eletivas_para_for'] = Eletivas.objects.all().values()
-        #só se o tipo de user for um "professor" ou um "professor-tutor" será necessário verificar as eletivas
-        if user_a_ser_atualizado_arg == 'professor' or user_a_ser_atualizado_arg == 'professor-tutor':
-            #percorre os valores das eletivas
-            for i in dados['eletivas_para_for']:
-                #pega os professores que estão cadastrados na eletiva da vez
-                p = Professores.objects.filter(eletiva=i['titulo'])
-                #se for igual a 2 é porque a eletiva esta completa
-                if len(p) == 2:
-                    dados['eletivas'] = dados['eletivas'].exclude(titulo=i['titulo'])
+        dados['eletivas_para_for'] = Eletivas.objects.all().values()            
         #atualizando a variável "dados['eletivas']" para receber os valores dos objects e não os objects
         dados['eletivas'] = dados['eletivas'].values()
         #tamanho equivalente ao total de eletivas não completas
@@ -229,12 +206,19 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
         #caso o "user_a_ser_atualizado_arg" seja um admin é necessário que maque os inputs que equivalem as ações que ele pode efetuar
         if user_a_ser_atualizado_arg == 'admin':
             #passando as ações do admin para list
-            acoes_lista = campos_atigos_do_user[4].split()
+            acoes_lista = campos_atigos_do_user['acoes'].split()
             #percorrendo a lista acima
             for i in acoes_lista:
                 #checked, no html equivale a "marcado"
                 dados[f'{i}'] = 'checked'
         elif user_a_ser_atualizado_arg == 'tutor' or user_a_ser_atualizado_arg == 'professor' or user_a_ser_atualizado_arg == 'professor-tutor':
+            #percorre os valores das eletivas
+            for i in dados['eletivas_para_for']:
+                #pega os professores que estão cadastrados na eletiva da vez
+                p = Professores.objects.filter(eletiva=i['titulo'])
+                #se for igual a 2 é porque a eletiva esta completa
+                if len(p) == 2:
+                    dados['eletivas'] = dados['eletivas'].exclude(titulo=i['titulo'])
             if dados['tabela'].tutor == False and dados['tabela'].professor == True:
                 dados["tutor"] = ""
                 dados["professor"] = "checked"

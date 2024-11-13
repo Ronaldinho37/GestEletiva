@@ -25,4 +25,9 @@ def add_professor_carrossel(request):
             menssagem_var['mensagem'] = ""
         except:
             dados['message'] = ""
+        dados['tabela_user_passado_como_parametro'] = "professor"
+        dados['modo'] = 'carrossel'
+        dados['usuarios'] = Professores.objects.filter(professor=True)
         return render(request,'carrossel/carrossel.html',dados)
+    #acabar de fazer o adicionar aqui
+    

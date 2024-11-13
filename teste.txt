@@ -1,0 +1,49 @@
+[/nome,/email,/idade,/imagem,/descricao] tutor
+[/nome,/email,/idade,/imagem,/descricao,/eletiva,/graduacao] professor, professor_tutor
+[/titulo,/descricao,/imagem,/img_professores_eletiva,/link] eletiva
+[/nome,/email,/senha,/imagem,acoes] admin
+
+
+
+
+
+
+#tam == 1  and user != 'eletiva': email
+                elif tam == 1 and user_a_ser_atualizado_arg != 'eletiva':
+                    user_a_ser_atualizado[0].email = i
+                #tam == 2  and user != 'eletiva': senha
+                elif tam == 2 and user_a_ser_atualizado_arg != 'eletiva' and user_a_ser_atualizado_arg != 'professor' and user_a_ser_atualizado_arg != 'tutor' and user_a_ser_atualizado_arg != 'professor-tutor':
+                    user_a_ser_atualizado[0].senha = i
+                elif tam == 2 and user_a_ser_atualizado_arg != 'professor' or tam == 2 and user_a_ser_atualizado_arg != 'professor-tutor' or tam == 2 and user_a_ser_atualizado_arg != 'tutor':
+                    user_a_ser_atualizado[0].idade = i
+                #tam == 2  and user == 'eletiva': foto de fundo da eletiva
+                #tam == 3  and user != 'eletiva': foto de perfil do usuário
+                elif tam == 3 and user_a_ser_atualizado_arg != 'eletiva' or tam == 2 and user_a_ser_atualizado_arg == 'eletiva' :
+                    #se não for passada imagem nova ou se for e o input que diz se o usuário quer ou não deixar sem imagem
+                    #estiver marcado então chamará a função "checar_imagem_existente" como None
+                    if imagem != None and pergunta_imagem == 'on' or imagem == None and pergunta_imagem == 'on':
+                        user_a_ser_atualizado[0].imagem = checar_imagem_existente(None,model[1],'atualizar')
+                    #do contrário chamará a função "checar_imagem_existente" com a nova imagem 
+                    elif imagem != None and pergunta_imagem == None:
+                        user_a_ser_atualizado[0].imagem = checar_imagem_existente(imagem,model[1],'atualizar')
+                #tam == 3  and user == 'eletiva': foto dos professores
+                elif tam == 3 and user_a_ser_atualizado_arg == 'eletiva':
+                    #se for inserida uma imagem ou não e o input que diz que o usuário quer deixar sem imagem estiver marcado então chamará a função "checar_imagem_existente" como None
+                    if img_professores != None and pergunta_imagem_professores == 'on' or img_professores == None and pergunta_imagem_professores == 'on':
+                        user_a_ser_atualizado[0].img_professores_eletiva = checar_imagem_existente(None,f'img_eletivas/img_professores_eletiva','atualizar')
+                    #caso contrário chamará "checar_imagem_existente" com a nova imagem 
+                    elif img_professores != None and pergunta_imagem_professores == None:
+                        user_a_ser_atualizado[0].img_professores_eletiva = checar_imagem_existente(img_professores,f'img_eletivas/img_professores_eletiva','atualizar')
+                #na posição 4 da variável "campos_atualizados_do_user" do admin, tutor e professor-tutor esta localizado o campo diferente de "eletiva"
+                elif tam == 4 and user_a_ser_atualizado_arg != 'admin' and user_a_ser_atualizado_arg != 'tutor' and user_a_ser_atualizado_arg == 'professor-tutor':
+                    user_a_ser_atualizado[0].eletiva = i
+                #a posição 4 da variável "campos_atualizados_do_user" do admin é equivalente ao campo "acoes"
+                elif tam == 4 and user_a_ser_atualizado_arg == 'admin':
+                    user_a_ser_atualizado[0].acoes = i
+                #a posição 4 da variável "campos_atualizados_do_user" do tutor e professor-tutor é equivalente ao campo "descricao"
+                #a posição 1 da variável "campos_atualizados_do_user" da eletiva também é equivalente ao campo "descricao"
+                elif tam == 4 and user_a_ser_atualizado_arg == 'tutor' or  tam == 5 and user_a_ser_atualizado_arg == 'professor-tutor' or user_a_ser_atualizado_arg == 'eletiva' and tam == 1 or user_a_ser_atualizado_arg == 'professor' and tam == 5 :
+                    user_a_ser_atualizado[0].descricao = i
+                elif tam == 6 and user_a_ser_atualizado_arg == 'professor' or tam == 6 and user_a_ser_atualizado_arg == 'professor-tutor':
+                    user_a_ser_atualizado[0].graduacao = i
+            #aumentando o valor da variável "tam" para que seja mantido o fluxo
