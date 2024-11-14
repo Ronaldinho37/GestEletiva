@@ -10,18 +10,22 @@
 <body>
 
 <div class="container">
-    <h1 class="title">ADICIONAR NOVO CARROSSEL</h1>
+    <h1 class="title">ATUALIZAR CARROSSEL</h1>
 
     <div class="align">
         <form action="" method="post" enctype="multipart/form-data" onsubmit="return validarFormCarrossel()">
             {% csrf_token %}
+            <label for="">Nome do professor:</label>
             <input type="text" id="nome" name="nome" value="{{nome}}" required placeholder="Título">
+            <label for="">Idade:</label>
             <input type="number" id="idade" name="idade" value="{{idade}}" min="18" max="99" required placeholder="Idade">
+            <label for="">Graduação:</label>
             <input type="text" id="graduacao" name="graduacao" value="{{graduacao}}" required placeholder="Graduação">
-            <textarea name="descricao" id="descricao" maxlength="200" required placeholder="Descrição"></textarea>
+            <label for="">Descrição:</label>
+            <textarea name="descricao" id="descricao" maxlength="200"style="resize:none" required placeholder="Descrição"></textarea>
             
             {% if modo == 'atualizar' %}
-                <img src="../../../media/{{imagem}}" alt="Imagem atual">
+                <img src="../../../media/{{imagem}}" alt="Imagem atual"> <br>
                 <input type="checkbox" name="deixar_sem_imagem"> Deixar sem imagem
                 <input type="file" id="imagem" name="imagem">
             {% else %}
@@ -34,6 +38,7 @@
         <div class="explanation">
             <img src="../.././../media/img_fixas/logo-asn.png" alt="Logo">
             <p>Nesta área você poderá adicionar novos oferecimentos na página inicial do site, podendo definir: Uma imagem a ser apresentada, um título pequeno, uma mini descrição sobre seu oferecimento e disponibilizar o link para levar o usuário ao site desejado.</p>
+            <a href="{% url 'index'%}" style="padding: 10px; background-color:cornflowerblue; text-decoration:none; border-radius:10px; color:#fafafa">Voltar</a>
         </div>
     </div>
 </div>
