@@ -4,7 +4,7 @@ let span = document.querySelector('span[id="numero_selecionados"]')
 let tabela = document.querySelector('table[id="tabela"]').dataset.user
 let id_do_user_logado = Number(document.querySelector('table[id="tabela"]').dataset.id_do_user_logado)
 let modo = document.querySelector('div[id="table-py"]').dataset.modo
-
+console.log(modo)
 
 function adicionar_linha(x){
     if(users_a_serem_excluidos.includes(`${x.id}`) == false){
@@ -17,6 +17,9 @@ function adicionar_linha(x){
             span.innerText = users_a_serem_excluidos.length
             //adiciona uma borda vermelha
             x.style.border = "1px solid red"
+            if(modo != 'deletar'){
+                document.querySelector("input[id='ids']").value = users_a_serem_excluidos;
+            }
         }
         
     } else {
@@ -28,11 +31,13 @@ function adicionar_linha(x){
         users_a_serem_excluidos = u
         //muda a quantidade de ids no HTML, de acordo com que o usuário vai clicando
         span.innerText = users_a_serem_excluidos.length
+    }   
+}
+function adicionar_carrossel(){
+    if(users_a_serem_excluidos.length != 0){
+        document.querySelector('input[id="submit"]').click()
     }
-    if(modo == 'adicionarcarrossel'){
-        document.querySelector('input[name="ids"]').value = users_a_serem_excluidos
-    }
-   
+
 }
 
 function ir_para_o_site(){

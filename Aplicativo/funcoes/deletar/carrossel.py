@@ -11,8 +11,14 @@ def deletar_carrossel(request,id):
         sim = request.POST.get('sim')
         if sim == 'on':
             try:
-                CarrosselProfessores.objects.get(id=int(id)).delete()
-                excluir_imagem('carrosselProfessores',CarrosselProfessores.objects.all().values())
+                carrossel = CarrosselProfessores.objects.get(id=1)
+                ids_carrossel = carrossel.ids.split(',')
+                ids_finais = []
+                for i in ids_carrossel:
+                    if i != f'{id}':
+                        ids_finais.append(i)
+                carrossel.ids = ','.join(ids_finais)
+                carrossel.save()
                 menssagem_var['mensagem'] = 'Carrossel deletado'
             except:
                 menssagem_var['mensagem'] = 'Id não identificado'

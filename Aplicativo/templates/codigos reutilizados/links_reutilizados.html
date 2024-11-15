@@ -52,10 +52,10 @@
                 <li class="menu-item">
                     <a href="#" class="dropdown-btn-update dropdown-btn" data-target="contact-dropdown">Atualizar</a>
                     <ul class="dropdown-content" id="contact-dropdown">
-                        <li><a href="{% url 'update_or_delete' u_or_d='atualizar' user_a_ser_atualizado_arg='professor'%}">Atualizar  Professor</a></li>
-                        <li><a href="{% url 'update_or_delete' u_or_d='atualizar' user_a_ser_atualizado_arg='tutor'%}">Atualizar  Tutor</a></li>
-                        <li><a href="{% url 'update_or_delete' u_or_d='atualizar' user_a_ser_atualizado_arg='admin'%}">Atualizar  Admin</a></li>
-                        <li><a href="{% url 'update_or_delete' u_or_d='atualizar' user_a_ser_atualizado_arg='eletiva'%}">Atualizar  Eletiva</a></li>
+                        <li><a href="{% url 'update_or_delete' u_or_d='atualizar' user_a_ser_atualizado_arg='professor'%}" onclick="definir_para_onde_vou('atualizar','professor')">Atualizar  Professor</a></li>
+                        <li><a href="{% url 'update_or_delete' u_or_d='atualizar' user_a_ser_atualizado_arg='tutor'%}" onclick="definir_para_onde_vou('atualizar','tutor')">Atualizar  Tutor</a></li>
+                        <li><a href="{% url 'update_or_delete' u_or_d='atualizar' user_a_ser_atualizado_arg='admin'%}" onclick="definir_para_onde_vou('atualizar','admin')">Atualizar  Admin</a></li>
+                        <li><a href="{% url 'update_or_delete' u_or_d='atualizar' user_a_ser_atualizado_arg='eletiva'%}" onclick="definir_para_onde_vou('atualizar','eletiva')">Atualizar  Eletiva</a></li>
                     </ul>
                 </li>
                 {% endif %}
@@ -94,9 +94,13 @@
             sessionStorage.setItem('link',link.replace(`${window.location.protocol}//${window.location.host}`,""))
         
         }
+        function definir_para_onde_vou(acao,user){
+            link = `/area-restrita/update_or_delete/${acao}/${user}`
+            sessionStorage.setItem('link',link)
+
+        }
         window.onload = () =>{
             sessionStorage.setItem('user',`${document.querySelector("#side-nav").dataset.user}`)
-            
             // let link_antigo = sessionStorage.getItem('deslogado')
             // if(link_antigo != window.location.href && link_antigo != null && link_antigo != "null"){
             //     window.location.href = link_antigo;

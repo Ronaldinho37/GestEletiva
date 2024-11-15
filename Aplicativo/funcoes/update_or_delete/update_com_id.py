@@ -1,7 +1,8 @@
 from ...views import menssagem_var
-from ...models import Professores,Admins,Eletivas
+from ...models import Professores,Admins,Eletivas,CarrosselProfessores
 from django.shortcuts import render, redirect
 from ..funcoes_sem_url.excluir_imagem import excluir_imagem
+from ..funcoes_sem_url.para_onde_vou import para_onde_vou
 from ..funcoes_sem_url.checar_imagem import checar_imagem_existente
 from ..funcoes_sem_url.acao_requisitada import verificar_se_o_usuario_pode_realizar_a_acao_equisitada
 
@@ -72,6 +73,7 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
  
     if request.method == 'POST':
         dados_request = {}
+        link_antigo = request.POST.get('link_update')
         def definir_requests(request,campos_antigos_do_user_arg):
             for i in campos_antigos_do_user_arg:
                 if i == 'imagem' or i == 'img_professores':
@@ -93,10 +95,26 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
                 user_a_ser_atualizado[0].tutor = True
                 user_a_ser_atualizado[0].professor = False
                 user_a_ser_atualizado_arg = "tutor"
+                #já que o usuário mudou para tutor eu preciso retira-lo do carrossel de professores
+                carrossel = CarrosselProfessores.objects.get(id=1)
+                ids_do_carrossel = carrossel.ids.split(',')
+                ids_finais = []
+                for i in ids_do_carrossel:
+                    if int(i) != int(id):
+                        ids_finais.append(i)
+                carrossel.ids = ','.join(ids_finais)
+                carrossel.save()
+                        
+                
             elif professor != 'on' and tutor != 'on' and user_a_ser_atualizado_arg != 'professor-tutor':
                 user_a_ser_atualizado[0].professor = True
                 user_a_ser_atualizado[0].tutor = True
                 user_a_ser_atualizado_arg = "professor-tutor"
+            
+            link_lista = link_antigo.split('/')
+            print(link_lista)
+            link_lista[4] = user_a_ser_atualizado_arg
+            link_antigo = '/'.join(link_lista)            
                 
             campos_atigos_do_user.clear()
             campos_atigos_do_user = {'nome': user_a_ser_atualizado[0].nome,'email': user_a_ser_atualizado[0].email,'idade':user_a_ser_atualizado[0].idade,'imagem':user_a_ser_atualizado[0].imagem,'descricao':user_a_ser_atualizado[0].descricao,'eletiva':user_a_ser_atualizado[0].eletiva,'graduacao':user_a_ser_atualizado[0].graduacao}
@@ -125,9 +143,6 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
         #esta variável é quem diz qual campo esta sendo atualizado no momento, por exemplo:
         #0: nome, 1: email ...
         tam = 0
-        print(user_a_ser_atualizado_arg)
-        print(user_a_ser_atualizado[0].professor)
-        print(user_a_ser_atualizado[0].tutor)
         for i in campos_atualizados_do_user:
             #se tam == 0 ou seja "nome"
             if tam == 0:
@@ -190,7 +205,7 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
         excluir_imagem(model[1],model[0])
         #adicionado uma nova mensagem
         menssagem_var['mensagem'] = "Atualizado com sucesso!"
-        return redirect(f"/area-restrita/update_or_delete/atualizar/{user_a_ser_atualizado_arg}")
+        return para_onde_vou(request,link_antigo)
     else:
         #tipo do user a ser atualizado, o user passado como parâmetro
         dados['user_a_ser_atualizado_arg'] = user_a_ser_atualizado_arg

@@ -26,6 +26,7 @@
         {% else %}
             <label for="">Nome:</label>
             <input type="text" class="mb-3 input-group-text" name="nome" id="nome" value="{{tabela.nome}}" required>
+            <input type="text" id="link_update" name="link_update" style="display: none;">
             <label for="">Email:</label>
             <input type="email" class="mb-3 input-group-text" name="email" id="email" value="{{tabela.email}}" required>
             {% if user_a_ser_atualizado_arg  == 'professor' or user_a_ser_atualizado_arg  == 'tutor' or user_a_ser_atualizado_arg  == 'professor-tutor' %}
@@ -114,7 +115,7 @@
             } else if(valor[0] == "p"){
                 desmarcar_checkbox('professor')
             }
-            
+            document.querySelector('input[id="link_update"]').value = sessionStorage.getItem('link')
         }
     </script>
 </body>
