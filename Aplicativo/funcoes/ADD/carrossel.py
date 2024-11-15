@@ -23,6 +23,7 @@ def add_professor_carrossel(request):
         except:
             carrossel = CarrosselProfessores(id=1,ids=ids)
             carrossel.save()
+        menssagem_var['mensagem'] = "Professor adicionado ao carrossel!"
         return redirect("/eletivas")
         
     else:
