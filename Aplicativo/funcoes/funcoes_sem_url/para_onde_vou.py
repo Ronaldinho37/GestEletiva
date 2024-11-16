@@ -1,5 +1,6 @@
 from django.shortcuts import redirect
 def para_onde_vou(request,link_antigo):
+    print(link_antigo)
     link_lista = link_antigo.split("/")
     if "eletivas" in link_antigo:
         return redirect("/eletivas")

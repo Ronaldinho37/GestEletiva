@@ -23,6 +23,7 @@
     <form class="bg-light w-25 d-flex flex-column align-content-center p-3 rounded" action="{{ update_com_id }}" method="post" enctype="multipart/form-data" > {% csrf_token %}
         {% if user_a_ser_atualizado_arg  == 'eletiva' %}
             <input type="text" name="titulo" id="titulo" value="{{tabela.titulo}}" required>
+            <input type="text" id="link_update" name="link_update" style="display: none;">
         {% else %}
             <label for="">Nome:</label>
             <input type="text" class="mb-3 input-group-text" name="nome" id="nome" value="{{tabela.nome}}" required>

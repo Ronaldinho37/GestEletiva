@@ -4,7 +4,12 @@ from ..funcoes_sem_url.checar_imagem import checar_imagem_existente
 from django.shortcuts import render, redirect
 def add_professor_carrossel(request):
     dados = dados_universsais.copy()
-    carrossel = CarrosselProfessores.objects.get(id=1)
+    try:
+        carrossel = CarrosselProfessores.objects.get(id=1)
+        lista_ids = carrossel.ids.split(',')
+    except:
+        carrossel = ''
+    
     if dados['user'] != 'ADMIN':
         menssagem_var['mensagem'] = "Só o diretor pode adicionar professores ao carrossel"
         return redirect("/eletivas")
@@ -37,8 +42,9 @@ def add_professor_carrossel(request):
         dados['tabela_user_passado_como_parametro'] = "professor"
         dados['modo'] = 'carrossel'
         dados['usuarios'] = Professores.objects.filter(professor=True)
-        for i in carrossel.ids.split(','):
-            dados['usuarios'] = dados['usuarios'].exclude(id=int(i))    
+        if carrossel != '':
+            for i in lista_ids:
+                dados['usuarios'] = dados['usuarios'].exclude(id=int(i))    
         return render(request,'carrossel/carrossel.html',dados)
     #acabar de fazer o adicionar aqui
     

@@ -1,5 +1,5 @@
 from ...views import dados_universsais,menssagem_var
-from ...models import Professores,Admins,Eletivas,OqueTemosaOferecer
+from ...models import Professores,Admins,Eletivas,OqueTemosaOferecer,CarrosselProfessores
 from ..funcoes_sem_url.excluir_imagem import excluir_imagem
 from ..funcoes_sem_url.acao_requisitada import verificar_se_o_usuario_pode_realizar_a_acao_equisitada
 from django.shortcuts import render, redirect
@@ -22,7 +22,6 @@ def deletar_com_ids(request,user_a_ser_atualizado_arg,id):
                 if int(i) == id_do_user_logado:
                     menssagem_var['mensagem'] = "Você não pode se auto deletar!"
                     return redirect(f"/area-restrita/update_or_delete/deletar/{user_a_ser_atualizado_arg}")
-        
         if request.method == 'POST':
             #pegando os valores dos inputs do html
             sim = request.POST.get('sim')
@@ -54,7 +53,7 @@ def deletar_com_ids(request,user_a_ser_atualizado_arg,id):
                         except:
                             menssagem_var['mensagem'] = 'Id não encontrado'
                         return redirect("/")
-                elif user_a_ser_atualizado_arg == "professor" or user_a_ser_atualizado_arg == "tutor":
+                elif user_a_ser_atualizado_arg == "professor" or user_a_ser_atualizado_arg == "professor-tutor" or user_a_ser_atualizado_arg == "tutor":
                     dados['model_user'] = Professores.objects.all().values()
                     dados['diretorio_user'] = "imagem_professores"
                     #se o user for tutor
@@ -77,6 +76,7 @@ def deletar_com_ids(request,user_a_ser_atualizado_arg,id):
                                     Professores.objects.get(id=i).delete()
                                 except:
                                      #se não conseguir saía daqui
+                                    menssagem_var['mensagem'] = 'Id não encontrado'
                                     return redirect(f"/area-restrita/update_or_delete/deletar/{user_a_ser_atualizado_arg}")
                     else:
                         dados['user'] = 'professor(es)'
@@ -93,6 +93,16 @@ def deletar_com_ids(request,user_a_ser_atualizado_arg,id):
                             else:
                                 try:
                                     Professores.objects.get(id=i).delete()
+                                    carrossel = CarrosselProfessores.objects.get(id=1)
+                                    ids_carrossel = carrossel.ids.split(',')
+                                    ids_finais_lista = []
+                                    for idc in ids_carrossel:
+                                        idcI = int(idc)
+                                        if idcI != int(i):
+                                            ids_finais_lista.append(str(idcI))
+                                    ids_finais_string = ','.join(ids_finais_lista)
+                                    carrossel.ids = ids_finais_string
+                                    carrossel.save()
                                 except:
                                     return redirect(f"/area-restrita/update_or_delete/deletar/{user_a_ser_atualizado_arg}")
                 #se o user passado como parâmetro for igual a eletiva

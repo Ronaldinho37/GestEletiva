@@ -96,14 +96,17 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
                 user_a_ser_atualizado[0].professor = False
                 user_a_ser_atualizado_arg = "tutor"
                 #já que o usuário mudou para tutor eu preciso retira-lo do carrossel de professores
-                carrossel = CarrosselProfessores.objects.get(id=1)
-                ids_do_carrossel = carrossel.ids.split(',')
-                ids_finais = []
-                for i in ids_do_carrossel:
-                    if int(i) != int(id):
-                        ids_finais.append(i)
-                carrossel.ids = ','.join(ids_finais)
-                carrossel.save()
+                try: 
+                    carrossel = CarrosselProfessores.objects.get(id=1)
+                    ids_do_carrossel = carrossel.ids.split(',')
+                    ids_finais = []
+                    for i in ids_do_carrossel:
+                        if int(i) != int(id):
+                            ids_finais.append(i)
+                    carrossel.ids = ','.join(ids_finais)
+                    carrossel.save()
+                except:
+                    carrossel='Linha só para o código funcionar'
                         
                 
             elif professor != 'on' and tutor != 'on' and user_a_ser_atualizado_arg != 'professor-tutor':
@@ -127,6 +130,7 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
         elif user_a_ser_atualizado_arg == 'eletiva':
                     #caso seja eletivas eu preciso saber se o usuário quer deixar sem imagens ou não
             dados_request['pergunta_imagem_professores'] = request.POST.get('pergunta_imagem_professores')
+            definir_requests(request,campos_atigos_do_user)
             campos_atualizados_do_user = [dados_request['titulo'],dados_request['descricao'],dados_request['imagem'],dados_request['img_professores'],dados_request['link']]
         elif user_a_ser_atualizado_arg == 'admin':
             #checkboxes do admin
@@ -137,6 +141,7 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
                 checkbox = request.POST.get(i)
                 if checkbox == 'on':
                     acoes_permitidas += f' {i}'
+            definir_requests(request,campos_atigos_do_user)
             #atualizando a variável "campos_atualizados_do_user"
             campos_atualizados_do_user = [dados_request['nome'],dados_request['email'],dados_request['senha'],dados_request['imagem'],acoes_permitidas]
         
@@ -160,7 +165,7 @@ def update_com_id(request,user_a_ser_atualizado_arg,id):
                     user_a_ser_atualizado[0].titulo = i
                 else:
                     #atualizando o nome do user
-                    user_a_ser_atualizado[0].nome = i
+                    user_a_ser_atualizado[0].nome = i.lower()
             #pois na posicao 1 de eletivas está 'descrição'
             elif tam == 1 and user_a_ser_atualizado_arg != 'eletiva':
                 user_a_ser_atualizado[0].email = i      
