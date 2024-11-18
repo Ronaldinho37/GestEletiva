@@ -123,11 +123,11 @@ input:checked + .slider:before {
 }
 
 .card{
-    
     background-color: #000;
     border-radius: 56px;
     width: 423px;
     height: 578px;
+    transition:.8s;
 }
 
 .card-header{
@@ -145,8 +145,8 @@ input:checked + .slider:before {
 }
 
 .circle{
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background-color: #D4E6F0;
     display: inline;
@@ -255,88 +255,6 @@ input:checked + .slider:before {
     z-index: 2;
 }
 
-@keyframes rotatePlus {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes moveMinus {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(100px); }
-    100% { transform: translateX(0); }
-}
-
-@keyframes bounceAtom {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-30px); }
-}
-
-@keyframes spinFormula {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(-360deg); }
-}
-
-@keyframes swingAmphora {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(-15deg); }
-    50% { transform: rotate(0deg); }
-    75% { transform: rotate(15deg); }
-    100% { transform: rotate(0deg); }
-}
-
-.plus-sign, .minus-sign, .atom, .formula, .globe, .amphora {
-    position: absolute;
-    opacity: 0.8;
-    pointer-events: none;
-}
-
-.plus-sign {
-    font-size: 100px;
-    color: #3498db;
-    top:-80%;
-    left: 10%;
-    animation: rotatePlus 5s linear infinite;
-}
-
-.minus-sign {
-    font-size: 50px;
-    color: #e74c3c;
-    top: -30%;
-    left: 20%;
-    animation: moveMinus 3s ease-in-out infinite;
-}
-
-.atom {
-    font-size: 80px;
-    color: #f1c40f;
-    top: -60%;
-    right: 20%;
-    animation: bounceAtom 2s ease-in-out infinite;
-}
-
-.formula {
-    font-size: 50px;
-    color: #2ecc71;
-    top: 70%;
-    right: 10%;
-    animation: spinFormula 4s linear infinite;
-}
-
-.globe {
-    font-size: 120px;
-    color: #3498db;
-    top:70%;
-    left: 10%;
-    animation: spinGlobe 6s linear infinite;
-}
-
-.amphora {
-    font-size: 50px;
-    color: #8e44ad;
-    top: 10%;
-    left: 90%;
-    animation: swingAmphora 3s ease-in-out infinite;
-}
 
 
 .cursor {
@@ -392,9 +310,10 @@ input:checked + .slider:before {
     
         background-color: #000;
         border-radius: 56px;
-        width: 423px;
-        height: 578px;
+        width: 523px;
+        height: 678px;
         margin-top:20px ;
+        transition:.8s;
     }
 }
 
@@ -402,10 +321,15 @@ input:checked + .slider:before {
     .card{
         background-color: #000;
         border-radius: 56px;
-        width: 323px;
-        height: 478px;
+        width: 523px;
+        height: 678px;
         margin-top: 24px;
+        transition:.8s;
 
+    }
+
+    .card img{
+        transition:.8s;
     }
 
     .formula {
@@ -436,8 +360,8 @@ input:checked + .slider:before {
     }
 
     .circle{
-        width: 650px;
-        height: 40px;
+        width: 60px;
+        height:60px;
         border-radius: 50%;
         background-color: #D4E6F0;
         display: inline;
