@@ -42,6 +42,7 @@ def eletivas(request):
 
     if carrossel != '':
         for i in lista_ids:
-            professor_carrossel = Professores.objects.get(id=int(i))
-            dados['carrossel'].append(professor_carrossel)
+            if i != '':
+                professor_carrossel = Professores.objects.get(id=int(i))
+                dados['carrossel'].append(professor_carrossel)
     return render(request,'eletiva/eletivas.html',dados)
