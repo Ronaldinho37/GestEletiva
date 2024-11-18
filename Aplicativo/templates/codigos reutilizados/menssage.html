@@ -101,9 +101,6 @@
         justify-content: center;
         border-radius: 10px;
         animation: slideDown 0.5s forwards; /* Animação para aparecer */
-        position: fixed; /* Torna a div fixa */
-        top: 10px; /* Ajuste a posição vertical conforme necessário */
-        left: 45%; /* Centraliza horizontalmente */
         transform: translateX(-50%); /* Ajuste para centralizar corretamente */
         z-index: 1000; /* Garante que a div fique sobre outros elementos */
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
@@ -119,6 +116,11 @@
     .log {
         display: flex;
         justify-content: center;
+        align-items: center;
+        height: 80px;
+        width: 100vw;
+        position: absolute;
+        top: 28px;
     }
 </style>
 {% if message != '' %}

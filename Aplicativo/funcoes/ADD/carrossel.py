@@ -42,9 +42,10 @@ def add_professor_carrossel(request):
         dados['tabela_user_passado_como_parametro'] = "professor"
         dados['modo'] = 'carrossel'
         dados['usuarios'] = Professores.objects.filter(professor=True)
-        if carrossel != '':
+        if carrossel != '' and carrossel.ids != '':
             for i in lista_ids:
-                dados['usuarios'] = dados['usuarios'].exclude(id=int(i))    
+                if i != '':
+                    dados['usuarios'] = dados['usuarios'].exclude(id=int(i))    
         return render(request,'carrossel/carrossel.html',dados)
     #acabar de fazer o adicionar aqui
     

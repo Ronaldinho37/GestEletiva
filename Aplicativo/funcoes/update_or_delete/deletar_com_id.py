@@ -54,6 +54,19 @@ def deletar_com_ids(request,user_a_ser_atualizado_arg,id):
                             menssagem_var['mensagem'] = 'Id não encontrado'
                         return redirect("/")
                 elif user_a_ser_atualizado_arg == "professor" or user_a_ser_atualizado_arg == "professor-tutor" or user_a_ser_atualizado_arg == "tutor":
+                    def deletar_professor_no_carrossel(id_do_professor):
+                        carrossel = CarrosselProfessores.objects.get(id=1)
+                        ids_carrossel = carrossel.ids.split(',')
+                        ids_finais_lista = []
+                        for idc in ids_carrossel:
+                            if idc != '':
+                                idcI = int(idc)
+                                if idcI != int(id_do_professor):
+                                    ids_finais_lista.append(str(idcI))
+                        ids_finais_string = ','.join(ids_finais_lista)
+                        carrossel.ids = ids_finais_string
+                        carrossel.save()
+                    
                     dados['model_user'] = Professores.objects.all().values()
                     dados['diretorio_user'] = "imagem_professores"
                     #se o user for tutor
@@ -73,7 +86,11 @@ def deletar_com_ids(request,user_a_ser_atualizado_arg,id):
                             else:
                                  #tente pegar o object de id = i e delete-o
                                 try:
-                                    Professores.objects.get(id=i).delete()
+                                    professor = Professores.objects.get(id=i)
+                                    if professor.professor == True:
+                                        deletar_professor_no_carrossel(id_do_professor=i)
+                                    professor.delete()
+                                    
                                 except:
                                      #se não conseguir saía daqui
                                     menssagem_var['mensagem'] = 'Id não encontrado'
@@ -93,16 +110,7 @@ def deletar_com_ids(request,user_a_ser_atualizado_arg,id):
                             else:
                                 try:
                                     Professores.objects.get(id=i).delete()
-                                    carrossel = CarrosselProfessores.objects.get(id=1)
-                                    ids_carrossel = carrossel.ids.split(',')
-                                    ids_finais_lista = []
-                                    for idc in ids_carrossel:
-                                        idcI = int(idc)
-                                        if idcI != int(i):
-                                            ids_finais_lista.append(str(idcI))
-                                    ids_finais_string = ','.join(ids_finais_lista)
-                                    carrossel.ids = ids_finais_string
-                                    carrossel.save()
+                                    deletar_professor_no_carrossel(id_do_professor=i)
                                 except:
                                     return redirect(f"/area-restrita/update_or_delete/deletar/{user_a_ser_atualizado_arg}")
                 #se o user passado como parâmetro for igual a eletiva
@@ -133,6 +141,7 @@ def deletar_com_ids(request,user_a_ser_atualizado_arg,id):
                 menssagem_var['mensagem'] = "selecione um dos valores"
                 return redirect(deletar_com_ids, user_a_ser_atualizado_arg=user_a_ser_atualizado_arg,id=id)
             else:
+                menssagem_var['mensagem'] = ""
                 return redirect(f"/area-restrita/update_or_delete/deletar/{user_a_ser_atualizado_arg}")
             
             excluir_imagem(dados['diretorio_user'],dados['model_user'])
