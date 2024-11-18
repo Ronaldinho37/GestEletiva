@@ -2,7 +2,7 @@
 <label for="descricao">Descrição</label>
     {% if user_a_ser_atualizado_arg  == 'eletiva' %}
         <textarea name="descricao" id="descricao" required maxlength="150" rows="15" placeholder="Max-Lenght:150">{{tabela.descricao}}</textarea>
-    {% elif user_a_ser_atualizado_arg  == 'tutor' or user_a_ser_atualizado_arg  == 'professor-tutor' %}
-        <textarea name="descricao" id="descricao" required maxlength="100" rows="10" placeholder="Max-Lenght:100">{{tabela.descricao}}</textarea>
+    {% else %}
+        <textarea name="descricao" id="descricao" required maxlength="1000" placeholder="Max-Lenght:1000">{{tabela.descricao}}</textarea>
     {% endif %}
 {% endblock %}

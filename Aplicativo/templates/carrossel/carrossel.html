@@ -5,55 +5,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Definir Carrossel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/Caro_Add.css' %}">
 </head>
 <body>
 
-<div class="container">
-    <h1 class="title">ATUALIZAR CARROSSEL</h1>
-
-    <div class="align">
-        <form action="" method="post" enctype="multipart/form-data" onsubmit="return validarFormCarrossel()">
-            {% csrf_token %}
-            <label for="">Nome do professor:</label>
-            <input type="text" id="nome" name="nome" value="{{nome}}" required placeholder="Título">
-            <label for="">Idade:</label>
-            <input type="number" id="idade" name="idade" value="{{idade}}" min="18" max="99" required placeholder="Idade">
-            <label for="">Graduação:</label>
-            <input type="text" id="graduacao" name="graduacao" value="{{graduacao}}" required placeholder="Graduação">
-            <label for="">Descrição:</label>
-            <textarea name="descricao" id="descricao" maxlength="200"style="resize:none" required placeholder="Descrição"></textarea>
-            
-            {% if modo == 'atualizar' %}
-                <img src="../../../media/{{imagem}}" alt="Imagem atual"> <br>
-                <input type="checkbox" name="deixar_sem_imagem"> Deixar sem imagem
-                <input type="file" id="imagem" name="imagem">
-            {% else %}
-                <input type="file" id="imagem" name="imagem" required>
-            {% endif %}
-
-            <input type="submit" value="Enviar">
-        </form>
-
-        <div class="explanation">
-            <img src="../.././../media/img_fixas/logo-asn.png" alt="Logo">
-            <p>Nesta área você poderá adicionar novos oferecimentos na página inicial do site, podendo definir: Uma imagem a ser apresentada, um título pequeno, uma mini descrição sobre seu oferecimento e disponibilizar o link para levar o usuário ao site desejado.</p>
-            <a href="{% url 'index'%}" style="padding: 10px; background-color:cornflowerblue; text-decoration:none; border-radius:10px; color:#fafafa">Voltar</a>
+    <div id="table-py"  style="font-family:Poppins;" data-modo="{{modo}}">
+        <div id="form-div " class="d-flex flex-column justify-content-center align-items-center mb-4" >
+    
+    
+    
+            <style>
+                ::-webkit-scrollbar{
+                    display: none;
+                }
+            </style>
+    
+            <div id="text-del">
+                <h2 class="text-center mb-4 p-3  m-3 rounded text-warning" style="background-color: rgb(8, 83, 196);"><span style="text-transform: uppercase;">{{modo}}</span> {{tabela_user_passado_como_parametro}}</h2>
+            </div>
+    
+            <div style="position: absolute; top:18%;" class="bg-warning p-2 rounded" id="text-area-res">
+                <h5>Area Restrita</h5>
+            </div>
+    
+            <div id="div-alert-tables" class=" rounded d-flex align-items-center flex-column p-3  shadow-lg" style="background-color: rgb(8, 83, 196); margin:5% 0%;">
+                <img src="../../../media/img_fixas/logo-asn.png" alt="" width="180">
+                <h1 class="text-white">ATENÇÃO!!!</h1>
+                <p  class="text-white" style="text-align: center;" id="p_aviso"><br> 
+                Selecione o usuário que deseja adicionar</p>
+    
+            </div>
+    
+            <label for="ordem">Procurar por:</label>
+            <input type="text" id="ordem" name="ordem" onkeyup="pesquisar(this)">
+            <label for="coluna"> na coluna</label>
+            <select name="coluna" id="coluna">
+                <option value="id" selected>id</option>
+                <option value="nome">nome</option>
+                <option value="email">email</option>
+                <option value="idade">idade</option>
+                <option value="eletiva">eletiva</option>
+            </select>
+            <h3>Selecionados: <span id="numero_selecionados">0</span></h3>
+            <form action="" method="post" style="display: none;">{% csrf_token %}
+                <input type="text" id="ids" name="ids">
+                <input type="submit" value="enviar" id="submit">
+            </form>
+            <button onclick="adicionar_carrossel()" class="bg-danger rounded" style="margin: 0;">Adicionar</button>
+            <div id="text-professores" class="bg-primary p-2 my-3 text-warning rounded">
+                <h3>Professores</h3>
+            </div>
         </div>
+        <table id="tabela" class="table table-hover" data-user="{{tabela_user_passado_como_parametro}}" data-id_do_user_logado="None">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Idade</th>
+                <th scope="col">Eletiva</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in usuarios %}
+                    <tr id="{{i.id}}" onclick="adicionar_linha(this)">
+                        <th scope="row" class="id" data-id="{{i.id}}">{{i.id}}</th>
+                        <td class="nome" data-id="{{i.id}}">{{i.nome}}</td>
+                        <td class="email" data-id="{{i.id}}">{{i.email}}</td>
+                        <td class="idade" data-id="{{i.id}}">{{i.idade}}</td>
+                        <td class="eletiva" data-id="{{i.id}}">{{i.eletiva}}</td>                  
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
     </div>
-</div>
-
     <script src="{% static 'js/acoes_tabela.js' %}"></script>
     <script src="{% static 'js/acao_tabela_pesquisar.js' %}"></script>
-    <script>
-        function validarFormCarrossel() {
-            let ids = String(document.querySelector('input[name="ids"]').value).split(',')
-            if(ids.length === 3) {
-                return true;
-            }
-            document.querySelector('h3[id="selecione"]').style.color = "red";
-            return false;
-        }
-    </script>
+  
 </body>
 </html>

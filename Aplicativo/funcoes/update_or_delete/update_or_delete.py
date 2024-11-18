@@ -11,7 +11,7 @@ def update_or_delete(request,u_or_d,user_a_ser_atualizado_arg):
 
     if verificar_se_o_usuario_pode_realizar_a_acao_equisitada(request,f'{u_or_d}') == True:
         return redirect("/")
-   
+
     dados = dados_universsais.copy()
     #esta variável nos dirá qual tabela deverá ser usada no html
     dados['tabela_user_passado_como_parametro'] = user_a_ser_atualizado_arg

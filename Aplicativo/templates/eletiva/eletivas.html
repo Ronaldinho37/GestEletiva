@@ -31,7 +31,7 @@
             <div class="card-container"> <!-- Removido d-flex para usar grid -->
             {% for i in eletivas %}
                 <div class="m-2" style="max-width: calc(33.33% - 1rem);"> <!-- Limita a 3 cards por linha -->
-                    <div class="card-1" data-materia="{{i.titulo}}" data-id="{{i.id}}" onmouseenter="entrou(this)" onmouseleave="saiu(this)">
+                    <div class="card-1" data-materia="{{i.titulo}}" data-id="{{i.id}}" >
                         <div class="top-section" style="background-image: url('../../../media/{{i.imagem}}');">
                             <img src="../../../media/{{i.img_professores_eletiva}}" alt="Wilmeika and Juliano">
                         </div>
@@ -40,7 +40,7 @@
                             <h2>{{todos_professores|pesquisar_professor:i.titulo}}</h2>
                             <p>{{i.descricao}}</p>
                         </div>
-                        <button onclick="vai(this)" data-link="{{i.link}}">Escolher</button>
+                        <button data-link="{{i.link}}" class="nova_aba">Escolher</button>
                     </div>
                 </div>
             {% endfor %}
@@ -142,7 +142,7 @@
                         <li><strong>Graduações:</strong> {{i.graduacao}}</li>
                         <li><strong>Descrição:</strong> {{i.descricao}}</li>
                         {% if user == 'ADMIN' %}
-                        <li><a href="{% url 'atualizar_carrossel' id=i.id %}">Atualizar</a></li>
+                        <li><a onclick="definir_pagina_antiga()" href="{% url 'update_com_id' user_a_ser_atualizado_arg='professor' id=i.id %}">Atualizar</a></li>
                         <li><a href="{% url 'deletar_carrossel' id=i.id %}">Deletar</a></li>
                         {% endif %}
                     </ul>
@@ -163,12 +163,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     
     <script>
-        function vai(x){
-            window.location.href = `${x.dataset.link}`
-        }
-    </script>
 
-    <script>
 function openProfessorModal(imageSrc, professorName,idDaDescricao) {
     // Define a imagem e o nome do professor no modal
     document.getElementById("modalProfessorImage").src = imageSrc;
@@ -205,7 +200,7 @@ document.querySelectorAll(".carousel-item img").forEach(img => {
 
     </script>
 
-    <script src="{% static 'js/mouse_funcoes.js' %}"></script>
+    <script src="{% static 'js/nova_aba.js' %}"></script>
     <script src="{% static 'js/links_reutilizados.js' %}"></script>
     <script src="{% static 'js/eletiva.js' %}"></script>
     <script src="https://unpkg.com/scrollreveal"></script>

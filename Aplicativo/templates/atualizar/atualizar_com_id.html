@@ -18,18 +18,27 @@
 
     </style>
 </head>
-<body class="d-flex justify-content-center align-content-center " style="margin-top:4%">
+<body class="d-flex justify-content-center align-content-center " style="margin-top:4%" data-user="{{user_a_ser_atualizado_arg}} ">
  
     <form class="bg-light w-25 d-flex flex-column align-content-center p-3 rounded" action="{{ update_com_id }}" method="post" enctype="multipart/form-data" > {% csrf_token %}
         {% if user_a_ser_atualizado_arg  == 'eletiva' %}
             <input type="text" name="titulo" id="titulo" value="{{tabela.titulo}}" required>
+            <input type="text" id="link_update" name="link_update" style="display: none;">
         {% else %}
             <label for="">Nome:</label>
             <input type="text" class="mb-3 input-group-text" name="nome" id="nome" value="{{tabela.nome}}" required>
+            <input type="text" id="link_update" name="link_update" style="display: none;">
             <label for="">Email:</label>
             <input type="email" class="mb-3 input-group-text" name="email" id="email" value="{{tabela.email}}" required>
-            <label for="">Senha:</label>
-            <input type="password" class="mb-3 input-group-text" name="senha" id="senha" value="{{tabela.senha}}" required>
+            {% if user_a_ser_atualizado_arg  == 'professor' or user_a_ser_atualizado_arg  == 'tutor' or user_a_ser_atualizado_arg  == 'professor-tutor' %}
+                <label for="">Idade:</label>
+                <input type="number" class="mb-3 input-group-text" name="idade" id="idade" value="{{tabela.idade}}" required>
+                <label for="" class="atributos_professor">Graduação:</label>
+                <input type="text" class="mb-3 input-group-text atributos_professor" name="graduacao" id="graduacao" value="{{tabela.graduacao}}">
+            {% else %}
+                <label for="">Senha:</label>
+                <input type="password" class="mb-3 input-group-text" name="senha" id="senha" value="{{tabela.senha}}" required>
+            {% endif %}
         {% endif %}
         
         <div style="display: flex; flex-direction: column; align-items: center; margin-top: 50px;">
@@ -39,7 +48,7 @@
             <label class="pb-2" for="pergunta">Deixar sem imagem?</label>
             <input type="checkbox" class="radio" name="pergunta_imagem" id="">
         </div>
-        {% if user_a_ser_atualizado_arg == 'aluno' or user_a_ser_atualizado_arg == 'professor' or user_a_ser_atualizado_arg == 'professor-tutor'%}
+        {% if user_a_ser_atualizado_arg == 'aluno' or user_a_ser_atualizado_arg == 'tutor' or user_a_ser_atualizado_arg == 'professor' or user_a_ser_atualizado_arg == 'professor-tutor'%}
             {% include 'atualizar/atualizar_professor.html' %}
             {% block eletiva %}
             {% endblock %}
@@ -53,7 +62,7 @@
             {% block acoes_do_admin %}
             {% endblock %}
         {% endif %}
-        {% if user_a_ser_atualizado_arg == 'tutor' or user_a_ser_atualizado_arg == 'eletiva' or user_a_ser_atualizado_arg == 'professor-tutor' %}
+        {% if user_a_ser_atualizado_arg == 'tutor' or user_a_ser_atualizado_arg == 'eletiva' or user_a_ser_atualizado_arg == 'professor' or user_a_ser_atualizado_arg == 'professor-tutor' %}
             {% include 'atualizar/atualizar_tutor.html' %}
             {% block descricao %}
             {% endblock %}
@@ -61,10 +70,54 @@
                 {% include 'atualizar/atualizar_eletiva.html' %}
                 {% block eletiva_da_eletiva %}
                 {% endblock %}
+            {% else %}
+            <div>
+                <p id="aviso"></p>
+                <label for="professor">Professor</label>
+                <input type="checkbox" class="check" onclick="desmarcar_checkbox(this.name)" name="professor" id="professor" {{professor}} >
+                <label for="professor-tutor">Professor-Tutor</label>
+                <input type="checkbox" class="check" onclick="desmarcar_checkbox(this.name)" name="professor-tutor" id="professor-tutor" {{professor_tutor}}>
+                <label for="tutor">Tutor</label>
+                <input type="checkbox" class="check" onclick="desmarcar_checkbox(this.name)" name="tutor" id="tutor" {{tutor}}>
+            </div>
             {% endif %}
         {% endif %}
 
         <input type="submit" class="btn btn-success m-3" value="atualizar">
     </form>
+    <script>
+        let aviso = document.querySelector("#aviso");
+        function desmarcar_checkbox(x){
+            let atributos_professores = document.getElementsByClassName('atributos_professor');
+            let inputs = document.getElementsByClassName('check')
+            for(i of inputs){
+                if(i.name != x){
+                    i.checked = false;
+                } else {
+                    i.checked = true;
+                }
+            }
+            if (x == "professor" || x == "professor-tutor"){
+                for(i of atributos_professores){
+                    i.style.display = "";
+                }
+            } else {
+                for(i of atributos_professores){
+                    i.style.display = "none";
+                }
+            }
+        }
+        window.onload = () =>{
+            let valor = String(document.querySelector('body').dataset.user);
+            if(valor[0] == "t"){
+                desmarcar_checkbox('tutor')
+            } else if(valor[10] == "t"){
+                desmarcar_checkbox('professor-tutor')
+            } else if(valor[0] == "p"){
+                desmarcar_checkbox('professor')
+            }
+            document.querySelector('input[id="link_update"]').value = sessionStorage.getItem('link')
+        }
+    </script>
 </body>
 </html>

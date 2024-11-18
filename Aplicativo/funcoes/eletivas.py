@@ -33,5 +33,15 @@ def eletivas(request):
         menssagem_var['mensagem'] = ""
     except:
         dados['message'] = ""
-    dados['carrossel'] = CarrosselProfessores.objects.all().values()
+    dados['carrossel'] = []
+    try:
+        carrossel = CarrosselProfessores.objects.get(id=1).ids
+        lista_ids = carrossel.split(',')
+    except:
+        carrossel = ''
+
+    if carrossel != '':
+        for i in lista_ids:
+            professor_carrossel = Professores.objects.get(id=int(i))
+            dados['carrossel'].append(professor_carrossel)
     return render(request,'eletiva/eletivas.html',dados)

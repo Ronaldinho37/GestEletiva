@@ -17,7 +17,8 @@ class Professores(models.Model):
     eletiva = models.CharField(max_length=100,null=True, blank=False)
     nome = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
-    senha = models.CharField(max_length=100)
+    idade = models.IntegerField()
+    graduacao = models.CharField(max_length=100,null=True, blank=False)
     #remover linha
     imagem = models.FileField(upload_to='imagem_professores', null=True, blank=False)
     #remover linha
@@ -25,7 +26,7 @@ class Professores(models.Model):
     #remover linha
     tutor = models.BooleanField(null=True, blank=False)
     #remover linha
-    descricao = models.CharField(max_length=100,null=True, blank=False)
+    descricao = models.CharField(max_length=1000,null=True, blank=False)
 
 class Admins(models.Model):
     nome = models.CharField(max_length=100)
@@ -69,10 +70,6 @@ class OqueTemosaOferecer(models.Model):
     titulo_do_link = models.CharField(max_length=100)
 
 class CarrosselProfessores(models.Model):
-    nome = models.CharField(max_length=100)
-    idade = models.IntegerField()
-    graduacao = models.CharField(max_length=100)
-    imagem = models.FileField(upload_to="carrosselProfessores/")
-    descricao = models.TextField(max_length=200)
+    ids = models.TextField(max_length=2000)
     
     
