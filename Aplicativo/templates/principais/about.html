@@ -12,7 +12,24 @@
 </head>
 
 <body style="background: linear-gradient(135deg, #fff, #fafafa);">
-
+    <style>
+        .profile-pic {
+            width: 50px; /* Tamanho da bolinha */
+            height: 50px;
+            background-color: red; /* Cor de fundo */
+            border-radius: 50%; /* Forma de círculo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Garante que a imagem não ultrapasse os limites */
+        }
+    
+        .profile-pic img {
+            width: 100%; /* Adapta a imagem ao tamanho do círculo */
+            height: 100%;
+            object-fit: cover; /* Garante que a imagem fique ajustada */
+        }
+    </style>
     
     {% include 'codigos reutilizados/links_reutilizados.html' %}
     {% block links %}
@@ -30,19 +47,19 @@
             <div class="carousel-container">
                 <div class="carousel">
                     <div class="carousel-item">
-                        <img src=".././../../media/img_fixas/literatura.png" alt="Slide 1">
+                        <img src=".././../../media/img_fixas/asn 1977.jpeg" alt="Slide 1">
                     </div>
                     <div class="carousel-item">
-                        <img src=".././../../media/img_fixas/literatura.png" alt="Slide 2">
+                        <img src=".././../../media/img_fixas/asn 2017.jpeg" alt="Slide 2">
                     </div>
                     <div class="carousel-item">
-                        <img src=".././../../media/img_fixas/literatura.png" alt="Slide 3">
+                        <img src=".././../../media/img_fixas/Professores.jpg" alt="Slide 3">
                     </div>
                     <div class="carousel-item">
-                        <img src=".././../../media/img_fixas/literatura.png" alt="Slide 4">
+                        <img src=".././../../media/img_fixas/asnnovo.PNG" alt="Slide 4">
                     </div>
                     <div class="carousel-item">
-                        <img src=".././../../media/img_fixas/literatura.png" alt="Slide 5">
+                        <img src=".././../../media/img_fixas/asn.HEIC" alt="Slide 5">
                     </div>
                 </div>
                 <button class="carousel-button prev">&lt;</button>
@@ -52,12 +69,7 @@
         </div>
         <br>
         <br>
-        <p>A Escola Estadual ANTONIO DOS SANTOS NEVES é uma instituição comprometida com a formação integral dos estudantes, 
-            promovendo a construção do conhecimento, o desenvolvimento de valores éticos e a preparação para o exercício da cidadania.
-             Atendendo alunos de diferentes faixas etárias e contextos sociais, a escola se destaca pela inclusão, inovação pedagógica e busca 
-             constante pela excelência no ensino.
-
-        </p></div></div>
+        <p>A EEEFM Antônio dos Santos Neves foi fundada em 1977 e está localizada na Avenida Democrata, no Centro de Boa Esperança, ES. Oferece ensino fundamental, médio, EJA e educação profissional, atendendo cerca de 1.300 alunos em três turnos. A escola possui 16 salas de aula, laboratórios de informática, biblioteca, quadra poliesportiva e sala de recursos para atendimento especializado. Seu compromisso está na inclusão e na qualidade do ensino, promovendo cidadania e inovação educacional. </p></div></div>
     </section>
 <br><br>
     <section>
@@ -130,15 +142,15 @@
 
             <div class="pri">
             <h2>+550 </h2>
-            <p>Matriculas</p>
+            <p>Matrículas</p>
         </div>
             <div class="sec">
                 <h2>+90% </h2>
-                <p>De participação dos alunos no enem</p>
+                <p>De participação dos alunos no ENEM</p>
             </div>
             <div class="ter">
                 <h2>1º Lugar</h2>
-                <p>Na sre de nova venecia</p>
+                <p>Na SRE de Nova Venécia</p>
             </div>
         </div>
     </div>
@@ -198,20 +210,15 @@
         <div class="box" style="width: 474px;">
             <h2>Valores</h2>
             <p>
-                <li>Inclusão e Diversidade</li>
-                <li>Compromisso com o Ensino</li>
-                <li>Ética e Respeito</li>
-                <li>Sustentabilidade</li>
-                <li>Colaboração e Participação</li>
-
+                Os valores da EEEFM Antônio dos Santos Neves incluem qualidade no ensino, criatividade, inovação e excelência. A escola busca desenvolver o potencial dos alunos em um ambiente acolhedor, promovendo o respeito mútuo e incentivando o trabalho em equipe. Seu compromisso é com a inclusão, cidadania e educação integral, formando indivíduos preparados para os desafios sociais e profissionais.
             </p>
         </div>
         <div class="box" style="    height: 136%;">
             <h2>Missão</h2>
-            <p>Proporcionar uma educação pública de qualidade que prepare os estudantes para os desafios do mundo contemporâneo, promovendo o respeito, a ética, e a autonomia, e fortalecendo o papel da escola como agente transformador da sociedade.</div>
+            <p>A missão da EEEFM Antônio dos Santos Neves é oferecer um ensino de qualidade que garanta o acesso, a permanência e a participação ativa dos alunos em um ambiente criativo, inovador e respeitoso. A escola busca promover o desenvolvimento integral dos estudantes, preparando-os para exercer sua cidadania com ética e autonomia.</div>
         <div class="box larger">
             <h2>Objetivo</h2>
-            <p>Com esses pilares, a escola busca formar cidadãos preparados para enfrentar os desafios do futuro e contribuir para uma sociedade mais justa e equitativa.</p>
+            <p>O objetivo da EEEFM Antônio dos Santos Neves é proporcionar uma educação de qualidade, voltada para o desenvolvimento completo dos alunos, com foco na formação acadêmica, cidadania e competências profissionais. A escola visa promover a inclusão, respeitando a diversidade, e incentivando o aprendizado contínuo. Além disso, busca fortalecer a participação ativa da comunidade escolar, criando um ambiente colaborativo e inovador que estimule o crescimento pessoal e coletivo dos estudantes.</p>
         </div>
     </div>
 </section></section>
@@ -222,10 +229,10 @@
             <div class="container">
                 <div class="card">
                     <div class="info">
-                        <div class="profile-pic"> <img src="media\img_fixas\heitor.jpg" alt=""></div>
+                        <div class="profile-pic"> <img src=".././../../media/img_fixas/heitor.jpeg" alt=""></div>
                         <div class="text">
                             <a href="">
-                            <h2 style="color: black;">Heitor pasti</h2>
+                            <h2 style="color: black;">Heitor Pasti</h2>
                             <p>pós doutorado em ciências da computação</p>
                         </div>
                     </div>
@@ -234,10 +241,10 @@
                 
                 <div class="card">
                     <div class="info">
-                        <div class="profile-pic"></div>
+                        <div class="profile-pic"> <img src=".././../../media/img_fixas/luann.jpeg" alt=""></div>
                         <div class="text">
                             <a href="">
-                            <h2 style="color: black;">Luan pasti</h2>
+                            <h2 style="color: black;">Luann Almeida</h2>
                             <p>pós doutorado em sistemas da informação</p>
                         </div>
                     </div>
@@ -246,10 +253,10 @@
     
                 <div class="card">
                     <div class="info">
-                        <div class="profile-pic"></div>
+                        <div class="profile-pic"> <img src=".././../../media/img_fixas/isamara.jpeg" alt=""></div>
                         <div class="text">
                             <a href="">
-                            <h2 style="color: black;">Isamara</h2>
+                            <h2 style="color: black;">Isamara Lima</h2>
                             <p>mestranda biologia</p>
                         </div>
                     </div>
@@ -257,10 +264,10 @@
                 </a></div>
                 <div class="card">
                     <div class="info">
-                        <div class="profile-pic"></div>
+                        <div class="profile-pic"> <img src=".././../../media/img_fixas/wilmeika.jpeg" alt=""></div>
                         <div class="text">
                             <a href="">
-                            <h2 style="color: black;">Wilmeika</h2>
+                            <h2 style="color: black;">Wilmeika Ambrosino</h2>
                             <p>mestre em língua Portuguesa - pós doutorado em letras</p>
                         </div>
                     </div>
