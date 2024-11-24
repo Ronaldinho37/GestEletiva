@@ -14,6 +14,21 @@
 
 </head>
 <body>
+    <style>
+        .circle {
+          width: 50px; /* ajuste conforme necessário */
+          height: 50px;
+          border-radius: 50%;
+          overflow: hidden;
+          border: 2px solid #ccc; /* borda opcional */
+        }
+      
+        .circle img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover; /* garante o ajuste correto */
+        }
+      </style>
 
     {% include 'codigos reutilizados/links_reutilizados.html' %}
     {% block links %}
@@ -41,12 +56,14 @@
     {% for i in avisos %}
     <div class="">
         <div class="card">
-            <div class="card-header" id="radios">
-                <div class="circle"></div>
-                <h5 class="text-white" style="margin-left: 4%;">ansedu</h5>
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16" style="margin-left: 55%;">
-                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-                </svg>
+          <div class="card-header" id="radios">
+            <div class="circle">
+              <img src="../../../media/img_anuncio/logoasn.png" alt="Imagem de Perfil">
+            </div>
+            <h5 class="text-white" style="margin-left: 4%;">ansedu</h5>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16" style="margin-left: 55%;">
+              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+            </svg>
             </div>
 
             <div class="meio">
