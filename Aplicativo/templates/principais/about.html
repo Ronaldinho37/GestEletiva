@@ -7,11 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/abount_new.css'%}">
     <link rel="stylesheet" href="{% static 'css/links_reutilizados.css' %}">
+    <script src="https://unpkg.com/scrollreveal"></script>
     <title>sobre</title>
 </head>
 
-<body>
-
+<body style="background: linear-gradient(135deg, #fff, #fafafa);">
+    <style>
+        .profile-pic {
+            width: 50px; /* Tamanho da bolinha */
+            height: 50px;
+            background-color: red; /* Cor de fundo */
+            border-radius: 50%; /* Forma de círculo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Garante que a imagem não ultrapasse os limites */
+        }
+    
+        .profile-pic img {
+            width: 100%; /* Adapta a imagem ao tamanho do círculo */
+            height: 100%;
+            object-fit: cover; /* Garante que a imagem fique ajustada */
+        }
+    </style>
     
     {% include 'codigos reutilizados/links_reutilizados.html' %}
     {% block links %}
@@ -22,109 +40,188 @@
 
     <section id="s1">
     <div class="titulo"></div>
-    <h1>Nossa Historia</h1>
+    <h1 style="background-color: rgb(8, 83, 196); padding: 10px; border-radius: 10px; color: rgb(255, 193, 7);">Nossa História</h1>
     <div class="pra-alin">
-    <div class="text-prin">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. 
-        The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', 
-        making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. 
-        Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</div></div>
-    </section>
-<br>
-<section id="ss2">
-    <section class="timeline">
-    <div class="timeline-item">
-        <div class="content-left">
-            <h2>1978</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec justo rhoncus, suscipit arcu eget, viverra ex. Cras eu massa lobortis, luctus turpis sit amet, sagittis turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec justo rhoncus, suscipit arcu eget, viverra ex.
-            </p>
+    <div class="text-prin">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="carousel-item">
+                        <img src=".././../../media/img_fixas/asn 1977.jpeg" alt="Slide 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src=".././../../media/img_fixas/asn 2017.jpeg" alt="Slide 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src=".././../../media/img_fixas/Professores.jpg" alt="Slide 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src=".././../../media/img_fixas/asnnovo.PNG" alt="Slide 4">
+                    </div>
+                    <div class="carousel-item">
+                        <img src=".././../../media/img_fixas/asn.HEIC" alt="Slide 5">
+                    </div>
+                </div>
+                <button class="carousel-button prev">&lt;</button>
+                <button class="carousel-button next">&gt;</button>
+                <div class="carousel-nav"></div>
+            </div>
         </div>
-        <div class="image-right">
-            <!-- Adicione sua imagem aqui -->
-        </div>
-    </div>
-
-    <div class="timeline-item">
-        <div class="content-left">
-            <h2>1985</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec justo rhoncus, suscipit arcu eget, viverra ex. Cras eu massa lobortis, luctus turpis sit amet, sagittis turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec justo rhoncus, suscipit arcu eget, viverra ex.
-            </p>
-        </div>
-        <div class="image-right">
-            <!-- Adicione sua imagem aqui -->
-        </div>
-    </div>
-
-    <div class="timeline-item">
-        <div class="content-left">
-            <h2>2010</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec justo rhoncus, suscipit arcu eget, viverra ex. Cras eu massa lobortis, luctus turpis sit amet, sagittis turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec justo rhoncus, suscipit arcu eget, viverra ex.
-            </p>
-        </div>
-        <div class="image-right">
-            <!-- Adicione sua imagem aqui -->
-        </div>
-    </div>
-    </section>
         <br>
-
-</section>        
+        <br>
+        <p>A EEEFM Antônio dos Santos Neves foi fundada em 1977 e está localizada na Avenida Democrata, no Centro de Boa Esperança, ES. Oferece ensino fundamental, médio, EJA e educação profissional, atendendo cerca de 1.300 alunos em três turnos. A escola possui 16 salas de aula, laboratórios de informática, biblioteca, quadra poliesportiva e sala de recursos para atendimento especializado. Seu compromisso está na inclusão e na qualidade do ensino, promovendo cidadania e inovação educacional. </p></div></div>
+    </section>
+<br><br>
+    <section>
+    <div class="container" style="display: block;">
+        <h1 id="history">NOSSA TRAGETORIA ATE AQUI</h1>
+        <div class="timeline">
+            <div id="date-1">
+            <div class="event">
+                <div class="icon">
+                    <i class="fas fa-school"></i>
+                </div>
+                
+                <div class="year">1990</div>
+                <div class="title">Fundação</div>
+                <p class="description">Início das atividades educacionais com foco no ensino fundamental.</p>
+            </div>
+            </div>
+            <div id="date-2">
+            <div class="event">
+               
+                <div class="icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="year">2000</div>
+                <div class="title">Expansão</div>
+                <p class="description">Ampliação das instalações e início do ensino médio.</p>
+            </div>
+            </div>
+            <div id="date-3">
+            <div class="event">
+                
+                <div class="icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="year">2010</div>
+                <div class="title">Inovação</div>
+                <p class="description">Implementação de metodologias ativas e tecnologia em sala.</p>
+            </div>
+            </div>
+            <div id="date-4">
+            <div class="event">
+                
+                <div class="icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="year">2020</div>
+                <div class="title">Excelência</div>
+                <p class="description">Reconhecimento nacional pela qualidade de ensino.</p>
+            </div>
+            </div>
+            <div id="date-5">
+            <div class="event">
+                
+                <div class="icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="year">2030</div>
+                <div class="title">Futuro</div>
+                <p class="description">Projeção de expansão internacional e novos programas.</p>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>   
+<br><br>     
 <section id="s3">
             <div class="num">
-            <h1>Números do ASN</h1>
+            <h1 id="title-2">Números do ASN</h1>
             <div class="resto">
 
             <div class="pri">
-            <h2>+200 mil</h2>
-            <p>aprovados em medicina</p>
+            <h2>+550 </h2>
+            <p>Matrículas</p>
         </div>
             <div class="sec">
-                <h2>+15mil </h2>
-                <p>aprovados em concursos militares</p>
+                <h2>+90% </h2>
+                <p>De participação dos alunos no ENEM</p>
             </div>
             <div class="ter">
-                <h2>+3 milhões</h2>
-                <p>De alunos mátriculados</p>
+                <h2>1º Lugar</h2>
+                <p>Na SRE de Nova Venécia</p>
             </div>
         </div>
     </div>
 </section>
 <section id="s4">
-    <section class="s5"></section>
-    <div class="testimonials-container">
-        <h2 class="title">Depoimentos dos pais</h2>
-        <div class="testimonials">
-            <div class="testimonial">
-                <span class="quote">“</span>
-                <p class="content">Quando chegamos, fomos acolhidos com respeito e sorriso estampado no rosto. Isso foi fazendo com que nos apaixonássemos pela estrutura do Darwin. Depois de um ano, parecia que já estávamos havia uns dez anos, tamanha a cumplicidade. É uma família.</p>
-                <p class="author">ELITON PERINI</p>
-                <p class="author-details">Pai de Vitoria e Lucas</p>
+    <section class="s5">
+    <div class="container">
+        <div id="depoimento" style="display: flex; flex-direction: column; justify-content: center">
+        <h1 class="text-dep">Depoimentos dos pais</h1>
+        <div class="carousel-dep">
+            <div class="carousel-container-dep">
+                <div class="carousel-item-dep">
+                    <div class="testimonial-card">
+                        <div class="quote">
+                            Quando meu marido e eu estávamos procurando uma escola para nossa filha, buscávamos mais do que qualidade de ensino. Queríamos um ambiente que valorizasse o respeito, a ética e que preparasse nossa filha para ser uma cidadã consciente e responsável.
+
+Escolhemos o Santos Neves porque percebemos que esses valores estão presentes no dia a dia, em cada projeto e interação. Além disso, a direção da escola nos chamou muita atenção. É visível o cuidado, a organização e a liderança da equipe gestora, que garante um ambiente acolhedor e uma educação de excelência para todos os alunos.
+
+Aqui, nossa filha encontrou um espaço onde é ouvida, incentivada a participar e a desenvolver habilidades de liderança e responsabilidade. Hoje, ela é uma jovem protagonista na escola, engajada em atividades e decisões que fazem diferença para ela e para a comunidade escolar. É emocionante ver como o Santos Neves auxilia nossos filhos a crescerem com confiança e com uma formação que vai além da sala de aula. Temos certeza de que fizemos a escolha certa para o futuro dela.                        </div>
+                        <div>
+                            <div class="author">Sidiana Nunes Ferrari</div>
+                            <div class="relation">Mãe de Ana Clara Ferrari</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item-dep">
+                    <div class="testimonial-card">
+                        <div class="quote">
+                            Acredito que para uma criança estar bem afetivamente e estar bem dentro da escola, ela precisa saber que ali dentro é tratada com carinho, com atenção. E eu encontrei isso no Darwin. Com menos de uma semana, meu marido e eu tivemos a certeza de ter feito a escolha certa.
+                        </div>
+                        <div>
+                            <div class="author">ÂNGELA BARATELLA</div>
+                            <div class="relation">Mãe de João e Joaquim</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item-dep">
+                    <div class="testimonial-card">
+                        <div class="quote">
+                            O ambiente acolhedor e a dedicação dos professores fazem toda a diferença no desenvolvimento das crianças. Estamos muito satisfeitos com o progresso que vemos em nossos filhos.
+                        </div>
+                        <div>
+                            <div class="author">MARIA SILVA</div>
+                            <div class="relation">Mãe de Pedro e Ana</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="testimonial">
-                <span class="quote">“</span>
-                <p class="content">Acredito que para uma criança estar bem afetivamente e estar bem dentro da escola, ela precisa saber que ali dentro é tratada com carinho, com atenção. E eu encontrei isso no Darwin. Com menos de uma semana, meu marido e eu tivemos a certeza de ter feito a escolha certa.</p>
-                <p class="author">ÂNGELA BARATELLA</p>
-                <p class="author-details">Mãe de João e Joaquim</p>
-            </div>
+            <button class="carousel-button-dep prev-dep">&lt;</button>
+            <button class="carousel-button-dep next-dep">&gt;</button>
+            <div class="carousel-nav-dep"></div>
         </div>
     </div>
+</div>
+</section>
 </section>
 <section class="sobre-nos">
     <h1>Sobre Nos</h1>
     <div class="container">
-        <div class="box" style="width: 450px;">
+        <div class="box" style="width: 474px;">
             <h2>Valores</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at auctor lectus, id sagittis felis. Sed ac.</p>
+            <p>
+                Os valores da EEEFM Antônio dos Santos Neves incluem qualidade no ensino, criatividade, inovação e excelência. A escola busca desenvolver o potencial dos alunos em um ambiente acolhedor, promovendo o respeito mútuo e incentivando o trabalho em equipe. Seu compromisso é com a inclusão, cidadania e educação integral, formando indivíduos preparados para os desafios sociais e profissionais.
+            </p>
         </div>
         <div class="box" style="    height: 136%;">
             <h2>Missão</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at auctor lectus, id sagittis felis. Sed ac risus vel neque efficitur scelerisque. Suspendisse ut molestie mi.</p>
-        </div>
+            <p>A missão da EEEFM Antônio dos Santos Neves é oferecer um ensino de qualidade que garanta o acesso, a permanência e a participação ativa dos alunos em um ambiente criativo, inovador e respeitoso. A escola busca promover o desenvolvimento integral dos estudantes, preparando-os para exercer sua cidadania com ética e autonomia.</div>
         <div class="box larger">
             <h2>Objetivo</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur.</p>
+            <p>O objetivo da EEEFM Antônio dos Santos Neves é proporcionar uma educação de qualidade, voltada para o desenvolvimento completo dos alunos, com foco na formação acadêmica, cidadania e competências profissionais. A escola visa promover a inclusão, respeitando a diversidade, e incentivando o aprendizado contínuo. Além disso, busca fortalecer a participação ativa da comunidade escolar, criando um ambiente colaborativo e inovador que estimule o crescimento pessoal e coletivo dos estudantes.</p>
         </div>
     </div>
 </section></section>
@@ -135,10 +232,10 @@
             <div class="container">
                 <div class="card">
                     <div class="info">
-                        <div class="profile-pic"></div>
+                        <div class="profile-pic"> <img src=".././../../media/img_fixas/heitor.jpeg" alt=""></div>
                         <div class="text">
                             <a href="">
-                            <h2 style="color: black;">Heitor pasti</h2>
+                            <h2 style="color: black;">Heitor Pasti</h2>
                             <p>pós doutorado em ciências da computação</p>
                         </div>
                     </div>
@@ -147,10 +244,10 @@
                 
                 <div class="card">
                     <div class="info">
-                        <div class="profile-pic"></div>
+                        <div class="profile-pic"> <img src=".././../../media/img_fixas/luann.jpeg" alt=""></div>
                         <div class="text">
                             <a href="">
-                            <h2 style="color: black;">Luan pasti</h2>
+                            <h2 style="color: black;">Luann Almeida</h2>
                             <p>pós doutorado em sistemas da informação</p>
                         </div>
                     </div>
@@ -159,10 +256,10 @@
     
                 <div class="card">
                     <div class="info">
-                        <div class="profile-pic"></div>
+                        <div class="profile-pic"> <img src=".././../../media/img_fixas/isamara.jpeg" alt=""></div>
                         <div class="text">
                             <a href="">
-                            <h2 style="color: black;">Isamara</h2>
+                            <h2 style="color: black;">Isamara Lima</h2>
                             <p>mestranda biologia</p>
                         </div>
                     </div>
@@ -170,10 +267,10 @@
                 </a></div>
                 <div class="card">
                     <div class="info">
-                        <div class="profile-pic"></div>
+                        <div class="profile-pic"> <img src=".././../../media/img_fixas/wilmeika.jpeg" alt=""></div>
                         <div class="text">
                             <a href="">
-                            <h2 style="color: black;">Wilmeika</h2>
+                            <h2 style="color: black;">Wilmeika Ambrosino</h2>
                             <p>mestre em língua Portuguesa - pós doutorado em letras</p>
                         </div>
                     </div>
@@ -185,7 +282,110 @@
     {% include 'codigos reutilizados/footer.html' %}
     {% block footer %}
     {% endblock %}
+    <script>
+        function initializeCarousel(options) {
+            const {
+                carouselSelector,
+                itemSelector,
+                prevButtonSelector,
+                nextButtonSelector,
+                navContainerSelector,
+                dotClass,
+                activeClass,
+                autoAdvance,
+                centerMode
+            } = options;
+        
+            const carousel = document.querySelector(carouselSelector);
+            const items = document.querySelectorAll(itemSelector);
+            const prevButton = document.querySelector(prevButtonSelector);
+            const nextButton = document.querySelector(nextButtonSelector);
+            const navContainer = document.querySelector(navContainerSelector);
+            let currentIndex = 0;
+        
+            // Create navigation dots
+            items.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add(dotClass);
+                if (index === 0) dot.classList.add(activeClass);
+                dot.addEventListener('click', () => goToSlide(index));
+                navContainer.appendChild(dot);
+            });
+        
+            const dots = document.querySelectorAll(`${navContainerSelector} .${dotClass}`);
+        
+            function updateCarousel() {
+                if (centerMode) {
+                    const newTransformValue = -currentIndex * 60 + 20;
+                    carousel.style.transform = `translateX(${newTransformValue}%)`;
+                } else {
+                    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }
+                
+                items.forEach((item, index) => {
+                    item.classList.toggle(activeClass, index === currentIndex);
+                });
+        
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle(activeClass, index === currentIndex);
+                });
+            }
+        
+            function goToSlide(index) {
+                currentIndex = index;
+                updateCarousel();
+            }
+        
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % items.length;
+                updateCarousel();
+            }
+        
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + items.length) % items.length;
+                updateCarousel();
+            }
+        
+            prevButton.addEventListener('click', prevSlide);
+            nextButton.addEventListener('click', nextSlide);
+        
+            // Initialize carousel
+            updateCarousel();
+        
+            // Auto-advance if enabled
+            if (autoAdvance) {
+                setInterval(nextSlide, 5000);
+            }
+        }
+        
+        // Initialize the first carousel (center mode)
+        initializeCarousel({
+            carouselSelector: '.carousel',
+            itemSelector: '.carousel-item',
+            prevButtonSelector: '.carousel-button.prev',
+            nextButtonSelector: '.carousel-button.next',
+            navContainerSelector: '.carousel-nav',
+            dotClass: 'carousel-nav-item',
+            activeClass: 'active',
+            autoAdvance: false,
+            centerMode: true
+        });
+        
+        // Initialize the second carousel (depoimentos)
+        initializeCarousel({
+            carouselSelector: '.carousel-container-dep',
+            itemSelector: '.carousel-item-dep',
+            prevButtonSelector: '.carousel-button-dep.prev-dep',
+            nextButtonSelector: '.carousel-button-dep.next-dep',
+            navContainerSelector: '.carousel-nav-dep',
+            dotClass: 'carousel-dot',
+            activeClass: 'active',
+            autoAdvance: true,
+            centerMode: false
+        });
+        </script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="{% static 'js/scrollAbout.js' %}"></script>
 
 </body>
 </html>

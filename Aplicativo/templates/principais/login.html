@@ -29,9 +29,11 @@
                 <input type="text" id="link_antigo" name="link_antigo" style="visibility: hidden;position: absolute;">
                 
                 <label for="password" style="color: rgb(154, 156, 158);" >Senha</label>
-                <input type="password" id="password" name="password" placeholder="Password" value="{{password}}">
-                <img id="olho" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII="
-/>
+                <input type="password" name="password" id="password"  value="{{password}}" required>
+                <button type="button" id="toggle-password" class="toggle-password" >
+                    <img src="https://api.iconify.design/mdi:eye.svg" alt="Mostrar senha" class="eye-icon">
+                </button>
+           
                 
                 <p id="error-message" style="color: red; display: none;">Por favor, preencha todos os campos corretamente.</p>
                 <button type="submit" class="signin-btn" id="confirm-button">Confirmar</button>
@@ -92,21 +94,24 @@
     
         }
 
-        var senha = $('#password');
-var olho= $("#olho");
-
-olho.mousedown(function() {
-  senha.attr("type", "text");
-});
-
-olho.mouseup(function() {
-  senha.attr("type", "password");
-});
-// para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-//citada pelo nosso amigo nos comentários
-$( "#olho" ).mouseout(function() { 
-  $("#password").attr("type", "password");
-});
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.getElementById('toggle-password');
+            const passwordInput = document.getElementById('password');
+        
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                
+                // Alterna o ícone entre olho aberto e fechado
+                const eyeIcon = this.querySelector('.eye-icon');
+                if (type === 'password') {
+                    eyeIcon.setAttribute('src', 'https://api.iconify.design/mdi:eye.svg');
+                } else {
+                    eyeIcon.setAttribute('src', 'https://api.iconify.design/mdi:eye-off.svg');
+                }
+            });
+        });
+        
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
